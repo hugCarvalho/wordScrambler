@@ -4,6 +4,8 @@ import "./App.css";
 //make options obj
 const initCountdown = 5;
 const initGuessesLeft = 3;
+//const initArr = ["dog", "bear", "horse", "python"];
+const initArr = ["dog"];
 
 function App() {
   const [gameStatus, setGameStatus] = useState("idle"); // "idle", "playing", "ended"
@@ -11,20 +13,33 @@ function App() {
   //const [counting, setCounting] = useState(false);
   const [score, setScore] = useState(0);
   const [guessesLeft, setGuessesLeft] = useState(initGuessesLeft);
+  const [array, setArray] = useState(initArr);
+  const [guess, setGuess] = useState(null);
+  const [scrambledWord, setScrambledWord] = useState("test");
 
   //FUNCTIONS
   //Break function into other fns later
   const startGame = e => {
+    setGuess(e.target.elements["input-text"].value);
+    console.log(e.target.elements["input-text"].value);
     e.preventDefault();
     if (gameStatus === "idle") {
       setGameStatus("playing");
-    } else {
+    } else if (gameStatus === "ended") {
       setCountdown(5);
       setScore(0);
       setGameStatus("playing");
+    } else {
+      console.log(scrambledWord === guess);
     }
   };
-
+  //GAME ENDS 💥
+  //GAME ENDS IF GUESSES LEFT ARE 0
+  useEffect(() => {
+    if (guessesLeft === 0) {
+      setGameStatus("ended");
+    }
+  }, [guessesLeft]);
   //GAME ENDS IF COUNTDOWN GETS TO 0
   useEffect(() => {
     if (countdown < 1) {
@@ -35,9 +50,54 @@ function App() {
       //cleanup
     };
   }, [countdown]);
+  //END 💥
 
+  //GENERATE RANDOM NUMBER AND WORD 🧣
   useEffect(() => {
-    console.log("gameStatus dependency");
+    function scramble(arrayName) {
+      const randomNum = Math.floor(Math.random() * arrayName.length);
+      console.log(randomNum);
+      const num = Math.floor(Math.random() * 2);
+      console.log("NUM", num);
+      //if (button.textContent !== "Check") {
+      let randomWord = arrayName[randomNum];
+      //Will scramble the word differently each time
+      let scrambledWord = randomWord
+        .toLowerCase()
+        .split("")
+        .sort((a, b) => {
+          if (a < b && num === 0) {
+            return -1;
+          } else if (a > b && num === 0) {
+            return 1;
+          } else if (a < b && num !== 0) {
+            return 1;
+          } else {
+            return -1;
+          }
+        })
+        .join("");
+
+      //IF SCRAMBLED WORD === RANDOMWORD RUN SCRAMBLE FUNCTION AGAIN TO GET A VALID SCRAMBLED WORD
+      if (scrambledWord === randomWord) {
+        console.log("RUN THE FUCNTION AGAIN");
+        //return scramble(arrayName);
+      }
+      console.log("scrambledWord, randomword :", scrambledWord, randomWord);
+      setScrambledWord(scrambledWord);
+      //}
+    }
+    if (gameStatus === "setup") {
+      scramble(array);
+    }
+    return () => {
+      //cleanup
+    };
+  }, [gameStatus, array]);
+
+  //TIMER
+  useEffect(() => {
+    //console.log("gameStatus dependency");
     let timer = null;
     if (gameStatus === "playing") {
       timer = setInterval(() => {
@@ -54,7 +114,7 @@ function App() {
 
   useEffect(() => {
     console.log("gameStatus :>> ", gameStatus);
-    console.log("countdown :>> ", countdown);
+    //console.log("countdown :>> ", countdown);
     return () => {
       //cleanup
     };
@@ -70,29 +130,31 @@ function App() {
       {/* Main App */}
       <main className="app">
         <div className="text">
-          <span className="scrambled-w  hidden"></span>
-          <span className="scrambled-w  hidden"></span>
-          <span className="scrambled-w  hidden">{countdown}</span>
+          <span className="scrambled-w  hidden">Guesses Left: {guessesLeft}</span>
+          <span className="scrambled-w  hidden">Time: {countdown}</span>
+          <span className="scrambled-w  hidden">Score:{score}</span>
         </div>
+        <div></div>
 
-        <div className="output">
-          <form>
+        <div>word: {scrambledWord}</div>
+        <div className="input">
+          <form onSubmit={e => startGame(e)}>
             <input
               className=""
               type="text"
               id="input-text"
               autoFocus
-              disabled={gameStatus !== "playing"}
+              //disabled={gameStatus !== "playing"}
               autoComplete="off"
             />
-            <button type="button" onClick={e => startGame(e)}>
+            <button type="submit">
               {gameStatus === "idle"
                 ? "Start"
                 : gameStatus === "playing"
                 ? "Guess"
                 : "Restart"}
             </button>
-            <button type="button" onClick={() => setGameStatus("ended")}>
+            <button type="submit" onClick={() => setGameStatus("ended")}>
               END
             </button>
           </form>
