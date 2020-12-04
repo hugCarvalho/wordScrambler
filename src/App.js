@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
+//TODO: delay appearance of scrambled word -first scramble then show
 //make options obj
-const initCountdown = 5;
+const initCountdown = 30;
 const initGuessesLeft = 3;
 //const initArr = ["dog", "bear", "horse", "python"];
 const initArr = ["dog"];
@@ -14,55 +15,97 @@ function App() {
   const [score, setScore] = useState(0);
   const [guessesLeft, setGuessesLeft] = useState(initGuessesLeft);
   const [array, setArray] = useState(initArr);
-  const [guess, setGuess] = useState(null);
   const [scrambledWord, setScrambledWord] = useState("test");
+  const [word, setWord] = useState("");
+
+  const [guess, setGuess] = useState(null);
+  const [correctWord, setCorrectWord] = useState(null);
 
   //FUNCTIONS
   //Break function into other fns later
-  const startGame = e => {
-    setGuess(e.target.elements["input-text"].value);
-    console.log(e.target.elements["input-text"].value);
+  const onSubmitHandler = e => {
+    //console.log(e.target.elements["input-text"].value);
     e.preventDefault();
     if (gameStatus === "idle") {
+      setGameStatus("setup");
+    } else if (gameStatus === "setup") {
       setGameStatus("playing");
+    } else if (gameStatus === "playing") {
+      setGuess(e.target.elements["input-text"].value);
     } else if (gameStatus === "ended") {
-      setCountdown(5);
-      setScore(0);
-      setGameStatus("playing");
+      setGameStatus("setup");
     } else {
-      console.log(scrambledWord === guess);
+      //console.log(scrambledWord === guess);
     }
   };
+
+  //RESET
+  useEffect(() => {
+    if (gameStatus === "setup") {
+      setGuessesLeft(initGuessesLeft);
+      setCountdown(initCountdown);
+      setScore(0);
+      setWord("");
+    }
+    return () => {
+      //cleanup
+    };
+  }, [gameStatus]);
+
   //GAME ENDS 💥
   //GAME ENDS IF GUESSES LEFT ARE 0
   useEffect(() => {
     if (guessesLeft === 0) {
       setGameStatus("ended");
+      console.log("GAME ENDED, 0 GUESSES LEFT: ", guessesLeft);
     }
   }, [guessesLeft]);
-  //GAME ENDS IF COUNTDOWN GETS TO 0
+  //GAME ENDS IF COUNTDOWN GETS TO 0 💥
   useEffect(() => {
     if (countdown < 1) {
       setGameStatus("ended");
+      console.log("TIME IS UP!!!", countdown);
     }
-
     return () => {
       //cleanup
     };
   }, [countdown]);
-  //END 💥
+
+  useEffect(() => {
+    if (gameStatus === "ended") {
+      console.log(gameStatus);
+      console.log(`Game over, you ${guessesLeft > 0 && countdown > 0 ? "WON" : "LOST"}`);
+    }
+  }, [gameStatus, guessesLeft, countdown]);
+
+  //GUESSES ⁉️
+  useEffect(() => {
+    if (guess && guess !== correctWord) {
+      setGuessesLeft(state => state - 1);
+    }
+    if (correctWord && guess === correctWord) {
+      console.log("Correct Word", correctWord, "guess", guess);
+      setScore(100);
+      setGameStatus("ended");
+    }
+
+    return () => {
+      //console.log("CLEAN EFFECT");
+    };
+  }, [guess, correctWord]);
 
   //GENERATE RANDOM NUMBER AND WORD 🧣
   useEffect(() => {
     function scramble(arrayName) {
       const randomNum = Math.floor(Math.random() * arrayName.length);
-      console.log(randomNum);
+      //console.log(randomNum);
       const num = Math.floor(Math.random() * 2);
-      console.log("NUM", num);
+      //console.log("NUM", num);
       //if (button.textContent !== "Check") {
-      let randomWord = arrayName[randomNum];
+      let randomOriginalWord = arrayName[randomNum];
+      setCorrectWord(randomOriginalWord);
       //Will scramble the word differently each time
-      let scrambledWord = randomWord
+      let scrambledWord = randomOriginalWord
         .toLowerCase()
         .split("")
         .sort((a, b) => {
@@ -79,12 +122,13 @@ function App() {
         .join("");
 
       //IF SCRAMBLED WORD === RANDOMWORD RUN SCRAMBLE FUNCTION AGAIN TO GET A VALID SCRAMBLED WORD
-      if (scrambledWord === randomWord) {
+      if (scrambledWord === randomOriginalWord) {
         console.log("RUN THE FUCNTION AGAIN");
         //return scramble(arrayName);
       }
-      console.log("scrambledWord, randomword :", scrambledWord, randomWord);
+      //console.log("scrambledWord, randomword :", scrambledWord, randomWord);
       setScrambledWord(scrambledWord);
+      setGameStatus("playing");
       //}
     }
     if (gameStatus === "setup") {
@@ -95,7 +139,7 @@ function App() {
     };
   }, [gameStatus, array]);
 
-  //TIMER
+  //TIMER ⏲️
   useEffect(() => {
     //console.log("gameStatus dependency");
     let timer = null;
@@ -136,16 +180,18 @@ function App() {
         </div>
         <div></div>
 
-        <div>word: {scrambledWord}</div>
+        <div>word: {gameStatus !== "idle" ? scrambledWord : "???"}</div>
         <div className="input">
-          <form onSubmit={e => startGame(e)}>
+          <form onSubmit={e => onSubmitHandler(e)}>
             <input
               className=""
               type="text"
               id="input-text"
-              autoFocus
-              //disabled={gameStatus !== "playing"}
+              autoFocus={gameStatus === "playing"}
+              disabled={gameStatus !== "playing"}
               autoComplete="off"
+              //value={word}
+              //onChange={e => setWord(e.target.value)}
             />
             <button type="submit">
               {gameStatus === "idle"
@@ -154,9 +200,9 @@ function App() {
                 ? "Guess"
                 : "Restart"}
             </button>
-            <button type="submit" onClick={() => setGameStatus("ended")}>
+            {/* <button type="submit" onClick={() => setGameStatus("ended")}>
               END
-            </button>
+            </button> */}
           </form>
         </div>
 
