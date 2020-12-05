@@ -7,17 +7,18 @@ import Input from "./components/Input/Input";
 import Instructions from "./components/Instructions/Instructions";
 import Score from "./components/Score/Score";
 import Word from "./components/Word/Word";
+import chooseWord, { scrambleWord } from "./functions/functions";
 
 //TODO: delay appearance of scrambled word -first scramble then show
 //make options obj
 const initOptions = {
   guessesLeft: 3,
-  countdown: 2,
+  countdown: 20,
   score: 0,
 };
 
-//const initArr = ["dog", "bear", "horse", "python"];
-const initArr = ["da"];
+const initArr = ["dog", "bear", "horse", "python"];
+//const initArr = ["da"];
 
 function App() {
   const [gameStatus, setGameStatus] = useState("idle"); // "idle", "playing", "ended"
@@ -69,16 +70,20 @@ function App() {
   }, [gameStatus]);
 
   useEffect(() => {
-    const chooseWord = categoryArr => {
-      const randomNum = Math.floor(Math.random() * categoryArr.length);
-      const randomOriginalWord = categoryArr[randomNum];
-      return randomOriginalWord;
-    };
     if (gameStatus === "setup") {
       console.log("SET CORRECT WORD");
       setCorrectWord(chooseWord(array));
     }
   }, [gameStatus, array]);
+
+  //GENERATE RANDOM NUMBER AND WORD 🧣
+  useEffect(() => {
+    if (correctWord) {
+      setScrambledWord(scrambleWord(correctWord));
+      setGameStatus("playing");
+      console.log("SCRAMBLE WORD");
+    }
+  }, [correctWord]);
 
   //GUESSES ⁉️
   useEffect(() => {
@@ -92,51 +97,6 @@ function App() {
       setGameStatus("ended");
     }
   }, [guess, correctWord]);
-
-  //GENERATE RANDOM NUMBER AND WORD 🧣
-  useEffect(() => {
-    // const chooseWord = categoryArr => {
-    //   const randomNum = Math.floor(Math.random() * categoryArr.length);
-    //   const randomOriginalWord = categoryArr[randomNum];
-    //   return randomOriginalWord;
-    // };
-    console.log("RUN");
-    //function scrambleWord(categoryArr) {
-    //Sets the correct word to allow for comparison
-    // const randomNum = Math.floor(Math.random() * categoryArr.length);
-    // const randomOriginalWord = categoryArr[randomNum];
-
-    //Scrambles the chosen word. If scrambled === chosen, will execute again until !==
-    const scrambleWord = word => {
-      console.log("HALLO?", word);
-      let letters = [...word];
-      let res = [];
-      let i = 0;
-      do {
-        let chosen = letters[Math.floor(Math.random() * letters.length)];
-        res.push(chosen);
-        letters.splice(letters.indexOf(chosen), 1);
-        i++;
-      } while (i < word.length);
-      let scrambledWord = res.join("");
-      console.log(scrambledWord === word);
-      //return;
-      return scrambledWord === word ? scrambleWord(word) : scrambledWord;
-    };
-    // setScrambledWord(scrambleChosenWord(randomOriginalWord));
-    //}
-    //setCorrectWord(chooseWord(array));
-    if (correctWord) {
-      setScrambledWord(scrambleWord(correctWord));
-      setGameStatus("playing");
-      console.log("SETUP PHASE");
-    }
-  }, [correctWord]);
-
-  //TIMER ⏲️
-  useEffect(() => {
-    //console.log("gameStatus dependency");
-  }, [gameStatus]);
 
   //GAME ENDS 💥
   //GAME ENDS IF GUESSES LEFT ARE 0
@@ -156,17 +116,9 @@ function App() {
 
   useEffect(() => {
     if (gameStatus === "ended") {
-      console.log(gameStatus);
       console.log(`Game over, you ${guessesLeft > 0 && countdown > 0 ? "WON" : "LOST"}`);
     }
   }, [gameStatus, guessesLeft, countdown]);
-
-  useEffect(() => {
-    //console.log("countdown :>> ", countdown);
-    return () => {
-      //cleanup
-    };
-  }, [gameStatus, countdown]);
 
   return (
     <div className="App">
