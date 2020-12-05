@@ -1,55 +1,141 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import Countdown from "./components/Countdown/Countdown";
+import GuessesLeft from "./components/GuessesLeft/GuessesLeft";
+import Header from "./components/Header/Header";
+import Input from "./components/Input/Input";
+import Instructions from "./components/Instructions/Instructions";
+import Score from "./components/Score/Score";
+import Word from "./components/Word/Word";
 
 //TODO: delay appearance of scrambled word -first scramble then show
 //make options obj
-const initCountdown = 30;
-const initGuessesLeft = 3;
+const initOptions = {
+  guessesLeft: 3,
+  countdown: 2,
+  score: 0,
+};
+
 //const initArr = ["dog", "bear", "horse", "python"];
-const initArr = ["dog"];
+const initArr = ["da"];
 
 function App() {
   const [gameStatus, setGameStatus] = useState("idle"); // "idle", "playing", "ended"
-  const [countdown, setCountdown] = useState(initCountdown);
+  const [guessesLeft, setGuessesLeft] = useState(initOptions.guessesLeft);
+  const [countdown, setCountdown] = useState(initOptions.countdown);
+  const [score, setScore] = useState(initOptions.score);
   //const [counting, setCounting] = useState(false);
-  const [score, setScore] = useState(0);
-  const [guessesLeft, setGuessesLeft] = useState(initGuessesLeft);
   const [array, setArray] = useState(initArr);
-  const [scrambledWord, setScrambledWord] = useState("test");
-  const [word, setWord] = useState("");
-
-  const [guess, setGuess] = useState(null);
   const [correctWord, setCorrectWord] = useState(null);
+  const [scrambledWord, setScrambledWord] = useState("");
+  const [guess, setGuess] = useState(null);
 
-  //FUNCTIONS
-  //Break function into other fns later
   const onSubmitHandler = e => {
-    //console.log(e.target.elements["input-text"].value);
     e.preventDefault();
     if (gameStatus === "idle") {
       setGameStatus("setup");
     } else if (gameStatus === "setup") {
-      setGameStatus("playing");
+      //setGameStatus("playing");
     } else if (gameStatus === "playing") {
       setGuess(e.target.elements["input-text"].value);
     } else if (gameStatus === "ended") {
+      setCorrectWord(null);
       setGameStatus("setup");
     } else {
-      //console.log(scrambledWord === guess);
+      throw new Error("OOOps, check status strings");
     }
   };
 
   //RESET
   useEffect(() => {
     if (gameStatus === "setup") {
-      setGuessesLeft(initGuessesLeft);
-      setCountdown(initCountdown);
-      setScore(0);
-      setWord("");
+      setGuessesLeft(initOptions.guessesLeft);
+      setCountdown(initOptions.countdown);
+      setScore(initOptions.score);
     }
+
+    let timer = null;
+    if (gameStatus === "playing") {
+      timer = setInterval(() => {
+        setCountdown(state => state - 1);
+      }, 1000);
+    } else {
+      clearInterval(timer);
+    }
+    console.log("gameStatus :>> ", gameStatus);
     return () => {
-      //cleanup
+      clearInterval(timer);
     };
+  }, [gameStatus]);
+
+  useEffect(() => {
+    const chooseWord = categoryArr => {
+      const randomNum = Math.floor(Math.random() * categoryArr.length);
+      const randomOriginalWord = categoryArr[randomNum];
+      return randomOriginalWord;
+    };
+    if (gameStatus === "setup") {
+      console.log("SET CORRECT WORD");
+      setCorrectWord(chooseWord(array));
+    }
+  }, [gameStatus, array]);
+
+  //GUESSES ⁉️
+  useEffect(() => {
+    console.log("CORRECT_WORD:", correctWord);
+    if (guess && guess !== correctWord) {
+      setGuessesLeft(state => state - 1);
+    }
+    if (guess && guess === correctWord) {
+      console.log("Correct Word", correctWord, "guess", guess);
+      setScore(100);
+      setGameStatus("ended");
+    }
+  }, [guess, correctWord]);
+
+  //GENERATE RANDOM NUMBER AND WORD 🧣
+  useEffect(() => {
+    // const chooseWord = categoryArr => {
+    //   const randomNum = Math.floor(Math.random() * categoryArr.length);
+    //   const randomOriginalWord = categoryArr[randomNum];
+    //   return randomOriginalWord;
+    // };
+    console.log("RUN");
+    //function scrambleWord(categoryArr) {
+    //Sets the correct word to allow for comparison
+    // const randomNum = Math.floor(Math.random() * categoryArr.length);
+    // const randomOriginalWord = categoryArr[randomNum];
+
+    //Scrambles the chosen word. If scrambled === chosen, will execute again until !==
+    const scrambleWord = word => {
+      console.log("HALLO?", word);
+      let letters = [...word];
+      let res = [];
+      let i = 0;
+      do {
+        let chosen = letters[Math.floor(Math.random() * letters.length)];
+        res.push(chosen);
+        letters.splice(letters.indexOf(chosen), 1);
+        i++;
+      } while (i < word.length);
+      let scrambledWord = res.join("");
+      console.log(scrambledWord === word);
+      //return;
+      return scrambledWord === word ? scrambleWord(word) : scrambledWord;
+    };
+    // setScrambledWord(scrambleChosenWord(randomOriginalWord));
+    //}
+    //setCorrectWord(chooseWord(array));
+    if (correctWord) {
+      setScrambledWord(scrambleWord(correctWord));
+      setGameStatus("playing");
+      console.log("SETUP PHASE");
+    }
+  }, [correctWord]);
+
+  //TIMER ⏲️
+  useEffect(() => {
+    //console.log("gameStatus dependency");
   }, [gameStatus]);
 
   //GAME ENDS 💥
@@ -66,9 +152,6 @@ function App() {
       setGameStatus("ended");
       console.log("TIME IS UP!!!", countdown);
     }
-    return () => {
-      //cleanup
-    };
   }, [countdown]);
 
   useEffect(() => {
@@ -78,86 +161,7 @@ function App() {
     }
   }, [gameStatus, guessesLeft, countdown]);
 
-  //GUESSES ⁉️
   useEffect(() => {
-    if (guess && guess !== correctWord) {
-      setGuessesLeft(state => state - 1);
-    }
-    if (correctWord && guess === correctWord) {
-      console.log("Correct Word", correctWord, "guess", guess);
-      setScore(100);
-      setGameStatus("ended");
-    }
-
-    return () => {
-      //console.log("CLEAN EFFECT");
-    };
-  }, [guess, correctWord]);
-
-  //GENERATE RANDOM NUMBER AND WORD 🧣
-  useEffect(() => {
-    function scramble(arrayName) {
-      const randomNum = Math.floor(Math.random() * arrayName.length);
-      //console.log(randomNum);
-      const num = Math.floor(Math.random() * 2);
-      //console.log("NUM", num);
-      //if (button.textContent !== "Check") {
-      let randomOriginalWord = arrayName[randomNum];
-      setCorrectWord(randomOriginalWord);
-      //Will scramble the word differently each time
-      let scrambledWord = randomOriginalWord
-        .toLowerCase()
-        .split("")
-        .sort((a, b) => {
-          if (a < b && num === 0) {
-            return -1;
-          } else if (a > b && num === 0) {
-            return 1;
-          } else if (a < b && num !== 0) {
-            return 1;
-          } else {
-            return -1;
-          }
-        })
-        .join("");
-
-      //IF SCRAMBLED WORD === RANDOMWORD RUN SCRAMBLE FUNCTION AGAIN TO GET A VALID SCRAMBLED WORD
-      if (scrambledWord === randomOriginalWord) {
-        console.log("RUN THE FUCNTION AGAIN");
-        //return scramble(arrayName);
-      }
-      //console.log("scrambledWord, randomword :", scrambledWord, randomWord);
-      setScrambledWord(scrambledWord);
-      setGameStatus("playing");
-      //}
-    }
-    if (gameStatus === "setup") {
-      scramble(array);
-    }
-    return () => {
-      //cleanup
-    };
-  }, [gameStatus, array]);
-
-  //TIMER ⏲️
-  useEffect(() => {
-    //console.log("gameStatus dependency");
-    let timer = null;
-    if (gameStatus === "playing") {
-      timer = setInterval(() => {
-        setCountdown(state => state - 1);
-      }, 1000);
-    } else {
-      clearInterval(timer);
-    }
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, [gameStatus]);
-
-  useEffect(() => {
-    console.log("gameStatus :>> ", gameStatus);
     //console.log("countdown :>> ", countdown);
     return () => {
       //cleanup
@@ -166,56 +170,18 @@ function App() {
 
   return (
     <div className="App">
-      {/* HEADER */}
-      <header className="App-header">
-        <h1>Word Scrambler</h1>
-      </header>
-
+      <Header />
       {/* Main App */}
-      <main className="app">
-        <div className="text">
-          <span className="scrambled-w  hidden">Guesses Left: {guessesLeft}</span>
-          <span className="scrambled-w  hidden">Time: {countdown}</span>
-          <span className="scrambled-w  hidden">Score:{score}</span>
-        </div>
-        <div></div>
-
-        <div>word: {gameStatus !== "idle" ? scrambledWord : "???"}</div>
-        <div className="input">
-          <form onSubmit={e => onSubmitHandler(e)}>
-            <input
-              className=""
-              type="text"
-              id="input-text"
-              autoFocus={gameStatus === "playing"}
-              disabled={gameStatus !== "playing"}
-              autoComplete="off"
-              //value={word}
-              //onChange={e => setWord(e.target.value)}
-            />
-            <button type="submit">
-              {gameStatus === "idle"
-                ? "Start"
-                : gameStatus === "playing"
-                ? "Guess"
-                : "Restart"}
-            </button>
-            {/* <button type="submit" onClick={() => setGameStatus("ended")}>
-              END
-            </button> */}
-          </form>
-        </div>
-
-        {/* Instructions */}
-        <div className="instructions">
-          <p>
-            <b>Instructions:</b>{" "}
-            <i>
-              guess the scrambled word in the least amount of guesses possible. The
-              fastest you are the more points you'll get.
-            </i>
-          </p>
-          aa
+      <main className="container__app">
+        <div className="wrapper__app">
+          <div className="indicators">
+            <GuessesLeft guessesLeft={guessesLeft} />
+            <Countdown countdown={countdown} />
+            <Score score={score} />
+          </div>
+          <Word gameStatus={gameStatus} scrambledWord={scrambledWord} />
+          <Input onSubmitHandler={onSubmitHandler} gameStatus={gameStatus} />
+          <Instructions />
         </div>
       </main>
     </div>
