@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import Countdown from "./components/Countdown/Countdown";
 import GuessesLeft from "./components/GuessesLeft/GuessesLeft";
 import Header from "./components/Header/Header";
-import Input from "./components/Input/Input";
+import Form from "./components/Form/Form";
 import Instructions from "./components/Instructions/Instructions";
 import Score from "./components/Score/Score";
 import Word from "./components/Word/Word";
@@ -21,35 +21,46 @@ const initArr = ["dog", "bear", "horse", "python"];
 //const initArr = ["da"];
 
 function App() {
-  const [gameStatus, setGameStatus] = useState("idle"); // "idle", "playing", "ended"
+  const [gameStatus, setGameStatus] = useState("onFirstLoad"); // "onFirstLoad", "playing", "ended"
   const [guessesLeft, setGuessesLeft] = useState(initOptions.guessesLeft);
   const [countdown, setCountdown] = useState(initOptions.countdown);
   const [score, setScore] = useState(initOptions.score);
-  //const [counting, setCounting] = useState(false);
   const [array, setArray] = useState(initArr);
   const [correctWord, setCorrectWord] = useState(null);
   const [scrambledWord, setScrambledWord] = useState("");
   const [guess, setGuess] = useState(null);
 
-  const onSubmitHandler = e => {
+  const userInput = useRef();
+
+  const onSubmitHandler = (e, userText) => {
+    if (userText === "") console.log("ALERTTTTTTTTTTTT!!!!!!!!!!!!1");
+    console.log("On submit handler: gameStatusWas:", gameStatus);
     e.preventDefault();
-    if (gameStatus === "idle") {
+    if (gameStatus === "onFirstLoad") {
       setGameStatus("setup");
+    } else if (gameStatus === "reset") {
+      const test = document.querySelector("input");
+      setGameStatus("setup");
+      console.log(test);
     } else if (gameStatus === "setup") {
-      //setGameStatus("playing");
+      console.log("gamestatus is =>", gameStatus);
     } else if (gameStatus === "playing") {
+      console.log("gamestatus is =>", gameStatus);
       setGuess(e.target.elements["input-text"].value);
     } else if (gameStatus === "ended") {
+      console.log("gamestatus is:", gameStatus, correctWord);
+
       setCorrectWord(null);
-      setGameStatus("setup");
+      setGameStatus("reset");
     } else {
       throw new Error("OOOps, check status strings");
     }
   };
 
-  //RESET
+  //Timer ⏲️
   useEffect(() => {
     if (gameStatus === "setup") {
+      console.log('activates if (gameStatus === "setup")');
       setGuessesLeft(initOptions.guessesLeft);
       setCountdown(initOptions.countdown);
       setScore(initOptions.score);
@@ -63,33 +74,41 @@ function App() {
     } else {
       clearInterval(timer);
     }
-    console.log("gameStatus :>> ", gameStatus);
+
+    console.log("gameStatus useEFFECT :>> ", gameStatus);
     return () => {
       clearInterval(timer);
     };
   }, [gameStatus]);
 
+  //Sets Word 🥉
   useEffect(() => {
     if (gameStatus === "setup") {
-      console.log("SET CORRECT WORD");
+      console.log("on setup");
       setCorrectWord(chooseWord(array));
     }
   }, [gameStatus, array]);
 
   //GENERATE RANDOM NUMBER AND WORD 🧣
   useEffect(() => {
-    if (correctWord) {
+    if (correctWord && gameStatus === "setup") {
       setScrambledWord(scrambleWord(correctWord));
       setGameStatus("playing");
-      console.log("SCRAMBLE WORD");
+      console.log("SETGAMESTATUS TO PLAYING");
     }
-  }, [correctWord]);
+    if (gameStatus === "ended") {
+      console.log('on gameStatus "ended"');
+      setGuess("what");
+      setScrambledWord(correctWord);
+    }
+  }, [correctWord, gameStatus]);
 
   //GUESSES ⁉️
   useEffect(() => {
-    console.log("CORRECT_WORD:", correctWord);
+    console.log("on GUESS or CORRECT_WORD:", guess, correctWord);
     if (guess && guess !== correctWord) {
       setGuessesLeft(state => state - 1);
+      console.log("WRONG GUESS, guess was", guess, "BUT WORD was", correctWord);
     }
     if (guess && guess === correctWord) {
       console.log("Correct Word", correctWord, "guess", guess);
@@ -120,6 +139,11 @@ function App() {
     }
   }, [gameStatus, guessesLeft, countdown]);
 
+  useEffect(() => {
+    console.log("scrambledWord", scrambledWord);
+    console.log("------------");
+  }, [scrambledWord]);
+
   return (
     <div className="App">
       <Header />
@@ -131,8 +155,12 @@ function App() {
             <Countdown countdown={countdown} />
             <Score score={score} />
           </div>
-          <Word gameStatus={gameStatus} scrambledWord={scrambledWord} />
-          <Input onSubmitHandler={onSubmitHandler} gameStatus={gameStatus} />
+          <Word
+            gameStatus={gameStatus}
+            scrambledWord={scrambledWord}
+            correctWord={correctWord}
+          />
+          <Form onSubmitHandler={onSubmitHandler} gameStatus={gameStatus} />
           <Instructions />
         </div>
       </main>

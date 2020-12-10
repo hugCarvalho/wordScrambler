@@ -1,9 +1,16 @@
 import React from "react";
 import "./Word.scss";
 
-function Word({ gameStatus, scrambledWord }) {
+function Word({ gameStatus, scrambledWord, correctWord }) {
   return (
-    <div className="word">word: {gameStatus === "playing" ? scrambledWord : "???"}</div>
+    <div className="word">
+      word:{" "}
+      {gameStatus === "playing"
+        ? scrambledWord
+        : gameStatus === "ended"
+        ? correctWord
+        : "???"}
+    </div>
   );
 }
 
