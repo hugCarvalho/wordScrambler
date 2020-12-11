@@ -25,7 +25,7 @@ function Form({ onSubmitHandler, gameStatus }) {
         className=""
         type="text"
         id="input-text"
-        disabled={gameStatus === "onFirstLoad" || gameStatus === "ended"}
+        disabled={gameStatus === "onLoad" || gameStatus === "ended"}
         autoComplete="off"
         value={userText}
         onChange={e => setUserText(e.target.value)}
@@ -34,7 +34,7 @@ function Form({ onSubmitHandler, gameStatus }) {
       />
       {}
       <Button gameStatus={gameStatus} type="submit">
-        {gameStatus === "onFirstLoad"
+        {gameStatus === "onLoad"
           ? "Start"
           : gameStatus === "playing" || gameStatus === "setup"
           ? "Guess"
