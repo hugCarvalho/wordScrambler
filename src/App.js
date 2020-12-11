@@ -8,11 +8,12 @@ import Instructions from "./components/Instructions/Instructions";
 import Score from "./components/Score/Score";
 import Word from "./components/Word/Word";
 import chooseWord, { scrambleWord } from "./functions/functions";
+import WarningHandling from "./components/WarningHandling/WarningHandling";
 
 //TODO: delay appearance of scrambled word -first scramble then show
 //make options obj
 const initOptions = {
-  guessesLeft: 3,
+  guessesLeft: 1,
   countdown: 20,
   score: 0,
 };
@@ -30,28 +31,30 @@ function App() {
   const [scrambledWord, setScrambledWord] = useState("");
   const [guess, setGuess] = useState(null);
 
-  const userInput = useRef();
-
+  // const [warning, setWarning] = ""; //emptyString
   const onSubmitHandler = (e, userText) => {
-    if (userText === "") console.log("ALERTTTTTTTTTTTT!!!!!!!!!!!!1");
-    console.log("On submit handler: gameStatusWas:", gameStatus);
     e.preventDefault();
+
+    console.log("On submit handler: gameStatusWas:", gameStatus);
     if (gameStatus === "onFirstLoad") {
       setGameStatus("setup");
     } else if (gameStatus === "reset") {
-      const test = document.querySelector("input");
       setGameStatus("setup");
-      console.log(test);
     } else if (gameStatus === "setup") {
       console.log("gamestatus is =>", gameStatus);
     } else if (gameStatus === "playing") {
-      console.log("gamestatus is =>", gameStatus);
-      setGuess(e.target.elements["input-text"].value);
+      if (userText === "") {
+        // setWarning("emptyString");
+        return;
+      } else {
+        console.log("gamestatus is =>", gameStatus);
+        setGuess(e.target.elements["input-text"].value);
+      }
     } else if (gameStatus === "ended") {
       console.log("gamestatus is:", gameStatus, correctWord);
 
       setCorrectWord(null);
-      setGameStatus("reset");
+      setGameStatus("setup");
     } else {
       throw new Error("OOOps, check status strings");
     }
@@ -98,7 +101,7 @@ function App() {
     }
     if (gameStatus === "ended") {
       console.log('on gameStatus "ended"');
-      setGuess("what");
+      setGuess("");
       setScrambledWord(correctWord);
     }
   }, [correctWord, gameStatus]);
@@ -106,11 +109,11 @@ function App() {
   //GUESSES ⁉️
   useEffect(() => {
     console.log("on GUESS or CORRECT_WORD:", guess, correctWord);
-    if (guess && guess !== correctWord) {
+    if (gameStatus === "playing" && guess !== correctWord) {
       setGuessesLeft(state => state - 1);
       console.log("WRONG GUESS, guess was", guess, "BUT WORD was", correctWord);
     }
-    if (guess && guess === correctWord) {
+    if (gameStatus === "playing" && guess === correctWord) {
       console.log("Correct Word", correctWord, "guess", guess);
       setScore(100);
       setGameStatus("ended");
@@ -164,6 +167,7 @@ function App() {
           <Instructions />
         </div>
       </main>
+      {/* <WarningHandling warning={warning} /> */}
     </div>
   );
 }

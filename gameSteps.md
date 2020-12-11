@@ -40,3 +40,7 @@
 
 - setCorrectWord(null);
 - setGameStatus("setup");
+
+#### Includes
+
+- React Tooltip
