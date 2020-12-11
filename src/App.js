@@ -8,6 +8,7 @@ import Instructions from "./components/Instructions/Instructions";
 import Score from "./components/Score/Score";
 import Word from "./components/Word/Word";
 import chooseWord, { scrambleWord } from "./functions/functions";
+import Scoreboard, { Top10 } from "./components/Scoreboard/Scoreboard";
 //import WarningHandling from "./components/WarningHandling/WarningHandling";
 
 //TODO: delay appearance of scrambled word -first scramble then show
@@ -34,6 +35,7 @@ function App() {
   const [scrambledWord, setScrambledWord] = useState("");
   const [guess, setGuess] = useState(null);
   const [options, setOptions] = useState(initOptions);
+  const [scoreboard, setScoreboard] = useState(null);
 
   // const [warning, setWarning] = ""; //emptyString
   const onSubmitHandler = (e, userText) => {
@@ -60,6 +62,12 @@ function App() {
         throw new Error("OOOps, check status strings");
     }
   };
+
+  useEffect(() => {
+    if (localStorage.scoreboard) {
+      setScoreboard(JSON.parse(localStorage.getItem("scoreboard")));
+    }
+  }, []);
 
   //Timer ⏲️
   useEffect(() => {
@@ -171,6 +179,10 @@ function App() {
     options.pointsPerWordLength,
   ]);
 
+  useEffect(() => {
+    JSON.stringify(localStorage.setItem("scoreboard", score));
+  }, [score, scoreboard]);
+
   return (
     <div className="App">
       <Header />
@@ -192,6 +204,8 @@ function App() {
         </div>
       </main>
       {/* <WarningHandling warning={warning} /> */}
+      <Top10 />
+      <Scoreboard />
     </div>
   );
 }
