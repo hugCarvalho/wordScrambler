@@ -1,9 +1,12 @@
-.Input {
+.Form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   input {
     //background-color: rgb(243, 71, 71);
     height: 1.9rem;
     color: rgb(49, 49, 49);
-    margin-top: 25px;
+    margin-top: 5px;
     outline: none;
     width: 65%;
     font-size: inherit;

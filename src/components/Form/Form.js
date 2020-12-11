@@ -17,7 +17,7 @@ function Form({ onSubmitHandler, gameStatus }) {
   }, [gameStatus]);
 
   return (
-    <form onSubmit={e => onSubmitHandler(e, userText)} className="Input">
+    <form onSubmit={e => onSubmitHandler(e, userText)} className="Form">
       <input
         // data-type="warning"
         // data-place="left"

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import "./App.css";
+import "./App.scss";
 import Countdown from "./components/Countdown/Countdown";
 import GuessesLeft from "./components/GuessesLeft/GuessesLeft";
 import Header from "./components/Header/Header";
@@ -8,7 +8,7 @@ import Instructions from "./components/Instructions/Instructions";
 import Score from "./components/Score/Score";
 import Word from "./components/Word/Word";
 import chooseWord, { scrambleWord } from "./functions/functions";
-import WarningHandling from "./components/WarningHandling/WarningHandling";
+//import WarningHandling from "./components/WarningHandling/WarningHandling";
 
 //TODO: delay appearance of scrambled word -first scramble then show
 //make options obj
@@ -64,7 +64,7 @@ function App() {
   //Timer ⏲️
   useEffect(() => {
     if (gameStatus === "setup") {
-      console.log('activates if (gameStatus === "setup")');
+      console.log("SETUP => setting up game");
       setGuessesLeft(initOptions.guessesLeft);
       setCountdown(initOptions.countdown);
       setScore(initOptions.score);
