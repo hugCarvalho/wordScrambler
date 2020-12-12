@@ -6,13 +6,16 @@ function Word({ gameStatus, scrambledWord, correctWord }) {
     <div className="Word">
       word:
       <span>
-        {gameStatus === "onLoad" || gameStatus === "scramblingWord"
-          ? "???"
-          : gameStatus === "playing"
-          ? scrambledWord
-          : gameStatus === "ended"
-          ? correctWord
-          : null}
+        {
+          gameStatus === "onLoad" || gameStatus === "scramblingWord"
+            ? "???"
+            : scrambledWord
+          //gameStatus === "playing"
+          //? scrambledWord
+          //: gameStatus === "ended"
+          //? correctWord
+          //: null
+        }
       </span>
     </div>
   );

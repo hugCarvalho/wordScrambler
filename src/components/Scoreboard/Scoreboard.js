@@ -36,10 +36,14 @@ function Scoreboard() {
   );
 }
 
-const showNumberOfScores = 10;
-const DUMMY_SCORES = [4, 7, 2, 5].sort((a, b) => b - a);
+export function Top10({ scoreboard }) {
+  let len = scoreboard.length;
+  if (len < 10) {
+    while (scoreboard.length < 10) {
+      scoreboard.push(null);
+    }
+  }
 
-export function Top10() {
   return (
     <div className="Top10">
       <div className="wrapper__table">
@@ -48,11 +52,11 @@ export function Top10() {
           <li>
             <span>Top 10</span>
           </li>
-          {DUMMY_SCORES.map((score, i) => {
+          {scoreboard.map((score, i) => {
             return (
               <li key={i}>
                 <span>{i + 1}. </span>
-                <span>{DUMMY_SCORES[i]}</span>
+                <span>{score || 0}</span>
               </li>
             );
           })}

@@ -23,20 +23,26 @@ const initOptions = {
   pointsPerWordLength: 10,
 };
 
-const initArr = ["dog", "bear", "horse", "python"];
+//todo: validation- word must be at least 2 letters
+const initArr = ["dog", "bear", "horse", "python", "12", "23", "43", "53"];
 //const initArr = ["da"];
 
 function App() {
+  //OPTIONS + DATA
+  const [options, setOptions] = useState(initOptions);
+  const [array, setArray] = useState(initArr);
+  //MAIN STATE
   const [gameStatus, setGameStatus] = useState("onLoad"); // "onLoad", "playing", "ended"
+  //IN GAME VARIABLES
   const [guessesLeft, setGuessesLeft] = useState(initOptions.guessesLeft);
   const [countdown, setCountdown] = useState(initOptions.countdown);
   const [score, setScore] = useState(initOptions.score);
-  const [array, setArray] = useState(initArr);
   const [correctWord, setCorrectWord] = useState(null);
   const [scrambledWord, setScrambledWord] = useState("");
   const [guess, setGuess] = useState(null);
-  const [options, setOptions] = useState(initOptions);
-  const [scoreboard, setScoreboard] = useState(null);
+  //SCOREBOARD
+  const [scoreboard, setScoreboard] = useState([]);
+  //MODAL
   const [modalMessage, setModalMessage] = useState("Testing modal message");
   const [showModal, setShowModal] = useState(false);
 
@@ -59,6 +65,7 @@ function App() {
         }
         break;
       case "ended":
+        setCorrectWord(null); //prevents setScrambledWord to run before time
         setGameStatus("scramblingWord");
         break;
       default:
@@ -66,9 +73,10 @@ function App() {
     }
   };
 
+  //LOCALSTORAGE ⏩ GET
   useEffect(() => {
     if (localStorage.scoreboard) {
-      setScoreboard(JSON.parse(localStorage.getItem("scoreboard")));
+      setScoreboard(JSON.parse(window.localStorage.getItem("scoreboard")));
     }
   }, []);
 
@@ -100,6 +108,7 @@ function App() {
   //Sets Word 🥉
   useEffect(() => {
     if (gameStatus === "scramblingWord") {
+      setCorrectWord(null);
       setCorrectWord(chooseWord(array));
     }
   }, [gameStatus, array]);
@@ -114,10 +123,10 @@ function App() {
     }
     if (gameStatus === "ended") {
       console.log('on gameStatus "ended"');
+      setScrambledWord(correctWord);
       setGuess("");
       setModalMessage("game over!");
       setShowModal(true);
-      setScrambledWord(correctWord);
     }
   }, [correctWord, gameStatus]);
 
@@ -157,18 +166,9 @@ function App() {
     }
   }, [gameStatus, guessesLeft, countdown]);
 
+  //GAME WON 🏆
   useEffect(() => {
-    console.log("correctWord", correctWord);
-    console.log("------------");
-  }, [correctWord]);
-
-  useEffect(() => {
-    console.log("scrambledWord", scrambledWord);
-    console.log("------------");
-  }, [scrambledWord]);
-
-  useEffect(() => {
-    if (gameStatus === "ended" && correctWord) {
+    if (gameStatus === "ended" && guessesLeft !== 0 && countdown > 0) {
       setScore(
         countdown * options.pointsPerTimeLeft +
           guessesLeft * options.pointsPerGuessLeft +
@@ -185,9 +185,38 @@ function App() {
     options.pointsPerWordLength,
   ]);
 
+  //LOCALSTORGAGE ⏩ SET
   useEffect(() => {
-    JSON.stringify(localStorage.setItem("scoreboard", score));
-  }, [score, scoreboard]);
+    let updatedScoreboard = scoreboard;
+    console.log("1", updatedScoreboard);
+    if (gameStatus === "ended" && score > 0) {
+      const minScore = Math.min(...scoreboard);
+      if (scoreboard.length < 10 || score > minScore) {
+        updatedScoreboard.push(score);
+        updatedScoreboard.sort((a, b) => b - a);
+        setScoreboard(updatedScoreboard);
+        window.localStorage.setItem("scoreboard", JSON.stringify(updatedScoreboard));
+      }
+    }
+    console.log("3", updatedScoreboard);
+  }, [gameStatus, score, scoreboard]);
+
+  useEffect(() => {
+    console.log("score", score);
+    console.log("------------");
+  }, [score]);
+  useEffect(() => {
+    console.log("correctWord", correctWord);
+    console.log("------------");
+  }, [correctWord]);
+  useEffect(() => {
+    console.log("scrambledWord", scrambledWord);
+    console.log("------------");
+  }, [scrambledWord]);
+  useEffect(() => {
+    console.log("scoreboard", scoreboard);
+    console.log("------------");
+  }, [scoreboard]);
 
   return (
     <div className="App">
@@ -203,6 +232,7 @@ function App() {
           <Word
             gameStatus={gameStatus}
             scrambledWord={scrambledWord}
+            Scoreboard
             correctWord={correctWord}
           />
           <Form onSubmitHandler={onSubmitHandler} gameStatus={gameStatus} />
@@ -210,8 +240,8 @@ function App() {
         </div>
       </main>
       {/* <WarningHandling warning={warning} /> */}
-      <Top10 />
-      <Scoreboard />
+      <Top10 scoreboard={scoreboard} />
+      {/* <Scoreboard scoreboard={scoreboard} /> */}
       {showModal && <Backdrop modalStatus={false}>{modalMessage} </Backdrop>}
     </div>
   );
