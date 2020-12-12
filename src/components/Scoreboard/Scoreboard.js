@@ -50,8 +50,8 @@ export function Top10() {
           </li>
           {DUMMY_SCORES.map((score, i) => {
             return (
-              <li>
-                <span key={i}>{i + 1}. </span>
+              <li key={i}>
+                <span>{i + 1}. </span>
                 <span>{DUMMY_SCORES[i]}</span>
               </li>
             );

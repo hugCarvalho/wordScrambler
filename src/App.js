@@ -9,6 +9,7 @@ import Score from "./components/Score/Score";
 import Word from "./components/Word/Word";
 import chooseWord, { scrambleWord } from "./functions/functions";
 import Scoreboard, { Top10 } from "./components/Scoreboard/Scoreboard";
+import Backdrop from "./components/Backdrop/Backdrop";
 //import WarningHandling from "./components/WarningHandling/WarningHandling";
 
 //TODO: delay appearance of scrambled word -first scramble then show
@@ -36,6 +37,8 @@ function App() {
   const [guess, setGuess] = useState(null);
   const [options, setOptions] = useState(initOptions);
   const [scoreboard, setScoreboard] = useState(null);
+  const [modalMessage, setModalMessage] = useState("Testing modal message");
+  const [showModal, setShowModal] = useState(false);
 
   // const [warning, setWarning] = ""; //emptyString
   const onSubmitHandler = (e, userText) => {
@@ -76,6 +79,7 @@ function App() {
       setGuessesLeft(initOptions.guessesLeft);
       setCountdown(initOptions.countdown);
       setScore(initOptions.score);
+      setShowModal(false);
       setGameStatus("playing");
     }
 
@@ -111,6 +115,8 @@ function App() {
     if (gameStatus === "ended") {
       console.log('on gameStatus "ended"');
       setGuess("");
+      setModalMessage("game over!");
+      setShowModal(true);
       setScrambledWord(correctWord);
     }
   }, [correctWord, gameStatus]);
@@ -206,6 +212,7 @@ function App() {
       {/* <WarningHandling warning={warning} /> */}
       <Top10 />
       <Scoreboard />
+      {showModal && <Backdrop modalStatus={false}>{modalMessage} </Backdrop>}
     </div>
   );
 }
