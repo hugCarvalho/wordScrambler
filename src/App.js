@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.scss";
-import Countdown from "./components/Countdown/Countdown";
-import GuessesLeft from "./components/GuessesLeft/GuessesLeft";
+import Countdown from "./components/Indicators/Countdown/Countdown";
+import GuessesLeft from "./components/Indicators/GuessesLeft/GuessesLeft";
 import Header from "./components/Header/Header";
 import Form from "./components/Form/Form";
 import Instructions from "./components/Instructions/Instructions";
-import Score from "./components/Score/Score";
+import Score from "./components/Indicators/Score/Score";
 import Word from "./components/Word/Word";
 import chooseWord, { scrambleWord } from "./functions/functions";
 import Scoreboard, { Top10 } from "./components/Scoreboard/Scoreboard";
@@ -24,7 +24,7 @@ const initOptions = {
 };
 
 //todo: validation- word must be at least 2 letters
-const initArr = ["dog", "bear", "horse", "python", "12", "23", "43", "53"];
+const initArr = ["dog", "bear", "horse", "python"]; //, "12", "23", "43", "53"];
 //const initArr = ["da"];
 
 function App() {
@@ -191,12 +191,18 @@ function App() {
     console.log("1", updatedScoreboard);
     if (gameStatus === "ended" && score > 0) {
       const minScore = Math.min(...scoreboard);
-      if (scoreboard.length < 10 || score > minScore) {
+      if (scoreboard.length < 10) {
         updatedScoreboard.push(score);
         updatedScoreboard.sort((a, b) => b - a);
-        setScoreboard(updatedScoreboard);
-        window.localStorage.setItem("scoreboard", JSON.stringify(updatedScoreboard));
       }
+      if (scoreboard.length >= 10 && score > minScore) {
+        updatedScoreboard.push(score);
+        updatedScoreboard.sort((a, b) => b - a);
+        updatedScoreboard.pop();
+      }
+      if (score <= 0) return;
+      setScoreboard(updatedScoreboard);
+      window.localStorage.setItem("scoreboard", JSON.stringify(updatedScoreboard));
     }
     console.log("3", updatedScoreboard);
   }, [gameStatus, score, scoreboard]);

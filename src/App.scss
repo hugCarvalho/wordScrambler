@@ -1,17 +1,27 @@
 .App {
+  background-color: #282c34;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   //padding: 10px;
   font-size: 2rem;
   text-align: center;
   main {
+    //background-color: #282c34;
     margin: 20px 3px;
     border: 1px solid gray;
     min-width: 314px;
+    width: 314px;
   }
 
   .indicators {
-    background-color: lightcoral;
+    //background-color: lightcoral;
+    color: whitesmoke;
     display: flex;
+    align-items: center;
+    height: 50px;
     justify-content: space-evenly;
+    font-size: 2.7rem;
   }
 }
 
