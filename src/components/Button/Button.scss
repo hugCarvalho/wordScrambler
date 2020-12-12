@@ -1,27 +1,28 @@
 .Button {
-  button {
-    background-color: rgb(0, 0, 0);
-    padding: 5px 10px;
-    min-width: 180px;
-    font-weight: 500;
-    letter-spacing: 0.6px;
-    color: lime;
+  background-color: rgb(14, 6, 6);
+  background-color: #28d2d2; //Start
+  background-color: #519569; //guess
 
-    text-transform: uppercase;
-    opacity: 0.8;
-    .btn-text {
-      display: flex;
-      align-self: center;
-    }
+  margin: 17px auto;
+  border-radius: 6px;
+  padding: 5px 10px;
+  min-width: 180px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  color: white;
 
-    margin: 2px auto;
-    border-radius: 6px;
+  text-transform: uppercase;
+
+  .btn-text {
+    display: flex;
+    align-self: center;
   }
+
   button:hover {
     cursor: pointer;
-    opacity: 1;
+    opacity: 0.8;
   }
   button:focus {
-    opacity: 1;
+    opacity: 0.8;
   }
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import "./GuessesLeft.scss";
 
+//TODO: change emoji for each guess left with transition
 function GuessesLeft({ guessesLeft }) {
   return (
     <div className="GuessesLeft">

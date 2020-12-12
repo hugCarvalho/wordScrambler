@@ -1,6 +1,7 @@
 import React from "react";
 import "./Instructions.scss";
 
+//TODO: add rest instructions with scrolling to the right
 function Instructions() {
   return (
     <div className="Instructions">

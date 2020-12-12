@@ -4,11 +4,11 @@ import "./Word.scss";
 function Word({ gameStatus, scrambledWord, correctWord }) {
   return (
     <div className="Word">
-      word:
+      {/* <span>word</span> */}
       <span>
         {
           gameStatus === "onLoad" || gameStatus === "scramblingWord"
-            ? "???"
+            ? "❓"
             : scrambledWord
           //gameStatus === "playing"
           //? scrambledWord

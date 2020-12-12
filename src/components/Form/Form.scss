@@ -4,17 +4,19 @@
   align-items: center;
   input {
     //background-color: rgb(243, 71, 71);
-    height: 1.9rem;
     color: rgb(49, 49, 49);
-    margin-top: 5px;
+    height: 2.2rem;
+    margin-top: 10px;
     outline: none;
     width: 65%;
-    font-size: inherit;
+    font-size: 1.2rem;
     padding-left: 0.4rem;
-    //border-top-left-radius: 6px;
-    //border-bottom-left-radius: 6px;
-    border: 1px inset white;
+    letter-spacing: 3px;
+    text-align: center;
+    border-radius: 10px;
+
     transition: all 0.5s;
+
     &:focus {
       outline: none;
       background-color: white;
