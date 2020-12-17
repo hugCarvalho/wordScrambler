@@ -80,9 +80,10 @@ function Instructions() {
           </div>
 
           <div className="options" style={onTextPageChangeHandler().options}>
-            <b>Options:</b>{" "}
+            <b>Word:</b>{" "}
             <i>
-              change several settings, like sound and costumise your experiencelike sound,{" "}
+              once the game is over, if you don't know the meaning of the chosen word,
+              click on it to be taken to its wiki page.
             </i>
           </div>
         </div>

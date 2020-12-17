@@ -3,7 +3,7 @@ import "./Score.scss";
 
 function Score({ score, gameWon }) {
   const changeBgColor = () =>
-    gameWon ? { backgroundColor: "#f1f2da" } : { backgroundColor: "#282c34" };
+    gameWon ? { backgroundColor: "white" } : { backgroundColor: "#282c34" };
 
   return (
     <div style={changeBgColor(gameWon)} className="Score">
