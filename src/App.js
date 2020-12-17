@@ -24,7 +24,7 @@ const initOptions = {
 };
 
 //todo: validation- word must be at least 2 letters
-const initArr = ["whale", "camel", "bear", "horse", "python"]; //, "12", "23", "43", "53"];
+const initArr = ["whale", "camel", "horse", "python"]; //, "12", "23", "43", "53"];
 //const initArr = ["da"];
 
 //TODO: lowercase correct word
@@ -47,6 +47,7 @@ function App() {
   //MODAL
   const [modalMessage, setModalMessage] = useState("Testing modal message");
   const [showModal, setShowModal] = useState(false);
+  const [gameWon, setGameWon] = useState(false);
 
   // const [warning, setWarning] = ""; //emptyString
   const onSubmitHandler = (e, userText) => {
@@ -89,6 +90,7 @@ function App() {
       setGuessesLeft(initOptions.guessesLeft);
       setCountdown(initOptions.countdown);
       setScore(initOptions.score);
+      setGameWon(false);
       setShowModal(false);
       setGameStatus("playing");
     }
@@ -171,6 +173,7 @@ function App() {
   //GAME WON 🏆
   useEffect(() => {
     if (gameStatus === "ended" && guessesLeft !== 0 && countdown > 0) {
+      setGameWon(true);
       setScore(
         countdown * options.pointsPerTimeLeft +
           guessesLeft * options.pointsPerGuessLeft +
@@ -235,7 +238,7 @@ function App() {
           <div className="indicators">
             <GuessesLeft guessesLeft={guessesLeft} />
             <Countdown countdown={countdown} />
-            <Score score={score} />
+            <Score score={score} gameWon={gameWon} />
           </div>
           <Word
             gameStatus={gameStatus}

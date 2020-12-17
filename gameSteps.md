@@ -1,10 +1,11 @@
 # GameStatus => "idle"
 
-# onSubmitHandler: gameStatus => "setup"
+# useEffect(gameStatus = setup)
 
 - setGuessesLeft(initOptions.guessesLeft);
 - setCountdown(initOptions.countdown);
 - setScore(initOptions.score);
+- setGameWon(false)
 - setCorrectWord(chooseWord(array));
 
 # CorrectWord
