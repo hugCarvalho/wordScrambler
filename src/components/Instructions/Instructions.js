@@ -10,15 +10,15 @@ function Instructions() {
   const onTextPageChangeHandler = () => {
     if (activePage === 2)
       return {
-        instructions: { transform: "translateX(-105%)" },
-        score: { transform: "translateX(0)" },
-        options: { transform: "translateX(115%)" },
+        instructions: { transform: "translateX(-100%)" },
+        score: { transform: "translateX(-307px)" }, //transform: width instructions text container + margin
+        options: { transform: "translateX(-292px)" },
       };
     if (activePage === 3)
       return {
-        instructions: { transform: "translateX(-105%)" },
-        score: { transform: "translateX(-105%)" },
-        options: { transform: "translateX(0)" },
+        instructions: { transform: "translateX(-100%)" },
+        score: { transform: "translateX(-200%)" },
+        options: { transform: "translateX(-599px)" },
       };
     return { instructions: {}, score: {} };
   };
@@ -44,29 +44,35 @@ function Instructions() {
             <b>Score:</b>{" "}
             <ul>
               <li>
-                <i>➕ 5 points for guess left</i>
+                <i>
+                  <span>&#43;</span> 5 points for guess left
+                </i>
               </li>
               <li>
-                <i>➕ number of letters of the word x 10 </i>
+                <i>
+                  <span>&#43;</span> number of letters of the word x 10{" "}
+                </i>
               </li>
               <li>
-                <i>➕ time remaining:</i>
+                <i>
+                  <span>&#43;</span> time remaining:
+                </i>
               </li>
 
               <ul className="nested-list">
                 <li>
                   <i>
-                    ➖ Level <strong>Hard</strong> - remaining time x 3
+                    Level <strong>Hard</strong> - remaining time x 3
                   </i>
                 </li>
                 <li>
                   <i>
-                    ➖ Level <strong>Medium</strong> -remaining time x 2
+                    Level <strong>Medium</strong> -remaining time x 2
                   </i>
                 </li>
                 <li>
                   <i>
-                    ➖ Level <strong>Easy</strong> - remaining time
+                    Level <strong>Easy</strong> - remaining time
                   </i>
                 </li>
               </ul>
@@ -82,12 +88,11 @@ function Instructions() {
         </div>
       </div>
       <footer>
-        {/* <span>👈🏻</span> */}
         <button
           onClick={() => setActivePage(state => state - 1)}
           style={activePage < 2 ? { visibility: "hidden", pointerEvents: "none" } : {}}
         >
-          👈🏽
+          👈
         </button>
         <span>{activePage}</span>
         <button
@@ -96,8 +101,8 @@ function Instructions() {
         >
           👉
         </button>
-        {/* <span>👉🏿</span> */}
       </footer>
+      <div className="close-panel"></div>
     </div>
   );
 }

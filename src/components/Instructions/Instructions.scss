@@ -5,7 +5,7 @@
   //background-color: #515151;
   position: relative;
   margin-top: 20px;
-
+  overflow: hidden;
   text-align: left;
 
   padding: 20px 10px 0px 10px;
@@ -13,26 +13,53 @@
   font-size: 1.6rem;
   color: whitesmoke;
 
-  .wrapper {
-    //background-color: gray;
-    display: flex;
-    flex-direction: column;
-    //width: 800px;
-  }
-
   .instructions__container {
     // background-color: rgb(66, 32, 77);
     height: 133px;
     overflow: hidden;
     display: flex;
+    width: 900px;
+  }
+  .wrapper {
+    // background-color: white;
+    display: flex;
+    //flex-direction: column;
+    //width: 400px;
+    //overflow: hidden;
   }
 
   .instructions-text {
+    //background-color: greenyellow;
     position: relative;
-
     padding-bottom: 10px;
-    transition: all 1s ease;
-    //width: 300px;
+    transition: transform 0.7s ease;
+    width: 292px;
+  }
+
+  .score,
+  .options {
+    //background-color: rgb(70, 70, 70);
+    //padding-bottom: 10px;
+    //width: calc(100% - 20px);
+    // transform: translateX(105%);
+    transition: transform 0.7s ease;
+    //top: 20px;
+    z-index: 110;
+    text-align: left;
+    width: 100%;
+  }
+  .score {
+    //background-color: rgb(101, 105, 105);
+    //padding-left: 15px;
+    //margin-top: -86px;
+    width: 292px;
+    margin-left: 15px;
+  }
+  .options {
+    //background-color: brown;
+    width: 292px;
+
+    //margin-top: -143px;
   }
 
   footer {
@@ -45,39 +72,29 @@
     border-top: 1px solid lightcyan;
   }
 
-  .score {
-    margin-top: -86px;
-  }
-  .options {
-    margin-top: -143px;
-  }
-
-  .score,
-  .options {
-    //background-color: rgb(70, 70, 70);
-    padding-bottom: 10px;
-    //width: calc(100% - 20px);
-    transform: translateX(105%);
-    transition: all 1s ease;
-    //top: 20px;
-    z-index: 110;
-    text-align: left;
-  }
-
   .nested-list {
     padding-left: 15px;
   }
 
   button {
     background-color: transparent;
+    transition: transform 0.3s ease;
     &:hover {
       transform: scale(1.1);
-      //font-size: 4rem;
     }
   }
+
+  .nested-list li i::before {
+    content: "\2799  ";
+  }
+
   // span {
   //   position: absolute;
   //   bottom: 0;
   //   right: 10px;
+  // }
+  // .close-panel {
+  //   position: absolute;
+  //   height: 20px;
   // }
 }

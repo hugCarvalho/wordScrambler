@@ -24,7 +24,7 @@ const initOptions = {
 };
 
 //todo: validation- word must be at least 2 letters
-const initArr = ["dog", "bear", "Horse", "python"]; //, "12", "23", "43", "53"];
+const initArr = ["whale", "camel", "bear", "horse", "python"]; //, "12", "23", "43", "53"];
 //const initArr = ["da"];
 
 //TODO: lowercase correct word
