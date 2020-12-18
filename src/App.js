@@ -13,7 +13,8 @@ import Backdrop from "./components/Backdrop/Backdrop";
 //import WarningHandling from "./components/WarningHandling/WarningHandling";
 
 //TODO: delay appearance of scrambled word -first scramble then show
-//make options obj
+//TODO: accessibility checklist
+
 const initOptions = {
   guessesLeft: 3,
   countdown: 20,

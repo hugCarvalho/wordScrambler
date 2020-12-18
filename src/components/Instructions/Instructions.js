@@ -1,12 +1,12 @@
 import React from "react";
 import "./Instructions.scss";
 
-//TODO: add rest instructions with scrolling to the right
 //TODO: make scoring text dynamic
+
 function Instructions() {
   const [activePage, setActivePage] = React.useState(1);
+  const [showInstructions, setShowInstructions] = React.useState(true);
 
-  const onClickHandler = () => {};
   const onTextPageChangeHandler = () => {
     if (activePage === 2)
       return {
@@ -90,6 +90,7 @@ function Instructions() {
       </div>
       <footer>
         <button
+          className="turn-page"
           onClick={() => setActivePage(state => state - 1)}
           style={activePage < 2 ? { visibility: "hidden", pointerEvents: "none" } : {}}
         >
@@ -97,13 +98,25 @@ function Instructions() {
         </button>
         <span>{activePage}</span>
         <button
+          className="turn-page"
           onClick={() => setActivePage(state => state + 1)}
           style={activePage > 2 ? { visibility: "hidden", pointerEvents: "none" } : {}}
         >
           👉
         </button>
       </footer>
-      <div className="close-panel"></div>
+      <div className="close-panel" style={!showInstructions ? { height: "100%" } : null}>
+        <span>
+          <button
+            onClick={() => setShowInstructions(state => !state)}
+            className={`fas fa-angle-double-down ${!showInstructions ? "open" : "close"}`}
+          ></button>
+          <button
+            onClick={() => setShowInstructions(state => !state)}
+            className={`fas fa-angle-double-up ${showInstructions ? "open" : "close"}`}
+          ></button>
+        </span>
+      </div>
     </div>
   );
 }
