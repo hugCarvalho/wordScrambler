@@ -2,8 +2,8 @@ import React from "react";
 import "./Score.scss";
 
 function Score({ score, gameWon }) {
-  const changeBgColor = () =>
-    gameWon ? { backgroundColor: "white" } : { backgroundColor: "#282c34" };
+  const changeBgColor = gameWon =>
+    gameWon === "yes" ? { backgroundColor: "white" } : { backgroundColor: "#282c34" };
 
   return (
     <div style={changeBgColor(gameWon)} className="Score">

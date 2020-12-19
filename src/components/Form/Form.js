@@ -51,10 +51,10 @@ function Form({ onSubmitHandler, gameStatus, gameWon, guessesLeft }) {
           style={displayWrongGuessCross ? { display: "inline" } : { display: "none" }}
           className="guess-result right-guess"
         >
-          ❎
+          🔴
         </span>
         <span
-          style={gameWon ? { display: "inline" } : { display: "none" }}
+          style={gameWon === "yes" ? { display: "inline" } : { display: "none" }}
           className="guess-result wrong-guess"
         >
           ✅

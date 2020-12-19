@@ -23,7 +23,7 @@
   // }
 
   div {
-    // background-color: rgb(223, 137, 25);
+    //background-color: rgb(223, 137, 25);
     position: relative;
     width: 50px;
 
@@ -58,6 +58,20 @@
   .activate-trophy {
     transform: translateY(-70px);
     // transition: 1s transform ease-out;
+  }
+
+  .loser {
+    position: absolute;
+    font-size: 50px;
+    display: flex;
+    align-self: center;
+    opacity: 0;
+    //margin-left: -25px;
+    transition: 1s opacity ease-out;
+  }
+
+  .activate-loser {
+    opacity: 1;
   }
 }
 

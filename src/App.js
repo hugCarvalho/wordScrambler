@@ -93,7 +93,7 @@ function App() {
       setGuessesLeft(initOptions.guessesLeft);
       setCountdown(initOptions.countdown);
       setScore(initOptions.score);
-      setGameWon(null);
+      //setGameWon(null);
       setShowModal(false);
       setGameStatus("playing");
     }
@@ -156,6 +156,7 @@ function App() {
   useEffect(() => {
     if (guessesLeft === 0) {
       setGameStatus("ended");
+      setGameWon("no");
       console.log("GAME ENDED, 0 GUESSES LEFT: ", guessesLeft);
     }
   }, [guessesLeft]);
@@ -164,6 +165,7 @@ function App() {
     if (countdown < 1) {
       setGameStatus("ended");
       console.log("TIME IS UP!!!", countdown);
+      setGameWon("no");
     }
   }, [countdown]);
 
