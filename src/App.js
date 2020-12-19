@@ -104,7 +104,7 @@ function App() {
     } else {
       clearInterval(timer);
     }
-    console.log("gameStatus useEFFECT :>> ", gameStatus);
+    //console.log("gameStatus useEFFECT :>> ", gameStatus);
     return () => {
       clearInterval(timer);
     };
@@ -137,14 +137,14 @@ function App() {
 
   //GUESSES ⁉️
   useEffect(() => {
-    console.log("on GUESS or CORRECT_WORD:", guess, correctWord);
+    //console.log("on GUESS or CORRECT_WORD:", guess, correctWord);
     if (gameStatus === "playing" && guess && guess !== correctWord) {
       setGuessesLeft(state => state - 1);
       console.log("WRONG GUESS, guess was", guess, "BUT WORD was", correctWord);
     }
     //SCORING LOGIC 🎼
     if (gameStatus === "playing" && guess && guess === correctWord) {
-      console.log("Correct Word", correctWord, "guess", guess);
+      //console.log("Correct Word", correctWord, "guess", guess);
       setGameStatus("ended");
     }
   }, [gameStatus, guess, correctWord]);
@@ -194,7 +194,7 @@ function App() {
   //LOCALSTORGAGE ⏩ SET
   useEffect(() => {
     let updatedScoreboard = scoreboard;
-    console.log("1", updatedScoreboard);
+    //console.log("1", updatedScoreboard);
     if (gameStatus === "ended" && score > 0) {
       const minScore = Math.min(...scoreboard);
       if (scoreboard.length < 10) {
@@ -210,7 +210,7 @@ function App() {
       setScoreboard(updatedScoreboard);
       window.localStorage.setItem("scoreboard", JSON.stringify(updatedScoreboard));
     }
-    console.log("3", updatedScoreboard);
+    //console.log("3", updatedScoreboard);
   }, [gameStatus, score, scoreboard]);
 
   useEffect(() => {
@@ -244,19 +244,28 @@ function App() {
           <Word
             gameStatus={gameStatus}
             scrambledWord={scrambledWord}
-            Scoreboard
+            //Scoreboard
             correctWord={correctWord}
           />
-          <Form onSubmitHandler={onSubmitHandler} gameStatus={gameStatus} />
+
+          <Form
+            onSubmitHandler={onSubmitHandler}
+            gameStatus={gameStatus}
+            gameWon={gameWon}
+            guessesLeft={guessesLeft}
+          />
+
           <Instructions />
         </div>
       </main>
       {/* <WarningHandling warning={warning} /> */}
-      <Top10 scoreboard={scoreboard} />
+      {/* <Top10 scoreboard={scoreboard} /> */}
       {/* <Scoreboard scoreboard={scoreboard} /> */}
-      {showModal && <Backdrop modalStatus={false}>{modalMessage} </Backdrop>}
+      {/* {showModal && <Backdrop modalStatus={false}>{modalMessage} </Backdrop>} */}
     </div>
   );
 }
 
 export default App;
+
+//🟢❌❎

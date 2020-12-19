@@ -3,8 +3,9 @@ import Button from "../Button/Button";
 import "./Form.scss";
 import ReactTooltip from "react-tooltip";
 
-function Form({ onSubmitHandler, gameStatus }) {
+function Form({ onSubmitHandler, gameStatus, gameWon, guessesLeft }) {
   const [userText, setUserText] = useState("");
+  const [displayWrongGuessCross, setDisplayWrongGuessCross] = useState(false);
   const userInput = useRef();
 
   useEffect(() => {
@@ -16,22 +17,50 @@ function Form({ onSubmitHandler, gameStatus }) {
     }
   }, [gameStatus]);
 
+  useEffect(() => {
+    console.log(displayWrongGuessCross);
+    if (displayWrongGuessCross) {
+      setDisplayWrongGuessCross(false);
+    }
+  }, [userText]);
+
+  useEffect(() => {
+    if (guessesLeft < 3) {
+      setDisplayWrongGuessCross(true);
+    }
+  }, [guessesLeft]);
   return (
     <form onSubmit={e => onSubmitHandler(e, userText)} className="Form">
-      <input
-        // data-type="warning"
-        // data-place="left"
-        // data-effect="solid"
-        className=""
-        type="text"
-        id="input-text"
-        disabled={gameStatus === "onLoad" || gameStatus === "ended"}
-        autoComplete="off"
-        value={userText}
-        onChange={e => setUserText(e.target.value)}
-        //placeholder="press start to begin a game"
-        ref={userInput}
-      />
+      <div className="input">
+        <input
+          // data-type="warning"
+          // data-place="left"
+          // data-effect="solid"
+          className=""
+          type="text"
+          id="input-text"
+          disabled={gameStatus === "onLoad" || gameStatus === "ended"}
+          autoComplete="off"
+          value={userText}
+          onChange={e => setUserText(e.target.value)}
+          //placeholder="press start to begin a game"
+          ref={userInput}
+        />
+        {/* <div className="guess-result"> */}
+        <span
+          style={displayWrongGuessCross ? { display: "inline" } : { display: "none" }}
+          className="guess-result right-guess"
+        >
+          ❎
+        </span>
+        <span
+          style={gameWon ? { display: "inline" } : { display: "none" }}
+          className="guess-result wrong-guess"
+        >
+          ✅
+        </span>
+        {/* </div> */}
+      </div>
       {}
       <Button gameStatus={gameStatus} type="submit">
         {gameStatus === "onLoad"

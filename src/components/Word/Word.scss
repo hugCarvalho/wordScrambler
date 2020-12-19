@@ -1,9 +1,25 @@
 .Word {
+  //display: flex;
+  //justify-content: center;
+  //align-items: center;
   //background-color: lightblue;
   margin-top: 25px;
   font-size: 3rem;
   color: whitesmoke;
-  span {
-    transition: all 4s ease;
+  .word {
+    position: relative;
+  }
+
+  .guess-right-wrong {
+    font-size: 2rem;
+    margin-left: 10px;
+    opacity: 1;
+    //display: none;
+  }
+
+  .guess-right-wrong {
+    position: absolute;
+    top: 25%;
+    right: -100%;
   }
 }

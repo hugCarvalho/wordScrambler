@@ -8,7 +8,7 @@ function Word({ gameStatus, scrambledWord, correctWord }) {
   return (
     <div className="Word">
       {/* <span>word</span> */}
-      <span>
+      <span className="word">
         {gameStatus === "onLoad" || gameStatus === "scramblingWord" ? (
           "❓"
         ) : gameStatus === "ended" ? (
