@@ -1,0 +1,89 @@
+.AnimationsDisplay {
+  position: absolute;
+  top: 53%;
+  left: 50%;
+  margin-left: -45px;
+  //margin-top: 580px;
+  width: 90px;
+  height: 105px;
+  //border: 1px solid black;
+  //animation-name: test;
+  border: 1px solid rgb(158, 158, 158);
+
+  overflow: hidden;
+
+  border-radius: 13px;
+  z-index: 1000;
+  background-color: #333a42;
+  background-color: #ffffff10;
+  transition: 1s backgroundColor ease-in;
+  // .activate-game-end {
+  //   background-color: #ffffff;
+  // }
+
+  div {
+    background-color: antiquewhite;
+    position: relative;
+    //width: 100%;
+  }
+
+  .medal {
+    position: absolute;
+    font-size: 50px;
+    top: -57px;
+    left: 50%;
+    margin-left: -25px;
+    transition: 1s transform ease-out;
+  }
+  .clap {
+    position: absolute;
+    font-size: 40px;
+    right: -45px;
+    top: 50%;
+    margin-top: -20px;
+    //margin-left: -20px;
+    transition: 1s transform ease-in-out;
+  }
+
+  .trophy {
+    position: absolute;
+    font-size: 50px;
+    bottom: -57px;
+    left: 50%;
+    margin-left: -25px;
+    transition: 1s transform ease-out;
+  }
+
+  .activate-medal {
+    transform: translateY(96%);
+    // transition: 1s transform ease-out;
+  }
+  .activate-clap {
+    transform: translateX(-170%);
+  }
+  .activate-trophy {
+    transform: translateY(-100%);
+    // transition: 1s transform ease-out;
+  }
+}
+
+@keyframes test {
+  25% {
+    border-top: 1px solid black;
+  }
+  25% {
+    border-right: 1px solid black;
+  }
+  50% {
+    border-bottom: 1px solid black;
+  }
+  75% {
+    border-left: 1px solid black;
+  }
+  100% {
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid rgb(168, 168, 168);
+  }
+}

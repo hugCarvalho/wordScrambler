@@ -1,4 +1,5 @@
 import React from "react";
+import AnimationsDisplay from "../AnimationsDisplay/AnimationsDisplay";
 import "./Instructions.scss";
 
 //TODO: make scoring text dynamic

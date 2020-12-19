@@ -10,6 +10,7 @@ import Word from "./components/Word/Word";
 import chooseWord, { scrambleWord } from "./functions/functions";
 import Scoreboard, { Top10 } from "./components/Scoreboard/Scoreboard";
 import Backdrop from "./components/Backdrop/Backdrop";
+import AnimationsDisplay from "./components/AnimationsDisplay/AnimationsDisplay";
 //import WarningHandling from "./components/WarningHandling/WarningHandling";
 
 //TODO: delay appearance of scrambled word -first scramble then show
@@ -48,7 +49,7 @@ function App() {
   //MODAL
   const [modalMessage, setModalMessage] = useState("Testing modal message");
   const [showModal, setShowModal] = useState(false);
-  const [gameWon, setGameWon] = useState(false);
+  const [gameWon, setGameWon] = useState(null); //null, "yes", "no" -> don't change to true/false to pass only one prop
 
   // const [warning, setWarning] = ""; //emptyString
   const onSubmitHandler = (e, userText) => {
@@ -71,6 +72,7 @@ function App() {
       case "ended":
         setCorrectWord(null); //prevents setScrambledWord to run before time
         setGameStatus("scramblingWord");
+        setGameWon(null);
         break;
       default:
         throw new Error("OOOps, check status strings");
@@ -91,7 +93,7 @@ function App() {
       setGuessesLeft(initOptions.guessesLeft);
       setCountdown(initOptions.countdown);
       setScore(initOptions.score);
-      setGameWon(false);
+      setGameWon(null);
       setShowModal(false);
       setGameStatus("playing");
     }
@@ -174,7 +176,7 @@ function App() {
   //GAME WON 🏆
   useEffect(() => {
     if (gameStatus === "ended" && guessesLeft !== 0 && countdown > 0) {
-      setGameWon(true);
+      setGameWon("yes");
       setScore(
         countdown * options.pointsPerTimeLeft +
           guessesLeft * options.pointsPerGuessLeft +
@@ -255,8 +257,9 @@ function App() {
             guessesLeft={guessesLeft}
           />
 
-          <Instructions gameStatus={gameStatus} />
+          <Instructions />
         </div>
+        <AnimationsDisplay gameWon={gameWon} />
       </main>
       {/* <WarningHandling warning={warning} /> */}
       {/* <Top10 scoreboard={scoreboard} /> */}
