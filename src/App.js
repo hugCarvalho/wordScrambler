@@ -87,7 +87,7 @@ function App() {
   //Timer ⏲️
   useEffect(() => {
     if (gameStatus === "setup") {
-      console.log("SETUP => setting up game");
+      //console.log("SETUP => setting up game");
       setGuessesLeft(initOptions.guessesLeft);
       setCountdown(initOptions.countdown);
       setScore(initOptions.score);
@@ -121,10 +121,10 @@ function App() {
   //GENERATE RANDOM NUMBER AND WORD 🧣
   useEffect(() => {
     if (correctWord && gameStatus === "scramblingWord") {
-      console.log("scramblingWord", gameStatus);
+      //console.log("scramblingWord", gameStatus);
       setScrambledWord(scrambleWord(correctWord));
       setGameStatus("setup");
-      console.log("SETGAMESTATUS TO PLAYING");
+      //console.log("SETGAMESTATUS TO PLAYING");
     }
     if (gameStatus === "ended") {
       console.log('on gameStatus "ended"');
@@ -214,20 +214,20 @@ function App() {
   }, [gameStatus, score, scoreboard]);
 
   useEffect(() => {
-    console.log("score", score);
-    console.log("------------");
+    //console.log("score", score);
+    //console.log("------------");
   }, [score]);
   useEffect(() => {
-    console.log("correctWord", correctWord);
-    console.log("------------");
+    //console.log("correctWord", correctWord);
+    //console.log("------------");
   }, [correctWord]);
   useEffect(() => {
-    console.log("scrambledWord", scrambledWord);
-    console.log("------------");
+    //console.log("scrambledWord", scrambledWord);
+    //console.log("------------");
   }, [scrambledWord]);
   useEffect(() => {
-    console.log("scoreboard", scoreboard);
-    console.log("------------");
+    // console.log("scoreboard", scoreboard);
+    //console.log("------------");
   }, [scoreboard]);
 
   return (
@@ -255,7 +255,7 @@ function App() {
             guessesLeft={guessesLeft}
           />
 
-          <Instructions />
+          <Instructions gameStatus={gameStatus} />
         </div>
       </main>
       {/* <WarningHandling warning={warning} /> */}

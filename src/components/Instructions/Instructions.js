@@ -3,7 +3,7 @@ import "./Instructions.scss";
 
 //TODO: make scoring text dynamic
 
-function Instructions() {
+function Instructions({ gameStatus }) {
   const [activePage, setActivePage] = React.useState(1);
   const [showInstructions, setShowInstructions] = React.useState(true);
 
@@ -22,6 +22,12 @@ function Instructions() {
       };
     return { instructions: {}, score: {} };
   };
+
+  React.useEffect(() => {
+    if (gameStatus === "playing") {
+      setShowInstructions(false);
+    }
+  }, [gameStatus]);
 
   return (
     <div className="Instructions">
