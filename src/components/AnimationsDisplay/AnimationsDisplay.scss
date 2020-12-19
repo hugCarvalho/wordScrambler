@@ -9,7 +9,8 @@
   //border: 1px solid black;
   //animation-name: test;
   border: 1px solid rgb(158, 158, 158);
-
+  display: flex;
+  justify-content: center;
   overflow: hidden;
 
   border-radius: 13px;
@@ -22,68 +23,67 @@
   // }
 
   div {
-    background-color: antiquewhite;
+    // background-color: rgb(223, 137, 25);
     position: relative;
-    //width: 100%;
+    width: 50px;
+
+    //justify-self: center;
   }
 
-  .medal {
-    position: absolute;
-    font-size: 50px;
-    top: -57px;
-    left: 50%;
-    margin-left: -25px;
-    transition: 1s transform ease-out;
-  }
+  .medal,
   .clap {
     position: absolute;
-    font-size: 40px;
-    right: -45px;
-    top: 50%;
-    margin-top: -20px;
-    //margin-left: -20px;
-    transition: 1s transform ease-in-out;
+    font-size: 50px;
+    margin-top: -70px;
+    // left: 50%;
+    transition: 1s all ease-out;
+  }
+  .activate-medal {
+    transform: translateY(69px);
+    // transition: 1s transform ease-out;
+  }
+  .activate-clap {
+    transform: translateY(155%);
+    // transition: 1s transform ease-out;
   }
 
   .trophy {
     position: absolute;
     font-size: 50px;
-    bottom: -57px;
-    left: 50%;
-    margin-left: -25px;
+    bottom: -70px;
+    //margin-left: -25px;
     transition: 1s transform ease-out;
   }
 
-  .activate-medal {
-    transform: translateY(96%);
-    // transition: 1s transform ease-out;
-  }
-  .activate-clap {
-    transform: translateX(-170%);
-  }
   .activate-trophy {
-    transform: translateY(-100%);
+    transform: translateY(-70px);
     // transition: 1s transform ease-out;
   }
 }
 
 @keyframes test {
   25% {
-    border-top: 1px solid black;
-  }
-  25% {
-    border-right: 1px solid black;
-  }
-  50% {
-    border-bottom: 1px solid black;
-  }
-  75% {
-    border-left: 1px solid black;
+    opacity: 0.2;
   }
   100% {
-    border-top: 1px solid black;
-    border-right: 1px solid black;
-    border-bottom: 1px solid black;
-    border-left: 1px solid rgb(168, 168, 168);
+    opacity: 1;
   }
+  // 50% {
+  //   border-bottom: 1px solid black;
+  // }
+  // 75% {
+  //   border-left: 1px solid black;
+  // }
+  // 100% {
+  //   border-top: 1px solid black;
+  //   border-right: 1px solid black;
+  //   border-bottom: 1px solid black;
+  //   border-left: 1px solid rgb(168, 168, 168);
+  // }
+  // from {
+  //   opacity: 0;
+  // }
+  // to {
+  //   opacity: 1;
+  // }
 }
