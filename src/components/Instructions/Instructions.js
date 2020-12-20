@@ -3,6 +3,7 @@ import AnimationsDisplay from "../AnimationsDisplay/AnimationsDisplay";
 import "./Instructions.scss";
 
 //TODO: make scoring text dynamic
+//TODO: display msg about not being possible to open while playing
 
 function Instructions({ gameStatus, gameWon }) {
   const [activePage, setActivePage] = React.useState(1);

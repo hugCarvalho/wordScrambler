@@ -159,7 +159,7 @@ function App() {
     //console.log("on GUESS or CORRECT_WORD:", guess, correctWord);
     if (gameStatus === "playing" && guess && guess !== correctWord) {
       setGuessesLeft(state => state - 1);
-      console.log("WRONG GUESS, guess was", guess, "BUT WORD was", correctWord);
+      // console.log("WRONG GUESS, guess was", guess, "BUT WORD was", correctWord);
     }
     //SCORING LOGIC 🎼
     if (gameStatus === "playing" && guess && guess === correctWord) {

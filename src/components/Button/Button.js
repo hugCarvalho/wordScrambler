@@ -3,9 +3,9 @@ import "./Button.scss";
 
 //onClick={() => userInput.current.focus()
 
-function Button({ type, children }) {
+function Button({ type, children, focus }) {
   return (
-    <button className="Button" type={type}>
+    <button onClick={focus} className="Button" type={type}>
       {children}
     </button>
   );

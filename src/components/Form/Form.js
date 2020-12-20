@@ -63,7 +63,11 @@ function Form({ onSubmitHandler, gameStatus, gameWon, guessesLeft }) {
         {/* </div> */}
       </div>
       {}
-      <Button gameStatus={gameStatus} type="submit">
+      <Button
+        focus={() => userInput.current.focus()}
+        gameStatus={gameStatus}
+        type="submit"
+      >
         {gameStatus === "onLoad"
           ? "Start"
           : gameStatus === "playing" || gameStatus === "setup"
