@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Button from "../Button/Button";
 import "./Form.scss";
-import ReactTooltip from "react-tooltip";
+// import ReactTooltip from "react-tooltip";
 
 function Form({ onSubmitHandler, gameStatus, gameWon, guessesLeft }) {
   const [userText, setUserText] = useState("");
@@ -22,6 +22,7 @@ function Form({ onSubmitHandler, gameStatus, gameWon, guessesLeft }) {
     if (displayWrongGuessCross) {
       setDisplayWrongGuessCross(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userText]);
 
   useEffect(() => {

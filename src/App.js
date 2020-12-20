@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.scss";
 import Countdown from "./components/Indicators/Countdown/Countdown";
 import GuessesLeft from "./components/Indicators/GuessesLeft/GuessesLeft";
@@ -8,9 +8,9 @@ import Instructions from "./components/Instructions/Instructions";
 import Score from "./components/Indicators/Score/Score";
 import Word from "./components/Word/Word";
 import chooseWord, { scrambleWord } from "./functions/functions";
-import Scoreboard, { Top10 } from "./components/Scoreboard/Scoreboard";
-import Backdrop from "./components/Backdrop/Backdrop";
-import AnimationsDisplay from "./components/AnimationsDisplay/AnimationsDisplay";
+// import Scoreboard, { Top10 } from "./components/Scoreboard/Scoreboard";
+// import Backdrop from "./components/Backdrop/Backdrop";
+// import AnimationsDisplay from "./components/AnimationsDisplay/AnimationsDisplay";
 //import WarningHandling from "./components/WarningHandling/WarningHandling";
 
 //TODO: delay appearance of scrambled word -first scramble then show
@@ -18,7 +18,7 @@ import AnimationsDisplay from "./components/AnimationsDisplay/AnimationsDisplay"
 
 const initOptions = {
   guessesLeft: 3,
-  countdown: 20,
+  countdown: 30,
   score: 0,
   pointsPerGuessLeft: 5,
   pointsPerTimeLeft: 2,
@@ -26,10 +26,27 @@ const initOptions = {
 };
 
 //todo: validation- word must be at least 2 letters
-const initArr = ["whale", "camel", "horse", "python"]; //, "12", "23", "43", "53"];
+//"whale", "camel", "horse", "python"
+const initArr = [
+  "car",
+  "oven",
+  "fork",
+  "paper",
+  "fridge",
+  "piano",
+  "pillow",
+  "garlic",
+  "wardrobe",
+  "backpack",
+  "suitcase",
+  "painting",
+  "trousers",
+  "headphone",
+]; //, "12", "23", "43", "53"];
 //const initArr = ["da"];
 
 //TODO: lowercase correct word
+//TODO: refactor
 
 function App() {
   //OPTIONS + DATA
@@ -45,10 +62,10 @@ function App() {
   const [scrambledWord, setScrambledWord] = useState("");
   const [guess, setGuess] = useState(null);
   //SCOREBOARD
-  const [scoreboard, setScoreboard] = useState([]);
+  // const [scoreboard, setScoreboard] = useState([]);
   //MODAL
-  const [modalMessage, setModalMessage] = useState("Testing modal message");
-  const [showModal, setShowModal] = useState(false);
+  // const [modalMessage, setModalMessage] = useState("Testing modal message");
+  // const [showModal, setShowModal] = useState(false);
   const [gameWon, setGameWon] = useState(null); //null, "yes", "no" -> don't change to true/false to pass only one prop
 
   // const [warning, setWarning] = ""; //emptyString
@@ -80,11 +97,11 @@ function App() {
   };
 
   //LOCALSTORAGE ⏩ GET
-  useEffect(() => {
-    if (localStorage.scoreboard) {
-      setScoreboard(JSON.parse(window.localStorage.getItem("scoreboard")));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.scoreboard) {
+  //     setScoreboard(JSON.parse(window.localStorage.getItem("scoreboard")));
+  //   }
+  // }, []);
 
   //Timer ⏲️
   useEffect(() => {
@@ -94,7 +111,7 @@ function App() {
       setCountdown(initOptions.countdown);
       setScore(initOptions.score);
       //setGameWon(null);
-      setShowModal(false);
+      // setShowModal(false);
       setGameStatus("playing");
     }
 
@@ -132,8 +149,8 @@ function App() {
       console.log('on gameStatus "ended"');
       setScrambledWord(correctWord);
       setGuess("");
-      setModalMessage("game over!");
-      setShowModal(true);
+      // setModalMessage("game over!");
+      // setShowModal(true);
     }
   }, [correctWord, gameStatus]);
 
@@ -196,26 +213,26 @@ function App() {
   ]);
 
   //LOCALSTORGAGE ⏩ SET
-  useEffect(() => {
-    let updatedScoreboard = scoreboard;
-    //console.log("1", updatedScoreboard);
-    if (gameStatus === "ended" && score > 0) {
-      const minScore = Math.min(...scoreboard);
-      if (scoreboard.length < 10) {
-        updatedScoreboard.push(score);
-        updatedScoreboard.sort((a, b) => b - a);
-      }
-      if (scoreboard.length >= 10 && score > minScore) {
-        updatedScoreboard.push(score);
-        updatedScoreboard.sort((a, b) => b - a);
-        updatedScoreboard.pop();
-      }
-      if (score <= 0) return;
-      setScoreboard(updatedScoreboard);
-      window.localStorage.setItem("scoreboard", JSON.stringify(updatedScoreboard));
-    }
-    //console.log("3", updatedScoreboard);
-  }, [gameStatus, score, scoreboard]);
+  // useEffect(() => {
+  //   let updatedScoreboard = scoreboard;
+  //   //console.log("1", updatedScoreboard);
+  //   if (gameStatus === "ended" && score > 0) {
+  //     const minScore = Math.min(...scoreboard);
+  //     if (scoreboard.length < 10) {
+  //       updatedScoreboard.push(score);
+  //       updatedScoreboard.sort((a, b) => b - a);
+  //     }
+  //     if (scoreboard.length >= 10 && score > minScore) {
+  //       updatedScoreboard.push(score);
+  //       updatedScoreboard.sort((a, b) => b - a);
+  //       updatedScoreboard.pop();
+  //     }
+  //     if (score <= 0) return;
+  //     setScoreboard(updatedScoreboard);
+  //     window.localStorage.setItem("scoreboard", JSON.stringify(updatedScoreboard));
+  //   }
+  //   //console.log("3", updatedScoreboard);
+  // }, [gameStatus, score, scoreboard]);
 
   useEffect(() => {
     //console.log("score", score);
@@ -229,10 +246,10 @@ function App() {
     //console.log("scrambledWord", scrambledWord);
     //console.log("------------");
   }, [scrambledWord]);
-  useEffect(() => {
-    // console.log("scoreboard", scoreboard);
-    //console.log("------------");
-  }, [scoreboard]);
+  // useEffect(() => {
+  //   // console.log("scoreboard", scoreboard);
+  //   //console.log("------------");
+  // }, [scoreboard]);
 
   return (
     <div className="App">
@@ -259,9 +276,8 @@ function App() {
             guessesLeft={guessesLeft}
           />
 
-          <Instructions gameWon={gameWon} />
+          <Instructions gameWon={gameWon} gameStatus={gameStatus} />
         </div>
-        {/* <AnimationsDisplay gameWon={gameWon} /> */}
       </main>
       {/* <WarningHandling warning={warning} /> */}
       {/* <Top10 scoreboard={scoreboard} /> */}

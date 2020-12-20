@@ -16,7 +16,6 @@ function AnimationsDisplay({ gameWon, showInstructions }) {
       setRandomNum(Math.floor(Math.random() * animations.length));
     }
   }, [gameWon]);
-  console.log(randomNum);
   return (
     <section
       style={gameWon ? { backgroundColor: "white" } : {}}

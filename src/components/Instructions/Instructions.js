@@ -25,6 +25,7 @@ function Instructions({ gameStatus, gameWon }) {
   };
 
   React.useEffect(() => {
+    console.log("GAMESTATUS", gameStatus);
     if (gameStatus === "playing") {
       setShowInstructions(false);
     }
@@ -115,7 +116,9 @@ function Instructions({ gameStatus, gameWon }) {
       <div className="close-panel" style={!showInstructions ? { height: "100%" } : null}>
         <span>
           <button
-            onClick={() => setShowInstructions(state => !state)}
+            onClick={
+              gameStatus !== "playing" ? () => setShowInstructions(state => !state) : null
+            }
             className={`fas fa-angle-double-down ${!showInstructions ? "open" : "close"}`}
           ></button>
           <button
