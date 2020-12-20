@@ -259,9 +259,9 @@ function App() {
             guessesLeft={guessesLeft}
           />
 
-          <Instructions />
+          <Instructions gameWon={gameWon} />
         </div>
-        <AnimationsDisplay gameWon={gameWon} />
+        {/* <AnimationsDisplay gameWon={gameWon} /> */}
       </main>
       {/* <WarningHandling warning={warning} /> */}
       {/* <Top10 scoreboard={scoreboard} /> */}

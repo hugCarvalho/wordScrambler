@@ -1,6 +1,6 @@
 .AnimationsDisplay {
   position: absolute;
-  top: 53%;
+  top: 12%;
   left: 50%;
   margin-left: -45px;
   //margin-top: 580px;
@@ -13,14 +13,21 @@
   justify-content: center;
   overflow: hidden;
 
+  opacity: 0;
   border-radius: 13px;
-  z-index: 1000;
+  z-index: 500;
   background-color: #333a42;
   background-color: #ffffff10;
   transition: 1s backgroundColor ease-in;
+
   // .activate-game-end {
   //   background-color: #ffffff;
   // }
+
+  &.showToken {
+    opacity: 1;
+    transition: 3.5s opacity ease-in;
+  }
 
   div {
     //background-color: rgb(223, 137, 25);

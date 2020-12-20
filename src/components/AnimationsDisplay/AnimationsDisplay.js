@@ -3,9 +3,13 @@ import "./AnimationsDisplay.scss";
 
 const animations = ["🏆", "🏅", "👏"];
 const animationLoser = ["😵", "🤬", "😭"];
-function AnimationsDisplay({ gameWon }) {
+
+function AnimationsDisplay({ gameWon, showInstructions }) {
   const [randomNum, setRandomNum] = React.useState(null);
   // const [randomNum, setRandomNum] = React.useState(2);
+
+  // console.log("SI", showInstructions);
+  // console.log("GAMEONW", gameWon);
 
   React.useEffect(() => {
     if (gameWon) {
@@ -15,8 +19,10 @@ function AnimationsDisplay({ gameWon }) {
   console.log(randomNum);
   return (
     <section
-      style={gameWon ? { backgroundColor: "white" } : null}
-      className={`AnimationsDisplay ${gameWon && "activate-game-end"}  `}
+      style={gameWon ? { backgroundColor: "white" } : {}}
+      className={`AnimationsDisplay ${gameWon && "activate-game-end"} ${
+        !showInstructions && "showToken"
+      } "what"  `}
     >
       <div></div>
       {/* WON - icons will enter from different sides*/}

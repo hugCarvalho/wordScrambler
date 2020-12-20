@@ -4,7 +4,7 @@ import "./Instructions.scss";
 
 //TODO: make scoring text dynamic
 
-function Instructions({ gameStatus }) {
+function Instructions({ gameStatus, gameWon }) {
   const [activePage, setActivePage] = React.useState(1);
   const [showInstructions, setShowInstructions] = React.useState(true);
 
@@ -124,6 +124,7 @@ function Instructions({ gameStatus }) {
           ></button>
         </span>
       </div>
+      <AnimationsDisplay showInstructions={showInstructions} gameWon={gameWon} />
     </div>
   );
 }
