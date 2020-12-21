@@ -26,7 +26,7 @@ function Instructions({ gameStatus, gameWon }) {
   };
 
   React.useEffect(() => {
-    console.log("GAMESTATUS", gameStatus);
+    // console.log("GAMESTATUS", gameStatus);
     if (gameStatus === "playing") {
       setShowInstructions(false);
     }

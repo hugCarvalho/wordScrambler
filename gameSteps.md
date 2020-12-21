@@ -1,4 +1,6 @@
-# GameStatus => "idle"
+# GameStatus =>
+
+onLoad / scramblingWord / ended
 
 # useEffect(gameStatus = setup)
 
@@ -41,6 +43,11 @@
 
 - setCorrectWord(null);
 - setGameStatus("setup");
+
+### Hooks
+
+- useRef
+- useState
 
 #### Includes
 

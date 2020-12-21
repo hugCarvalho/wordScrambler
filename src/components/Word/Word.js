@@ -1,26 +1,26 @@
 import React from "react";
 import "./Word.scss";
 
-function Word({ gameStatus, scrambledWord, correctWord }) {
+function Word({ gameStatus, scrambledWord }) {
+  //Active on gameStatus "ended" only
+  const [changeWordColor, setChangeWordColor] = React.useState(false);
   const link = `https://en.wikipedia.org/wiki/${scrambledWord}`;
-  const [makeColorPink, setmakeColorPink] = React.useState(false);
 
   return (
     <div className="Word">
-      {/* <span>word</span> */}
-      <span className="word">
+      <span>
         {gameStatus === "onLoad" || gameStatus === "scramblingWord" ? (
           "❓"
         ) : gameStatus === "ended" ? (
           <a
-            style={makeColorPink ? { color: "pink", transform: "scale(1.1)" } : null}
-            onMouseOver={() => setmakeColorPink(true)}
-            onMouseLeave={() => setmakeColorPink(false)}
+            style={changeWordColor ? { color: "pink" } : {}}
+            onMouseOver={() => setChangeWordColor(true)}
+            onMouseLeave={() => setChangeWordColor(false)}
             href={link}
             target="_blank"
             rel="noopener noreferrer"
           >
-            {scrambledWord}{" "}
+            {scrambledWord}
           </a>
         ) : (
           scrambledWord

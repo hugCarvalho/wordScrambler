@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
+import Emoji from "../../reusable/Emoji.js/Emoji";
 import Button from "../Button/Button";
-import "./Form.scss";
+import "./UserInput.scss";
 // import ReactTooltip from "react-tooltip";
 
 function Form({ onSubmitHandler, gameStatus, gameWon, guessesLeft }) {
   const [userText, setUserText] = useState("");
-  const [displayWrongGuessCross, setDisplayWrongGuessCross] = useState(false);
+  const [showWrongGuessIndicator, setShowWrongGuessIndicator] = useState(false);
   const userInput = useRef();
 
   useEffect(() => {
@@ -17,27 +18,28 @@ function Form({ onSubmitHandler, gameStatus, gameWon, guessesLeft }) {
     }
   }, [gameStatus]);
 
+  //Removes wrong guess indicator after user types(or deletes) text again
   useEffect(() => {
-    console.log(displayWrongGuessCross);
-    if (displayWrongGuessCross) {
-      setDisplayWrongGuessCross(false);
+    if (showWrongGuessIndicator) {
+      setShowWrongGuessIndicator(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userText]);
 
+  //Triggers showing of wrong guess indicator
   useEffect(() => {
     if (guessesLeft < 3) {
-      setDisplayWrongGuessCross(true);
+      setShowWrongGuessIndicator(true);
     }
+    console.log(guessesLeft);
   }, [guessesLeft]);
+
+  console.log(gameWon);
+
   return (
-    <form onSubmit={e => onSubmitHandler(e, userText)} className="Form">
-      <div className="input">
+    <form onSubmit={e => onSubmitHandler(e, userText)} className="UserInput">
+      <div className="input-container">
         <input
-          // data-type="warning"
-          // data-place="left"
-          // data-effect="solid"
-          className=""
           type="text"
           id="input-text"
           disabled={gameStatus === "onLoad" || gameStatus === "ended"}
@@ -47,20 +49,22 @@ function Form({ onSubmitHandler, gameStatus, gameWon, guessesLeft }) {
           //placeholder="press start to begin a game"
           ref={userInput}
         />
-        {/* <div className="guess-result"> */}
-        <span
-          style={displayWrongGuessCross ? { display: "inline" } : { display: "none" }}
-          className="guess-result right-guess"
+        <Emoji
+          className="guess-result"
+          style={showWrongGuessIndicator ? { display: "inline" } : { display: "none" }}
+          ariaLabel="wrong guess"
+          title="wrong guess"
         >
           🔴
-        </span>
-        <span
+        </Emoji>
+        <Emoji
+          className="guess-result"
           style={gameWon === "yes" ? { display: "inline" } : { display: "none" }}
-          className="guess-result wrong-guess"
+          ariaLabel="guess correct"
+          title="guess correct"
         >
           ✅
-        </span>
-        {/* </div> */}
+        </Emoji>
       </div>
       {}
       <Button

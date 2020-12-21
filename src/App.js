@@ -3,7 +3,7 @@ import "./App.scss";
 import Countdown from "./components/Indicators/Countdown/Countdown";
 import GuessesLeft from "./components/Indicators/GuessesLeft/GuessesLeft";
 import Header from "./components/Header/Header";
-import Form from "./components/Form/Form";
+import UserInput from "./components/UserInput/UserInput";
 import Instructions from "./components/Instructions/Instructions";
 import Score from "./components/Indicators/Score/Score";
 import Word from "./components/Word/Word";
@@ -16,8 +16,8 @@ import chooseWord, { scrambleWord } from "./functions/functions";
 //TODO: delay appearance of scrambled word -first scramble then show
 //TODO: accessibility checklist
 
-const initOptions = {
-  guessesLeft: 3,
+const gameOptions = {
+  totalGuessesLeft: 3,
   countdown: 30,
   score: 0,
   pointsPerGuessLeft: 5,
@@ -50,14 +50,14 @@ const initArr = [
 
 function App() {
   //OPTIONS + DATA
-  const [options, setOptions] = useState(initOptions);
+  const [options, setOptions] = useState(gameOptions);
   const [array, setArray] = useState(initArr);
   //MAIN STATE
   const [gameStatus, setGameStatus] = useState("onLoad"); // "onLoad", "playing", "ended"
   //IN GAME VARIABLES
-  const [guessesLeft, setGuessesLeft] = useState(initOptions.guessesLeft);
-  const [countdown, setCountdown] = useState(initOptions.countdown);
-  const [score, setScore] = useState(initOptions.score);
+  const [guessesLeft, setGuessesLeft] = useState(gameOptions.totalGuessesLeft);
+  const [countdown, setCountdown] = useState(gameOptions.countdown);
+  const [score, setScore] = useState(gameOptions.score);
   const [correctWord, setCorrectWord] = useState(null);
   const [scrambledWord, setScrambledWord] = useState("");
   const [guess, setGuess] = useState(null);
@@ -74,7 +74,7 @@ function App() {
 
     switch (gameStatus) {
       case "onLoad":
-        console.log("SETTING game status to scrambling");
+        //console.log("SETTING game status to scrambling");
         setGameStatus("scramblingWord");
         break;
       case "playing":
@@ -107,9 +107,9 @@ function App() {
   useEffect(() => {
     if (gameStatus === "setup") {
       //console.log("SETUP => setting up game");
-      setGuessesLeft(initOptions.guessesLeft);
-      setCountdown(initOptions.countdown);
-      setScore(initOptions.score);
+      setGuessesLeft(gameOptions.totalGuessesLeft);
+      setCountdown(gameOptions.countdown);
+      setScore(gameOptions.score);
       //setGameWon(null);
       // setShowModal(false);
       setGameStatus("playing");
@@ -146,7 +146,7 @@ function App() {
       //console.log("SETGAMESTATUS TO PLAYING");
     }
     if (gameStatus === "ended") {
-      console.log('on gameStatus "ended"');
+      // console.log('on gameStatus "ended"');
       setScrambledWord(correctWord);
       setGuess("");
       // setModalMessage("game over!");
@@ -188,7 +188,7 @@ function App() {
 
   useEffect(() => {
     if (gameStatus === "ended") {
-      console.log(`Game over, you ${guessesLeft > 0 && countdown > 0 ? "WON" : "LOST"}`);
+      // console.log(`Game over, you ${guessesLeft > 0 && countdown > 0 ? "WON" : "LOST"}`);
     }
   }, [gameStatus, guessesLeft, countdown]);
 
@@ -258,22 +258,21 @@ function App() {
       <main className="container__app">
         <div className="wrapper__app">
           <div className="indicators">
-            <GuessesLeft guessesLeft={guessesLeft} />
+            <GuessesLeft guessesLeft={guessesLeft} gameOptions={gameOptions} />
             <Countdown countdown={countdown} />
             <Score score={score} gameWon={gameWon} />
           </div>
           <Word
             gameStatus={gameStatus}
-            scrambledWord={scrambledWord}
-            //Scoreboard
             correctWord={correctWord}
+            scrambledWord={scrambledWord}
           />
 
-          <Form
+          <UserInput
             onSubmitHandler={onSubmitHandler}
             gameStatus={gameStatus}
-            gameWon={gameWon}
             guessesLeft={guessesLeft}
+            gameWon={gameWon}
           />
 
           <Instructions gameWon={gameWon} gameStatus={gameStatus} />

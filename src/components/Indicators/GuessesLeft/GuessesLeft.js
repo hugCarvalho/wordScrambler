@@ -1,30 +1,18 @@
 import React from "react";
 import "./GuessesLeft.scss";
+import changeGuessesLeftColor, { renderEmojiFace } from "./fns";
 
-//TODO: change emoji for each guess left with transition
+import Emoji from "../../../reusable/Emoji.js/Emoji";
+
 //TODO: put fn in separate file
-function GuessesLeft({ guessesLeft }) {
-  const renderFace = guesses => {
-    const faces = ["🤔", "😨", "😲", "🤯"];
-    if (guesses === 3) return faces[0];
-    if (guesses === 2) return faces[1];
-    if (guesses === 1) return faces[2];
-    return faces[3];
-  };
-
-  const changeGuessColor = guesses => {
-    if (guesses === 2) return { color: "#83d04e" };
-    if (guesses === 1) return { color: "#ffd700" };
-    if (guesses === 0) return { color: "#ff3434" };
-    return;
-  };
-
+//🤔
+function GuessesLeft({ guessesLeft, gameOptions }) {
   return (
     <div className="GuessesLeft">
-      <span role="img" aria-label="guesses left" title="guesses left">
-        {renderFace(guessesLeft)}
-      </span>{" "}
-      <span style={changeGuessColor(guessesLeft)}>{guessesLeft}</span>
+      <Emoji aria-label="guesses left" title="guesses left">
+        {renderEmojiFace(guessesLeft, gameOptions)}
+      </Emoji>
+      <span style={changeGuessesLeftColor(guessesLeft)}>{guessesLeft}</span>
     </div>
   );
 }

@@ -1,15 +1,16 @@
 import React from "react";
 import "./Score.scss";
+import Emoji from "../../../reusable/Emoji.js/Emoji";
 
 function Score({ score, gameWon }) {
-  const changeBgColor = gameWon =>
+  const changeEmojiBgColorOnWin = gameWon =>
     gameWon === "yes" ? { backgroundColor: "white" } : { backgroundColor: "#282c34" };
 
   return (
-    <div style={changeBgColor(gameWon)} className="Score">
-      <span role="img" aria-label="score" title="score">
+    <div style={changeEmojiBgColorOnWin(gameWon)} className="Score">
+      <Emoji aria-label="score" title="score">
         🎉
-      </span>
+      </Emoji>
       <span style={{ backgroundColor: "#282c34" }}> {score}</span>
     </div>
   );
