@@ -7,7 +7,9 @@ import UserInput from "./components/UserInput/UserInput";
 import Instructions from "./components/Instructions/RenderInstructions";
 import Score from "./components/Indicators/Score/Score";
 import Word from "./components/Word/Word";
-import chooseWord, { scrambleWord } from "./functions/functions";
+import chooseWord, { scrambleWord } from "./App_functions";
+import gameOptions from "./data/gameOptions";
+import initArr from "./data/testData";
 // import Scoreboard, { Top10 } from "./components/Scoreboard/Scoreboard";
 // import Backdrop from "./components/Backdrop/Backdrop";
 // import AnimationsDisplay from "./components/AnimationsDisplay/AnimationsDisplay";
@@ -15,36 +17,7 @@ import chooseWord, { scrambleWord } from "./functions/functions";
 
 //TODO: delay appearance of scrambled word -first scramble then show
 //TODO: accessibility checklist
-
-const gameOptions = {
-  totalGuessesLeft: 3,
-  countdown: 30,
-  score: 0,
-  pointsPerGuessLeft: 5,
-  pointsPerTimeLeft: 2,
-  pointsPerWordLength: 10,
-};
-
-//todo: validation- word must be at least 2 letters
-//"whale", "camel", "horse", "python"
-const initArr = [
-  "car",
-  "oven",
-  "fork",
-  "paper",
-  "fridge",
-  "piano",
-  "pillow",
-  "garlic",
-  "wardrobe",
-  "backpack",
-  "suitcase",
-  "painting",
-  "trousers",
-  "headphone",
-]; //, "12", "23", "43", "53"];
-//const initArr = ["da"];
-
+//TODO: validation- word must be at least 2 letters
 //TODO: lowercase correct word
 //TODO: refactor
 
@@ -202,15 +175,7 @@ function App() {
           correctWord.length * options.pointsPerWordLength
       );
     }
-  }, [
-    correctWord,
-    countdown,
-    gameStatus,
-    guessesLeft,
-    options.pointsPerGuessLeft,
-    options.pointsPerTimeLeft,
-    options.pointsPerWordLength,
-  ]);
+  }, [correctWord, countdown, gameStatus, guessesLeft, options]);
 
   //LOCALSTORGAGE ⏩ SET
   // useEffect(() => {
@@ -287,5 +252,3 @@ function App() {
 }
 
 export default App;
-
-//🟢❌❎

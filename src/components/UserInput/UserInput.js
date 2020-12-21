@@ -43,7 +43,7 @@ function Form({ onSubmitHandler, gameStatus, gameWon, guessesLeft }) {
           disabled={gameStatus === "onLoad" || gameStatus === "ended"}
           autoComplete="off"
           value={userText}
-          onChange={e => setUserText(e.target.value)}
+          onChange={e => setUserText(e.target.value.toLowerCase())}
           //placeholder="press start to begin a game"
           ref={userInput}
         />

@@ -3,7 +3,7 @@ import "./Header.scss";
 
 function Header() {
   return (
-    <header className="App-header">
+    <header className="Header">
       <h1>Word Scrambler</h1>
     </header>
   );

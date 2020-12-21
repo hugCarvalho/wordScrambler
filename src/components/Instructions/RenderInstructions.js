@@ -36,6 +36,10 @@ function Instructions({ gameStatus, gameWon }) {
       setShowInstructions(false);
     }
   }, [gameStatus]);
+
+  React.useEffect(() => {
+    console.log("showInstructions :>> ", showInstructions);
+  }, [showInstructions]);
   return (
     <div className="Instructions">
       <div className="instructions__container">
@@ -48,7 +52,7 @@ function Instructions({ gameStatus, gameWon }) {
       <FooterInstructions activePage={activePage} setActivePage={setActivePage} />
       <OpenCloseInstructions
         gameStatus={gameStatus}
-        setShowInstructions={setShowInstructions}
+        toggleCloseOpen={() => setShowInstructions(state => !state)}
         showInstructions={showInstructions}
       />
       <EndAnimationsDisplay showInstructions={showInstructions} gameWon={gameWon} />
