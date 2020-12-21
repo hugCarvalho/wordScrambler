@@ -4,7 +4,7 @@ import Countdown from "./components/Indicators/Countdown/Countdown";
 import GuessesLeft from "./components/Indicators/GuessesLeft/GuessesLeft";
 import Header from "./components/Header/Header";
 import UserInput from "./components/UserInput/UserInput";
-import Instructions from "./components/Instructions/Instructions";
+import Instructions from "./components/Instructions/RenderInstructions";
 import Score from "./components/Indicators/Score/Score";
 import Word from "./components/Word/Word";
 import chooseWord, { scrambleWord } from "./functions/functions";
