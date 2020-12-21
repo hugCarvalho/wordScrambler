@@ -1,6 +1,6 @@
 import React from "react";
 import "./RenderInstructions.scss";
-import AnimationsDisplay from "../AnimationsDisplay/AnimationsDisplay";
+import EndAnimationsDisplay from "../EndAnimationsDisplay/EndAnimationsDisplay";
 import ScoreInstructions from "./ScoreInstructions/ScoreInstructions";
 import ObjectiveInstructions from "./ObjectiveInstructions/ObjectiveInstructions";
 import OptionsInstructions from "./OptionsInstructions/OptionsInstructions";
@@ -51,7 +51,7 @@ function Instructions({ gameStatus, gameWon }) {
         setShowInstructions={setShowInstructions}
         showInstructions={showInstructions}
       />
-      <AnimationsDisplay showInstructions={showInstructions} gameWon={gameWon} />
+      <EndAnimationsDisplay showInstructions={showInstructions} gameWon={gameWon} />
     </div>
   );
 }

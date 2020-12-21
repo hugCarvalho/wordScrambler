@@ -34,8 +34,6 @@ function Form({ onSubmitHandler, gameStatus, gameWon, guessesLeft }) {
     console.log(guessesLeft);
   }, [guessesLeft]);
 
-  console.log(gameWon);
-
   return (
     <form onSubmit={e => onSubmitHandler(e, userText)} className="UserInput">
       <div className="input-container">

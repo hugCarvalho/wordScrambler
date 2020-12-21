@@ -1,0 +1,74 @@
+$fontSize: 50px;
+
+.EndAnimationsDisplay {
+  background-color: #ffffff10;
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  margin-left: -45px;
+  width: 90px;
+  height: 105px;
+
+  display: flex;
+  justify-content: center;
+  border: 1px solid rgb(158, 158, 158);
+  border-radius: 13px;
+
+  overflow: hidden;
+  opacity: 0;
+  z-index: 500;
+  transition: 1s backgroundColor ease-in;
+
+  &.showToken {
+    opacity: 1;
+    transition: 2.5s opacity ease-in;
+  }
+
+  div {
+    //background-color: rgb(223, 137, 25);
+    position: relative;
+    width: 50px;
+  }
+
+  //WINNER
+  .medal,
+  .clap,
+  .trophy {
+    position: absolute;
+    font-size: $fontSize;
+    transition: 1s all ease-out;
+  }
+  .medal,
+  .clap {
+    margin-top: -70px;
+  }
+  .trophy {
+    bottom: -70px;
+  }
+
+  .activate-medal {
+    transform: translateY(69px);
+  }
+  .activate-clap {
+    transform: translateY(155%);
+    // transition: 1s transform ease-out;
+  }
+  .activate-trophy {
+    transform: translateY(-70px);
+    // transition: 1s transform ease-out;
+  }
+
+  //LOSER
+  .loser {
+    position: absolute;
+    font-size: $fontSize;
+    display: flex;
+    align-self: center;
+    transition: 1s opacity ease-out;
+    opacity: 0;
+  }
+
+  .activate-loser {
+    opacity: 1;
+  }
+}
