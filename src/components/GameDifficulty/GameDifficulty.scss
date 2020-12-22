@@ -1,0 +1,10 @@
+.GameDifficulty {
+  background-color: rgb(40, 189, 189);
+  width: 100%;
+  height: 50px;
+  color: inherit;
+  display: flex;
+  .input {
+    -webkit-appearance: checkbox;
+  }
+}

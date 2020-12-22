@@ -8,7 +8,6 @@ const testData = [
   "fridge",
   "piano",
   "pillow",
-  "garlic",
   "wardrobe",
   "backpack",
   "suitcase",
@@ -22,6 +21,13 @@ const testData = [
   "chair",
   "poster",
   "boardgame",
+  "joystick",
+  "lamp",
+  "pencil",
+  "cable",
+  "lipstick",
+  "mirror",
+  "drawer",
 ];
 //, "12", "23", "43", "53"];
 //const initArr = ["da"];
