@@ -11,6 +11,7 @@ import chooseWord, { scrambleWord } from "./App_functions";
 import gameOptions from "./data/gameOptions";
 import initArr from "./data/testData";
 import GameDifficulty from "./components/GameDifficulty/GameDifficulty";
+import DisplayCategory from "./components/DisplayCategory/DisplayCategory";
 // import Scoreboard, { Top10 } from "./components/Scoreboard/Scoreboard";
 // import Backdrop from "./components/Backdrop/Backdrop";
 // import AnimationsDisplay from "./components/AnimationsDisplay/AnimationsDisplay";
@@ -222,6 +223,7 @@ function App() {
       <Header />
       {/* Main App */}
       <GameDifficulty />
+      <DisplayCategory />
       <main className="container__app">
         <div className="wrapper__app">
           <div className="indicators">
