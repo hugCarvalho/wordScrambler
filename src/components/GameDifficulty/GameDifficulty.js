@@ -7,7 +7,6 @@ function PlayDifficulty() {
 
   return (
     <form className="GameDifficulty">
-      <p>Select your difficulty:</p>
       <RadioButton
         value="easy"
         active={difficulty}

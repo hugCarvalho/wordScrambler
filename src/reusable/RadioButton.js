@@ -2,9 +2,8 @@ import React from "react";
 
 function RadioButton({ children, active, value, classes = "", onChange }) {
   return (
-    <div>
+    <div className={`RadioButton ${classes}`}>
       <input
-        className={`RadioButton ${classes}`}
         type="radio"
         id={value}
         name={value}
