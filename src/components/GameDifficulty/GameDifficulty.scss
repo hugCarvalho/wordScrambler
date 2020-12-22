@@ -1,20 +1,35 @@
 .GameDifficulty {
-  // background-color: rgb(40, 189, 189);
-  width: 320px;
+  width: 343px;
   //height: 50px;
   color: inherit;
-  display: flex;
-  justify-content: space-evenly;
+
+  div {
+    // background-color: rgb(40, 189, 189);
+    display: flex;
+    align-items: center;
+    margin: auto; //don't use width and justify content
+  }
 
   .RadioButton {
+    // background-color: orange;
+
     :hover {
       cursor: pointer;
     }
     label {
-      padding: 5px;
+      // background-color: green;
+      padding-left: 5px;
+    }
+
+    input {
+      -webkit-appearance: button;
     }
   }
-  .input {
-    -webkit-appearance: checkbox;
+
+  .disabled {
+    color: darkgrey;
+    :hover {
+      cursor: not-allowed;
+    }
   }
 }

@@ -2,41 +2,46 @@ import React from "react";
 import RadioButton from "../../reusable/RadioButton";
 import "./GameDifficulty.scss";
 
-function PlayDifficulty() {
-  const [difficulty, setDifficulty] = React.useState("all");
-
+function GameDifficulty({ difficulty, setDifficulty, gameStatus }) {
+  console.log(gameStatus);
   return (
-    <form className="GameDifficulty">
-      <RadioButton
-        value="easy"
-        active={difficulty}
-        onChange={e => setDifficulty(e.target.value)}
-      >
-        Easy
-      </RadioButton>
-      <RadioButton
-        value="medium"
-        active={difficulty}
-        onChange={e => setDifficulty(e.target.value)}
-      >
-        Medium
-      </RadioButton>
-      <RadioButton
-        value="hard"
-        active={difficulty}
-        onChange={e => setDifficulty(e.target.value)}
-      >
-        Hard
-      </RadioButton>
-      <RadioButton
-        value="all"
-        active={difficulty}
-        onChange={e => setDifficulty(e.target.value)}
-      >
-        All
-      </RadioButton>
+    <form className={`GameDifficulty`}>
+      <div className={`${gameStatus === "playing" ? "disabled" : ""}`}>
+        <RadioButton
+          value="easy"
+          active={difficulty}
+          onChange={setDifficulty}
+          disabled={gameStatus === "playing" ? true : false}
+        >
+          Easy
+        </RadioButton>
+        <RadioButton
+          value="medium"
+          active={difficulty}
+          onChange={setDifficulty}
+          disabled={gameStatus === "playing" ? true : false}
+        >
+          Medium
+        </RadioButton>
+        <RadioButton
+          value="hard"
+          active={difficulty}
+          onChange={setDifficulty}
+          disabled={gameStatus === "playing" ? true : false}
+        >
+          Hard
+        </RadioButton>
+        <RadioButton
+          value="all"
+          active={difficulty}
+          onChange={setDifficulty}
+          disabled={gameStatus === "playing" ? true : false}
+        >
+          All
+        </RadioButton>
+      </div>
     </form>
   );
 }
 
-export default PlayDifficulty;
+export default GameDifficulty;

@@ -29,6 +29,7 @@ function App() {
   const [array, setArray] = useState(initArr);
   //MAIN STATE
   const [gameStatus, setGameStatus] = useState("onLoad"); // "onLoad", "playing", "ended"
+  const [difficulty, setDifficulty] = useState("all");
   //IN GAME VARIABLES
   const [guessesLeft, setGuessesLeft] = useState(gameOptions.totalGuessesLeft);
   const [countdown, setCountdown] = useState(gameOptions.countdown);
@@ -108,9 +109,9 @@ function App() {
   useEffect(() => {
     if (gameStatus === "scramblingWord") {
       setCorrectWord(null);
-      setCorrectWord(chooseWord(array));
+      setCorrectWord(chooseWord(array, difficulty));
     }
-  }, [gameStatus, array]);
+  }, [gameStatus, array, difficulty]);
 
   //GENERATE RANDOM NUMBER AND WORD 🧣
   useEffect(() => {
@@ -222,7 +223,11 @@ function App() {
     <div className="App">
       <Header />
       {/* Main App */}
-      <GameDifficulty />
+      <GameDifficulty
+        difficulty={difficulty}
+        setDifficulty={e => setDifficulty(e.target.value)}
+        gameStatus={gameStatus}
+      />
       <DisplayCategory />
       <main className="container__app">
         <div className="wrapper__app">

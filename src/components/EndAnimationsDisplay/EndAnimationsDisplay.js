@@ -3,9 +3,9 @@ import Emoji from "../../reusable/Emoji.js/Emoji";
 import "./EndAnimationsDisplay.scss";
 
 const animations = ["🏆", "🏅", "👏"];
-const animationLoser = ["😵", "🤬", "😭"];
+const animationLoser = ["😤", "🤬", "😭"];
 //"🥇", "🥈", "🥉",
-//😵🤬😭
+//😵
 
 function EndAnimationsDisplay({ gameWon, showInstructions }) {
   const [randomNum, setRandomNum] = React.useState(null);
