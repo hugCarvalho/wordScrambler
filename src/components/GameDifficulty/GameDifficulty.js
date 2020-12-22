@@ -3,7 +3,6 @@ import RadioButton from "../../reusable/RadioButton";
 import "./GameDifficulty.scss";
 
 function GameDifficulty({ difficulty, setDifficulty, gameStatus }) {
-  console.log(gameStatus);
   return (
     <form className={`GameDifficulty`}>
       <div className={`${gameStatus === "playing" ? "disabled" : ""}`}>

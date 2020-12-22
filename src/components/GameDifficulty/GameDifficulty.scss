@@ -10,6 +10,13 @@
     margin: auto; //don't use width and justify content
   }
 
+  .disabled {
+    color: darkgrey;
+    :hover {
+      cursor: not-allowed;
+    }
+  }
+
   .RadioButton {
     // background-color: orange;
 
@@ -20,16 +27,8 @@
       // background-color: green;
       padding-left: 5px;
     }
-
     input {
       -webkit-appearance: button;
-    }
-  }
-
-  .disabled {
-    color: darkgrey;
-    :hover {
-      cursor: not-allowed;
     }
   }
 }
