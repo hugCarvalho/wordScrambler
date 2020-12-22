@@ -8,7 +8,7 @@ function Score({ score, gameWon }) {
 
   return (
     <div style={changeEmojiBgColorOnWin(gameWon)} className="Score">
-      <Emoji aria-label="score" title="score">
+      <Emoji aria-label="score" title="score" style={{ color: "white" }}>
         🎉
       </Emoji>
       <span style={{ backgroundColor: "#282c34" }}> {score}</span>

@@ -38,7 +38,7 @@ function Instructions({ gameStatus, gameWon }) {
   }, [gameStatus]);
 
   React.useEffect(() => {
-    console.log("showInstructions :>> ", showInstructions);
+    //console.log("showInstructions :>> ", showInstructions);
   }, [showInstructions]);
   return (
     <div className="Instructions">

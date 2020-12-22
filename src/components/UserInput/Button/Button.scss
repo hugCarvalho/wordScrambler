@@ -1,9 +1,10 @@
-$bg-color: #519569;
+$bg-color: #448159;
 
 .Button {
   background-color: rgb(14, 6, 6);
   background-color: #28d2d2; //Start
   background-color: $bg-color; //guess
+  border: 2px solid lighten($bg-color, 20);
 
   margin: 17px auto;
   border-radius: 6px;
@@ -20,7 +21,8 @@ $bg-color: #519569;
     align-self: center;
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: lighten($bg-color, 10);
   }
 }

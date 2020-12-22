@@ -1,6 +1,6 @@
 import React from "react";
 
-function OpenCloseInstructions({ toggleCloseOpen, gameStatus, showInstructions }) {
+function OpenCloseInstructions({ toggleCloseOpen, showInstructions }) {
   return (
     <div
       className="OpenCloseInstructions"
@@ -8,10 +8,12 @@ function OpenCloseInstructions({ toggleCloseOpen, gameStatus, showInstructions }
     >
       <section>
         <button
-          onClick={gameStatus !== "playing" ? toggleCloseOpen : null}
+          aria-hidden="false"
+          onClick={toggleCloseOpen}
           className={`fas fa-angle-double-down ${!showInstructions ? "open" : "close"}`}
         ></button>
         <button
+          aria-hidden="false"
           onClick={toggleCloseOpen}
           className={`fas fa-angle-double-up ${showInstructions ? "open" : "close"}`}
         ></button>

@@ -1,4 +1,5 @@
 import React from "react";
+import "./Emoji.scss";
 
 export function Emoji({ children, ariaLabel, title, className = "", style = {} }) {
   return (
@@ -6,7 +7,7 @@ export function Emoji({ children, ariaLabel, title, className = "", style = {} }
       role="img"
       aria-label={ariaLabel}
       title={title}
-      className={className}
+      className={`Emoji ${className}`}
       style={style}
     >
       {children}

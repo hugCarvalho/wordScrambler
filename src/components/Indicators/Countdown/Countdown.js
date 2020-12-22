@@ -11,7 +11,7 @@ function Countdown({ countdown }) {
 
   return (
     <div className="Countdown">
-      <Emoji aria-label="countdown" title="countdown">
+      <Emoji aria-label="countdown" title="countdown" style={{ color: "white" }}>
         {/* ⌛ */}⏳
       </Emoji>
       <span style={changeCountdownColor(countdown)}>{countdown}</span>

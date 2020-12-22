@@ -9,7 +9,7 @@ import Emoji from "../../../reusable/Emoji.js/Emoji";
 function GuessesLeft({ guessesLeft, gameOptions }) {
   return (
     <div className="GuessesLeft">
-      <Emoji aria-label="guesses left" title="guesses left">
+      <Emoji aria-label="guesses left" title="guesses left" style={{ color: "white" }}>
         {renderEmojiFace(guessesLeft, gameOptions)}
       </Emoji>
       <span style={changeGuessesLeftColor(guessesLeft)}>{guessesLeft}</span>

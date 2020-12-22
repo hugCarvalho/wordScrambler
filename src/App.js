@@ -15,7 +15,7 @@ import DisplayCategory from "./components/DisplayCategory/DisplayCategory";
 // import Scoreboard, { Top10 } from "./components/Scoreboard/Scoreboard";
 // import Backdrop from "./components/Backdrop/Backdrop";
 // import AnimationsDisplay from "./components/AnimationsDisplay/AnimationsDisplay";
-//import WarningHandling from "./components/WarningHandling/WarningHandling";
+// import WarningHandling from "./components/WarningHandling/WarningHandling";
 
 //TODO: delay appearance of scrambled word -first scramble then show
 //TODO: accessibility checklist

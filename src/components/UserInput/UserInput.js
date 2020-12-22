@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Emoji from "../../reusable/Emoji.js/Emoji";
-import Button from "../Button/Button";
+import Button from "./Button/Button";
 import "./UserInput.scss";
 // import ReactTooltip from "react-tooltip";
 
@@ -31,13 +31,14 @@ function Form({ onSubmitHandler, gameStatus, gameWon, guessesLeft }) {
     if (guessesLeft < 3) {
       setShowWrongGuessIndicator(true);
     }
-    console.log(guessesLeft);
+    // console.log(guessesLeft);
   }, [guessesLeft]);
 
   return (
     <form onSubmit={e => onSubmitHandler(e, userText)} className="UserInput">
       <div className="input-container">
         <input
+          aria-label="user guess"
           type="text"
           id="input-text"
           disabled={gameStatus === "onLoad" || gameStatus === "ended"}
@@ -47,6 +48,7 @@ function Form({ onSubmitHandler, gameStatus, gameWon, guessesLeft }) {
           //placeholder="press start to begin a game"
           ref={userInput}
         />
+        <label htmlFor="input-text"></label>
         <Emoji
           className="guess-result"
           style={showWrongGuessIndicator ? { display: "inline" } : { display: "none" }}
@@ -70,11 +72,13 @@ function Form({ onSubmitHandler, gameStatus, gameWon, guessesLeft }) {
         gameStatus={gameStatus}
         type="submit"
       >
-        {gameStatus === "onLoad"
-          ? "Start"
-          : gameStatus === "playing" || gameStatus === "setup"
-          ? "Guess"
-          : "Play again"}
+        <b>
+          {gameStatus === "onLoad"
+            ? "Start"
+            : gameStatus === "playing" || gameStatus === "setup"
+            ? "Guess"
+            : "Play again"}
+        </b>
       </Button>
       {/* <ReactTooltip delayHide={1000} disable={false}>
         <p>Start typing...</p>

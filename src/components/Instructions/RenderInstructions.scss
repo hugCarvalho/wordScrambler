@@ -51,26 +51,25 @@ $heightInstructions: 20px;
     .nested-list {
       padding-left: 15px;
     }
-    .nested-list li i::before {
+    .nested-list::before {
       content: "\2799  ";
     }
   }
 
   .FooterInstructions {
     //background-color: darkcyan;
-    //position: absolute;
     display: flex;
     justify-content: space-between;
     margin-top: 11px;
     padding: 3px 0;
     border-top: 1px solid lightcyan;
-  }
-
-  .turn-page {
-    background-color: transparent;
-    transition: transform 0.3s ease;
-    &:hover {
-      transform: scale(1.1);
+    .turn-page {
+      background-color: transparent;
+      transition: transform 0.3s ease;
+      &:hover,
+      &:focus {
+        transform: scale(1.1);
+      }
     }
   }
 
@@ -97,6 +96,7 @@ $heightInstructions: 20px;
         position: absolute;
         opacity: 1;
       }
+
       .fa-angle-double-up,
       .open {
         opacity: 0;
@@ -110,6 +110,11 @@ $heightInstructions: 20px;
         color: rgba(245, 245, 245, 0.746);
         background: transparent;
         line-height: $heightInstructions;
+
+        &:focus {
+          //color: orange;
+          font-size: larger;
+        }
       }
     }
   }
