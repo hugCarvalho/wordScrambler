@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import "./Audio.scss";
 import applause1 from "./audio/applause1.mp3";
 import boo from "./audio/boo2.mp3";
-import Emoji from "./reusable/Emoji.js/Emoji";
+import Emoji from "../../reusable/Emoji/Emoji";
 
 function Audio({ gameWon, soundOptions, setSoundOptions }) {
   const [playSound, setPlaySound] = React.useState(false);

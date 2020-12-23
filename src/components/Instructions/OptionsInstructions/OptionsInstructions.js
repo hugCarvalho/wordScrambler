@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function OptionsInstructions({ onPageChange }) {
   return (
@@ -11,5 +12,9 @@ function OptionsInstructions({ onPageChange }) {
     </article>
   );
 }
+
+OptionsInstructions.propTypes = {
+  onPageChange: PropTypes.func.isRequired,
+};
 
 export default OptionsInstructions;

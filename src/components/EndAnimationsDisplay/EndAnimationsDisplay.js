@@ -1,6 +1,7 @@
 import React from "react";
-import Emoji from "../../reusable/Emoji.js/Emoji";
 import "./EndAnimationsDisplay.scss";
+import Emoji from "../../reusable/Emoji/Emoji";
+import PropTypes from "prop-types";
 
 const animations = ["🏆", "🏅", "👏"];
 const animationLoser = ["😤", "🤬", "😭"];
@@ -53,5 +54,10 @@ function EndAnimationsDisplay({ gameWon, showInstructions }) {
     </section>
   );
 }
+
+EndAnimationsDisplay.propTypes = {
+  gameWon: PropTypes.string,
+  showInstructions: PropTypes.bool.isRequired,
+};
 
 export default EndAnimationsDisplay;

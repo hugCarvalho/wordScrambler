@@ -1,7 +1,6 @@
 import React from "react";
 import "./Button.scss";
-
-//onClick={() => userInput.current.focus()
+import PropTypes from "prop-types";
 
 function Button({ type, children, onClick: focus }) {
   return (
@@ -10,5 +9,11 @@ function Button({ type, children, onClick: focus }) {
     </button>
   );
 }
+
+Button.propTypes = {
+  type: PropTypes.string.isRequired,
+  children: PropTypes.any,
+  onClick: PropTypes.func,
+};
 
 export default Button;

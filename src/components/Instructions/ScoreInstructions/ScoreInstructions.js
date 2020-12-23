@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function ScoreInstructions({ onPageChange }) {
   return (
@@ -28,4 +29,7 @@ function ScoreInstructions({ onPageChange }) {
   );
 }
 
+ScoreInstructions.propTypes = {
+  onPageChange: PropTypes.func.isRequired,
+};
 export default ScoreInstructions;

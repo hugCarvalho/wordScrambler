@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-function RadioButton({ children, active, value, onChange, disabled }) {
+function RadioButton({ children, active, value, onChange, disabled = false }) {
   return (
     <div className={`RadioButton`}>
       <input
@@ -16,5 +17,12 @@ function RadioButton({ children, active, value, onChange, disabled }) {
     </div>
   );
 }
+
+RadioButton.propTypes = {
+  active: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool.isRequired,
+};
 
 export default RadioButton;

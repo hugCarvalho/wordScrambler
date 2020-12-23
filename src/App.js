@@ -12,7 +12,7 @@ import gameOptions from "./data/gameOptions";
 import initArr from "./data/testData";
 import GameDifficulty from "./components/GameDifficulty/GameDifficulty";
 import DisplayCategory from "./components/DisplayCategory/DisplayCategory";
-import Audio from "./Audio";
+import Audio from "./components/Audio/Audio";
 // import Scoreboard, { Top10 } from "./components/Scoreboard/Scoreboard";
 // import Backdrop from "./components/Backdrop/Backdrop";
 // import AnimationsDisplay from "./components/AnimationsDisplay/AnimationsDisplay";
@@ -155,6 +155,7 @@ function App() {
       console.log("GAME ENDED, 0 GUESSES LEFT: ", guessesLeft);
     }
   }, [guessesLeft]);
+
   //GAME ENDS IF COUNTDOWN GETS TO 0 💥
   useEffect(() => {
     if (countdown < 1) {

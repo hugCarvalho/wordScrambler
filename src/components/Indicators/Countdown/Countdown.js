@@ -1,5 +1,6 @@
 import React from "react";
-import Emoji from "../../../reusable/Emoji.js/Emoji";
+import Emoji from "../../../reusable/Emoji/Emoji";
+import PropTypes from "prop-types";
 import "./Countdown.scss";
 
 function Countdown({ countdown }) {
@@ -18,5 +19,9 @@ function Countdown({ countdown }) {
     </div>
   );
 }
+
+Countdown.propTypes = {
+  countdown: PropTypes.number.isRequired,
+};
 
 export default Countdown;

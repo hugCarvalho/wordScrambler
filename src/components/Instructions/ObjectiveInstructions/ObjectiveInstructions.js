@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function ObjectiveInstructions({ onPageChange }) {
   return (
@@ -11,5 +12,9 @@ function ObjectiveInstructions({ onPageChange }) {
     </article>
   );
 }
+
+ObjectiveInstructions.propTypes = {
+  onPageChange: PropTypes.func.isRequired,
+};
 
 export default ObjectiveInstructions;

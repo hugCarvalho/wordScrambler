@@ -1,10 +1,10 @@
 import React from "react";
 import "./GuessesLeft.scss";
 import changeGuessesLeftColor, { renderEmojiFace } from "./fns";
+import PropTypes from "prop-types";
 
-import Emoji from "../../../reusable/Emoji.js/Emoji";
+import Emoji from "../../../reusable/Emoji/Emoji";
 
-//TODO: put fn in separate file
 //🤔
 function GuessesLeft({ guessesLeft, gameOptions }) {
   return (
@@ -16,5 +16,10 @@ function GuessesLeft({ guessesLeft, gameOptions }) {
     </div>
   );
 }
+
+GuessesLeft.propTypes = {
+  guessesLeft: PropTypes.number.isRequired,
+  gameOptions: PropTypes.object.isRequired,
+};
 
 export default GuessesLeft;

@@ -1,5 +1,6 @@
 import React from "react";
 import "./Word.scss";
+import PropTypes from "prop-types";
 
 function Word({ gameStatus, scrambledWord }) {
   //Active on gameStatus "ended" only
@@ -29,5 +30,10 @@ function Word({ gameStatus, scrambledWord }) {
     </div>
   );
 }
+
+Word.propTypes = {
+  gameStatus: PropTypes.string.isRequired,
+  scrambledWord: PropTypes.string.isRequired,
+};
 
 export default Word;

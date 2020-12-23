@@ -1,5 +1,6 @@
 import React from "react";
 import "./OpenCloseInstructions.scss";
+import PropTypes from "prop-types";
 
 function OpenCloseInstructions({ toggleCloseOpen, showInstructions }) {
   return (
@@ -24,5 +25,10 @@ function OpenCloseInstructions({ toggleCloseOpen, showInstructions }) {
     </div>
   );
 }
+
+OpenCloseInstructions.propTypes = {
+  toggleCloseOpen: PropTypes.func.isRequired,
+  showInstructions: PropTypes.bool.isRequired,
+};
 
 export default OpenCloseInstructions;

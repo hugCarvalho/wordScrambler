@@ -1,5 +1,6 @@
 import React from "react";
 import "./Emoji.scss";
+import PropTypes from "prop-types";
 
 export function Emoji({ children, ariaLabel, title, className = "", style = {} }) {
   return (
@@ -14,5 +15,13 @@ export function Emoji({ children, ariaLabel, title, className = "", style = {} }
     </span>
   );
 }
+
+Emoji.propTypes = {
+  children: PropTypes.any,
+  ariaLabel: PropTypes.string,
+  title: PropTypes.string,
+  className: PropTypes.string,
+  style: PropTypes.object,
+};
 
 export default Emoji;

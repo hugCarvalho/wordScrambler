@@ -1,5 +1,6 @@
 import React from "react";
-import Emoji from "../../../reusable/Emoji.js/Emoji";
+import Emoji from "../../../reusable/Emoji/Emoji";
+import PropTypes from "prop-types";
 
 function FooterInstructions({ activePage, setActivePage }) {
   return (
@@ -26,5 +27,10 @@ function FooterInstructions({ activePage, setActivePage }) {
     </footer>
   );
 }
+
+FooterInstructions.propTypes = {
+  activePage: PropTypes.number.isRequired,
+  setActivePage: PropTypes.func.isRequired,
+};
 
 export default FooterInstructions;

@@ -1,6 +1,7 @@
 import React from "react";
 import "./Score.scss";
-import Emoji from "../../../reusable/Emoji.js/Emoji";
+import Emoji from "../../../reusable/Emoji/Emoji";
+import PropTypes from "prop-types";
 
 function Score({ score, gameWon }) {
   const changeEmojiBgColorOnWin = gameWon =>
@@ -15,5 +16,10 @@ function Score({ score, gameWon }) {
     </div>
   );
 }
+
+Score.propTypes = {
+  score: PropTypes.number.isRequired,
+  gameWon: PropTypes.string,
+};
 
 export default Score;

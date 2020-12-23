@@ -1,5 +1,6 @@
 import React from "react";
 import RadioButton from "../../reusable/RadioButton";
+import PropTypes from "prop-types";
 import "./GameDifficulty.scss";
 
 function GameDifficulty({ difficulty, setDifficulty, gameStatus }) {
@@ -42,5 +43,11 @@ function GameDifficulty({ difficulty, setDifficulty, gameStatus }) {
     </form>
   );
 }
+
+GameDifficulty.propTypes = {
+  difficulty: PropTypes.string.isRequired,
+  setDifficulty: PropTypes.func.isRequired,
+  gameStatus: PropTypes.string.isRequired,
+};
 
 export default GameDifficulty;

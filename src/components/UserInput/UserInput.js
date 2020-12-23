@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import Emoji from "../../reusable/Emoji.js/Emoji";
+import Emoji from "../../reusable/Emoji/Emoji";
 import Button from "./Button/Button";
 import "./UserInput.scss";
+import PropTypes from "prop-types";
+
 // import ReactTooltip from "react-tooltip";
 
 function Form({ onSubmitHandler, gameStatus, gameWon, guessesLeft }) {
@@ -86,5 +88,12 @@ function Form({ onSubmitHandler, gameStatus, gameWon, guessesLeft }) {
     </form>
   );
 }
+
+Form.propTypes = {
+  onSubmitHandler: PropTypes.func.isRequired,
+  gameStatus: PropTypes.string.isRequired,
+  gameWon: PropTypes.string,
+  guessesLeft: PropTypes.number.isRequired,
+};
 
 export default Form;
