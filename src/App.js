@@ -12,6 +12,7 @@ import gameOptions from "./data/gameOptions";
 import initArr from "./data/testData";
 import GameDifficulty from "./components/GameDifficulty/GameDifficulty";
 import DisplayCategory from "./components/DisplayCategory/DisplayCategory";
+import Audio from "./Audio";
 // import Scoreboard, { Top10 } from "./components/Scoreboard/Scoreboard";
 // import Backdrop from "./components/Backdrop/Backdrop";
 // import AnimationsDisplay from "./components/AnimationsDisplay/AnimationsDisplay";
@@ -256,6 +257,7 @@ function App() {
       {/* <Top10 scoreboard={scoreboard} /> */}
       {/* <Scoreboard scoreboard={scoreboard} /> */}
       {/* {showModal && <Backdrop modalStatus={false}>{modalMessage} </Backdrop>} */}
+      <Audio gameWon={gameWon} soundOptions={options.soundOn} />
     </div>
   );
 }
