@@ -2,13 +2,13 @@ import React from "react";
 
 function ObjectiveInstructions({ onPageChange }) {
   return (
-    <div className="ObjectiveInstructions" style={onPageChange().instructions}>
+    <article className="ObjectiveInstructions" style={onPageChange().instructions}>
+      <h4>Objective:</h4>
       <p>
-        <b>Instructions:</b>{" "}
-        <i>guess the scrambled word in the least amount of guesses possible. </i>
-        <i>The fastest and the more accurate you are, the more points you'll get.</i>
+        Guess the scrambled word in the least amount of guesses possible. The fastest and
+        the more accurate you are, the more points you'll get.
       </p>
-    </div>
+    </article>
   );
 }
 

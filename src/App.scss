@@ -54,3 +54,11 @@
     transform: rotate(360deg);
   }
 }
+
+.test {
+  border: 1px solid gray;
+  border-bottom: none;
+  position: absolute;
+  top: -30px;
+  padding: 3px;
+}

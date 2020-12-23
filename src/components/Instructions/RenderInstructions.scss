@@ -96,25 +96,26 @@ $heightInstructions: 20px;
         position: absolute;
         opacity: 1;
       }
-
-      .fa-angle-double-up,
-      .open {
-        opacity: 0;
-        transition: opacity 1.6s ease;
-      }
       .close {
         opacity: 1;
         transition: opacity 1.6s ease 0.8s;
+        // &:focus {
+        //   font-size: larger;
+        // }
+      }
+      .open {
+        //position: relative;
+        opacity: 0;
+        //z-index: -1;
+        transition: opacity 1.6s ease;
+        // &:focus {
+        //   font-size: larger;
+        // }
       }
       .fas {
         color: rgba(245, 245, 245, 0.746);
         background: transparent;
         line-height: $heightInstructions;
-
-        &:focus {
-          //color: orange;
-          font-size: larger;
-        }
       }
     }
   }
