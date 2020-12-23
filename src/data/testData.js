@@ -2,7 +2,6 @@
 //const testData = ["MiKE"];
 
 const testData = [
-  "",
   "backpack",
   "boardgame",
   "cable",
@@ -41,6 +40,17 @@ const testData = [
   "handkerchief",
   "bracelet",
   "socket",
+  "toothbrush",
+  "pen",
+  "shower",
+  "bathtub",
+  "basin",
+  "counter",
+  "pedestal",
+  "sink",
+  "toothpaste",
+  "pipe",
+  "drain",
 ];
 //, "12", "23", "43", "53"];
 //const initArr = ["da"];

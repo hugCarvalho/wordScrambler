@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
+import "./Audio.scss";
 import applause1 from "./audio/applause1.mp3";
 import boo from "./audio/boo2.mp3";
 
-function Audio({ gameWon, soundOptions }) {
+function Audio({ gameWon, soundOptions, setSoundOptions }) {
   const [playSound, setPlaySound] = React.useState(false);
   const audioLoser = useRef();
   const audioWinner = useRef();
@@ -26,7 +27,16 @@ function Audio({ gameWon, soundOptions }) {
   }, [gameWon, playSound, soundOptions]);
 
   return (
-    <div>
+    <div className="Audio">
+      <div>
+        <input
+          id="sound-on"
+          type="checkbox"
+          checked={soundOptions}
+          onChange={setSoundOptions}
+        />
+        <label htmlFor="sound-on">soundFX</label>
+      </div>
       <audio ref={audioLoser} autoPlay>
         <source src={boo} type="audio/mp3"></source>
       </audio>

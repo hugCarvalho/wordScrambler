@@ -23,6 +23,7 @@ import Audio from "./Audio";
 //TODO: validation- word must be at least 2 letters
 //TODO: lowercase correct word
 //TODO: refactor
+//TODO: change handling of options obj to reducer
 
 function App() {
   //OPTIONS + DATA
@@ -257,7 +258,17 @@ function App() {
       {/* <Top10 scoreboard={scoreboard} /> */}
       {/* <Scoreboard scoreboard={scoreboard} /> */}
       {/* {showModal && <Backdrop modalStatus={false}>{modalMessage} </Backdrop>} */}
-      <Audio gameWon={gameWon} soundOptions={options.soundOn} />
+      <Audio
+        gameWon={gameWon}
+        soundOptions={options.soundOn}
+        setSoundOptions={() =>
+          setOptions(state => {
+            const copyObj = { ...state };
+            copyObj.soundOn = !copyObj.soundOn;
+            return copyObj;
+          })
+        }
+      />
     </div>
   );
 }

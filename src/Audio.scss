@@ -1,0 +1,15 @@
+.Audio {
+  //background-color: green;
+
+  input {
+    -webkit-appearance: checkbox;
+  }
+  label {
+    margin-left: 5px;
+  }
+
+  input:hover,
+  label:hover {
+    cursor: pointer;
+  }
+}

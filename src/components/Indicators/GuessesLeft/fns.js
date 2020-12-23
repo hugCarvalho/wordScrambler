@@ -5,9 +5,9 @@ const changeGuessesLeftColor = guesses => {
   return;
 };
 
-//"🧐"
+//"🧐"🤔"🥴"
 export const renderEmojiFace = (guesses, gameOptions) => {
-  const faces = ["🥴", "😨", "😲", "🤯"];
+  const faces = ["🧐", "😨", "😲", "🤯"];
   const { totalGuessesLeft } = gameOptions;
   if (guesses === 0) return faces[3];
   else if (guesses === totalGuessesLeft) return faces[0];
