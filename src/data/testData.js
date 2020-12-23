@@ -51,6 +51,16 @@ const testData = [
   "toothpaste",
   "pipe",
   "drain",
+  "stereo",
+  "scalpel",
+  "glass",
+  "table",
+  "bed",
+  "camera",
+  "window",
+  "curtains",
+  "handle",
+  "floor",
 ];
 //, "12", "23", "43", "53"];
 //const initArr = ["da"];

@@ -1,7 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function RadioButton({ children, active, value, onChange, disabled = false }) {
+function RadioButton({
+  className = "",
+  children,
+  active,
+  value,
+  onChange,
+  disabled = false,
+}) {
   return (
     <div className={`RadioButton`}>
       <input
@@ -12,6 +19,7 @@ function RadioButton({ children, active, value, onChange, disabled = false }) {
         checked={active === value}
         onChange={onChange}
         disabled={disabled}
+        className={className}
       />
       <label htmlFor={value}>{children}</label>
     </div>
