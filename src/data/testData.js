@@ -61,6 +61,23 @@ const testData = [
   "curtains",
   "handle",
   "floor",
+  "bag",
+  "glue",
+  "watch",
+  "chain",
+  "hat",
+  "batterie",
+  "magnet",
+  "vase",
+  "box",
+  "wall",
+  "ladder",
+  "blanket",
+  "snicker",
+  "microwave",
+  "needle",
+  "sock",
+  "necklace",
 ];
 //, "12", "23", "43", "53"];
 //const initArr = ["da"];
