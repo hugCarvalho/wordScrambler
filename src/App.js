@@ -32,16 +32,16 @@ const initHighScores = {
 };
 const initScores = {
   easy: [
-    {
-      id: 1,
-      date: Date.now(),
-      score: 100,
-    },
-    {
-      id: 2,
-      date: Date.now(),
-      score: 200,
-    },
+    // {
+    //   id: 1,
+    //   date: Date.now(),
+    //   score: 100,
+    // },
+    // {
+    //   id: 2,
+    //   date: Date.now(),
+    //   score: 200,
+    // },
   ],
   medium: [],
   hard: [],
@@ -54,22 +54,24 @@ function App() {
   const [array, setArray] = useState(initArr);
   const [allScores, setAllScores] = useState(initScores);
   const [updatedAllScores, setUpdatedAllScores] = useState(initScores);
-  //MAIN STATE
   const [difficulty, setDifficulty] = useState("all");
+  //MAIN STATE
   const [gameStatus, setGameStatus] = useState("onLoad"); // "onLoad", "playing", "ended"
   //IN GAME VARIABLES
   const [guessesLeft, setGuessesLeft] = useState(gameOptions.totalGuessesLeft);
   const [countdown, setCountdown] = useState(gameOptions.countdown);
-  const [score, setScore] = useState(gameOptions.score);
   const [correctWord, setCorrectWord] = useState(null);
   const [scrambledWord, setScrambledWord] = useState("");
   const [guess, setGuess] = useState(null);
+  //GAME ENDED
+  const [gameWon, setGameWon] = useState(null); //null, "yes", "no" -> don't change to true/false to pass only one prop
+  const [score, setScore] = useState(gameOptions.score);
+  const [allowHighScoreEntry, setAllowHighScoreEntry] = useState(false); //prevents automatic highscore entry when changing level
   //SCOREBOARD
   // const [scoreboard, setScoreboard] = useState([]);
   //MODAL
   // const [modalMessage, setModalMessage] = useState("Testing modal message");
   // const [showModal, setShowModal] = useState(false);
-  const [gameWon, setGameWon] = useState(null); //null, "yes", "no" -> don't change to true/false to pass only one prop
 
   // const [warning, setWarning] = ""; //emptyString
   const onSubmitHandler = (e, userText) => {
@@ -167,6 +169,7 @@ function App() {
     //SCORING LOGIC 🎼
     if (gameStatus === "playing" && guess && guess === correctWord) {
       //console.log("Correct Word", correctWord, "guess", guess);
+
       setGameStatus("ended");
     }
   }, [gameStatus, guess, correctWord]);
@@ -205,22 +208,28 @@ function App() {
           guessesLeft * options.pointsPerGuessLeft +
           correctWord.length * options.pointsPerWordLength
       );
+      setAllowHighScoreEntry(true);
       //setAllScores({ id: allScores + 1, date: Date.now(), score: score });
     }
+    console.log(gameStatus);
   }, [correctWord, countdown, gameStatus, guessesLeft, options]);
 
   useEffect(() => {
-    if (gameWon === "yes") {
-      let res = { ...allScores };
-      res[difficulty].push({
+    if (gameWon === "yes" && allowHighScoreEntry) {
+      let scores = { ...allScores };
+      scores[difficulty].push({
         id: Math.random(), //TODO: change to uuid?
         date: new Date().toLocaleDateString("de-DE"),
         score: score,
       });
-      console.log("Add game score to", res[difficulty], res);
-      setUpdatedAllScores(res);
+      //console.log("Add game score to", scores[difficulty], scores);
+      setUpdatedAllScores(scores);
     }
-  }, [gameWon, score, difficulty, allScores]);
+  }, [gameWon, score, difficulty, allScores, allowHighScoreEntry]);
+
+  useEffect(() => {
+    setAllowHighScoreEntry(false);
+  }, [updatedAllScores]);
 
   //LOCALSTORGAGE ⏩ SET
   // useEffect(() => {
