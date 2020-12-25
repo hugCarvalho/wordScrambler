@@ -16,7 +16,7 @@ function Audio({ gameWon, soundOptions, setSoundOptions }) {
   }, [gameWon]);
 
   React.useEffect(() => {
-    //console.log("audio", audioLoser.current);
+    console.log("audio", audioLoser.current);
     if (soundOptions && playSound && gameWon === "no") {
       audioLoser.current.play();
       setPlaySound(false);

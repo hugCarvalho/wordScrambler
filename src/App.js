@@ -21,8 +21,9 @@ import HighScores from "./components/Scoreboard/HighScores";
 
 //TODO: accessibility checklist
 //TODO: validation- word must be at least 2 letters
-//TODO: refactor
 //TODO: change handling of options obj to reducer
+//TODO: optimize performance
+//TODO: refactor
 
 const initHighScores = {
   easy: [],
@@ -118,6 +119,7 @@ function App() {
       //setGameWon(null);
       // setShowModal(false);
       setGameStatus("playing");
+      setAllowHighScoreEntry(true);
     }
 
     let timer = null;
@@ -208,12 +210,12 @@ function App() {
           guessesLeft * options.pointsPerGuessLeft +
           correctWord.length * options.pointsPerWordLength
       );
-      setAllowHighScoreEntry(true);
       //setAllScores({ id: allScores + 1, date: Date.now(), score: score });
     }
     console.log(gameStatus);
   }, [correctWord, countdown, gameStatus, guessesLeft, options]);
 
+  //HIGHSCORE 💯
   useEffect(() => {
     if (gameWon === "yes" && allowHighScoreEntry) {
       let scores = { ...allScores };
@@ -224,12 +226,11 @@ function App() {
       });
       //console.log("Add game score to", scores[difficulty], scores);
       setUpdatedAllScores(scores);
+      setAllowHighScoreEntry(false);
     }
   }, [gameWon, score, difficulty, allScores, allowHighScoreEntry]);
 
-  useEffect(() => {
-    setAllowHighScoreEntry(false);
-  }, [updatedAllScores]);
+  useEffect(() => {}, [updatedAllScores]);
 
   //LOCALSTORGAGE ⏩ SET
   useEffect(() => {
@@ -238,9 +239,10 @@ function App() {
   }, [updatedAllScores]);
 
   useEffect(() => {
+    console.log("allowHighScoreEntry", allowHighScoreEntry);
     //console.log("score", score);
     //console.log("------------");
-  }, [score]);
+  }, [allowHighScoreEntry]);
   useEffect(() => {
     //console.log("correctWord", correctWord);
     //console.log("------------");
@@ -294,6 +296,7 @@ function App() {
       <Audio
         gameWon={gameWon}
         soundOptions={options.soundOn}
+        // setAllowHighScoreEntry={() => setAllowHighScoreEntry(false)}
         setSoundOptions={() =>
           setOptions(state => {
             const copyObj = { ...state };
