@@ -68,7 +68,7 @@ function App() {
   const [score, setScore] = useState(gameOptions.score);
   const [allowHighScoreEntry, setAllowHighScoreEntry] = useState(false); //prevents automatic highscore entry when changing level
   //SCOREBOARD
-  // const [scoreboard, setScoreboard] = useState([]);
+  // const [highScoreTables, setScoreboard] = useState([]);
   //MODAL
   // const [modalMessage, setModalMessage] = useState("Testing modal message");
   // const [showModal, setShowModal] = useState(false);
@@ -102,11 +102,11 @@ function App() {
   };
 
   //LOCALSTORAGE ⏩ GET
-  // useEffect(() => {
-  //   if (localStorage.scoreboard) {
-  //     setScoreboard(JSON.parse(window.localStorage.getItem("scoreboard")));
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (localStorage.highScoreTables) {
+      setUpdatedAllScores(JSON.parse(window.localStorage.getItem("highScoreTables")));
+    }
+  }, []);
 
   //Timer ⏲️
   useEffect(() => {
@@ -232,26 +232,10 @@ function App() {
   }, [updatedAllScores]);
 
   //LOCALSTORGAGE ⏩ SET
-  // useEffect(() => {
-  //   let updatedScoreboard = scoreboard;
-  //   //console.log("1", updatedScoreboard);
-  //   if (gameStatus === "ended" && score > 0) {
-  //     const minScore = Math.min(...scoreboard);
-  //     if (scoreboard.length < 10) {
-  //       updatedScoreboard.push(score);
-  //       updatedScoreboard.sort((a, b) => b - a);
-  //     }
-  //     if (scoreboard.length >= 10 && score > minScore) {
-  //       updatedScoreboard.push(score);
-  //       updatedScoreboard.sort((a, b) => b - a);
-  //       updatedScoreboard.pop();
-  //     }
-  //     if (score <= 0) return;
-  //     setScoreboard(updatedScoreboard);
-  //     window.localStorage.setItem("scoreboard", JSON.stringify(updatedScoreboard));
-  //   }
-  //   //console.log("3", updatedScoreboard);
-  // }, [gameStatus, score, scoreboard]);
+  useEffect(() => {
+    window.localStorage.setItem("highScoreTables", JSON.stringify(updatedAllScores));
+    //console.log("3", updatedAllScores);
+  }, [updatedAllScores]);
 
   useEffect(() => {
     //console.log("score", score);
@@ -266,9 +250,9 @@ function App() {
     //console.log("------------");
   }, [scrambledWord]);
   // useEffect(() => {
-  //   // console.log("scoreboard", scoreboard);
+  //   // console.log("highScoreTables", highScoreTables);
   //   //console.log("------------");
-  // }, [scoreboard]);
+  // }, [highScoreTables]);
 
   return (
     <div className="App">
@@ -304,8 +288,8 @@ function App() {
         </div>
       </main>
       {/* <WarningHandling warning={warning} /> */}
-      {/* <Top10 scoreboard={scoreboard} /> */}
-      {/* <Scoreboard scoreboard={scoreboard} /> */}
+      {/* <Top10 highScoreTables={highScoreTables} /> */}
+      {/* <Scoreboard highScoreTables={highScoreTables} /> */}
       {/* {showModal && <Backdrop modalStatus={false}>{modalMessage} </Backdrop>} */}
       <Audio
         gameWon={gameWon}
