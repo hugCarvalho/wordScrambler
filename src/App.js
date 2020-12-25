@@ -14,24 +14,48 @@ import GameDifficulty from "./components/GameDifficulty/GameDifficulty";
 import DisplayCategory from "./components/DisplayCategory/DisplayCategory";
 import Audio from "./components/Audio/Audio";
 // import Scoreboard, { Top10 } from "./components/Scoreboard/Scoreboard";
+import { HighScores } from "./components/Scoreboard/Scoreboard";
 // import Backdrop from "./components/Backdrop/Backdrop";
 // import AnimationsDisplay from "./components/AnimationsDisplay/AnimationsDisplay";
 // import WarningHandling from "./components/WarningHandling/WarningHandling";
 
-//TODO: delay appearance of scrambled word -first scramble then show
 //TODO: accessibility checklist
 //TODO: validation- word must be at least 2 letters
-//TODO: lowercase correct word
 //TODO: refactor
 //TODO: change handling of options obj to reducer
+
+const initHighScores = {
+  easy: [],
+  medium: [],
+  hard: [],
+  all: [],
+};
+const initScores = {
+  easy: [
+    {
+      id: 1,
+      date: Date.now(),
+      score: 100,
+    },
+    {
+      id: 2,
+      date: Date.now(),
+      score: 200,
+    },
+  ],
+  medium: [],
+  hard: [],
+  all: [],
+};
 
 function App() {
   //OPTIONS + DATA
   const [options, setOptions] = useState(gameOptions);
   const [array, setArray] = useState(initArr);
+  const [allScores, setAllScores] = useState(initScores);
   //MAIN STATE
-  const [gameStatus, setGameStatus] = useState("onLoad"); // "onLoad", "playing", "ended"
   const [difficulty, setDifficulty] = useState("all");
+  const [gameStatus, setGameStatus] = useState("onLoad"); // "onLoad", "playing", "ended"
   //IN GAME VARIABLES
   const [guessesLeft, setGuessesLeft] = useState(gameOptions.totalGuessesLeft);
   const [countdown, setCountdown] = useState(gameOptions.countdown);
@@ -180,8 +204,22 @@ function App() {
           guessesLeft * options.pointsPerGuessLeft +
           correctWord.length * options.pointsPerWordLength
       );
+      //setAllScores({ id: allScores + 1, date: Date.now(), score: score });
     }
   }, [correctWord, countdown, gameStatus, guessesLeft, options]);
+
+  // useEffect(() => {
+  //   if (gameWon === "yes") {
+  //     setAllScores(state => [
+  //       ...state,
+  //       state[difficulty].push({
+  //         id: state.length + 1,
+  //         date: Date.now(),
+  //         score: score,
+  //       }),
+  //     ]);
+  //   }
+  // }, [gameWon, score, difficulty]);
 
   //LOCALSTORGAGE ⏩ SET
   // useEffect(() => {
@@ -270,6 +308,7 @@ function App() {
           })
         }
       />
+      <HighScores allScores={allScores} difficulty={difficulty} />
     </div>
   );
 }

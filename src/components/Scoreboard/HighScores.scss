@@ -1,0 +1,50 @@
+.HighScores {
+  border-collapse: collapse;
+  border-spacing: 0;
+  min-width: 300px;
+  max-width: 316px;
+  max-width: 516px;
+  width: 80%;
+
+  td {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    overflow: hidden;
+    padding: 10px 5px;
+    word-break: normal;
+  }
+  th {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    overflow: hidden;
+    padding: 10px 5px;
+    word-break: normal;
+  }
+  .cells {
+    border-color: inherit;
+    border-color: black;
+
+    text-align: center;
+    vertical-align: top;
+  }
+  .rank {
+    border-color: inherit;
+    border-color: black;
+
+    text-align: center;
+    vertical-align: top;
+  }
+  tr:nth-child(even) {
+    background: rgb(202, 2, 2);
+  }
+  // tr:nth-child(odd) {
+  //   background: rgb(110, 85, 85);
+  // }
+}
