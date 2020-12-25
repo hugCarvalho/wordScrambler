@@ -1,0 +1,47 @@
+import React from "react";
+import "./HighScores.scss";
+
+function HighScores({ updatedAllScores, difficulty, numEntries }) {
+  const [highScoreTable, setHighScoreTable] = React.useState([]);
+
+  React.useEffect(() => {
+    //console.log("updatedAllScores", updatedAllScores);
+    let sortedScores = [
+      ...updatedAllScores[difficulty].sort((a, b) => b.score - a.score),
+    ];
+    while (sortedScores.length < numEntries) {
+      sortedScores.push(null);
+    }
+    setHighScoreTable(sortedScores);
+  }, [difficulty, updatedAllScores, numEntries]);
+
+  return (
+    <table className="HighScores">
+      <thead>
+        <tr>
+          <th className="cells" colSpan="3">
+            Top {numEntries} - {difficulty}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td className="cells subtitle">Rank</td>
+          <td className="cells subtitle">Date</td>
+          <td className="cells subtitle">Score</td>
+        </tr>
+        {highScoreTable.map((item, i) => {
+          return (
+            <tr key={i}>
+              <td className="cells rank">{`${i + 1}.`}</td>
+              <td className="cells date">{item ? item.date : "-"}</td>
+              <td className="cells score">{item ? item.score : "-"}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
+}
+
+export default HighScores;

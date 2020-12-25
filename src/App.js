@@ -13,8 +13,8 @@ import initArr from "./data/testData";
 import GameDifficulty from "./components/GameDifficulty/GameDifficulty";
 import DisplayCategory from "./components/DisplayCategory/DisplayCategory";
 import Audio from "./components/Audio/Audio";
+import HighScores from "./components/Scoreboard/HighScores";
 // import Scoreboard, { Top10 } from "./components/Scoreboard/Scoreboard";
-import { HighScores } from "./components/Scoreboard/Scoreboard";
 // import Backdrop from "./components/Backdrop/Backdrop";
 // import AnimationsDisplay from "./components/AnimationsDisplay/AnimationsDisplay";
 // import WarningHandling from "./components/WarningHandling/WarningHandling";
@@ -53,6 +53,7 @@ function App() {
   const [options, setOptions] = useState(gameOptions);
   const [array, setArray] = useState(initArr);
   const [allScores, setAllScores] = useState(initScores);
+  const [updatedAllScores, setUpdatedAllScores] = useState(initScores);
   //MAIN STATE
   const [difficulty, setDifficulty] = useState("all");
   const [gameStatus, setGameStatus] = useState("onLoad"); // "onLoad", "playing", "ended"
@@ -208,18 +209,18 @@ function App() {
     }
   }, [correctWord, countdown, gameStatus, guessesLeft, options]);
 
-  // useEffect(() => {
-  //   if (gameWon === "yes") {
-  //     setAllScores(state => [
-  //       ...state,
-  //       state[difficulty].push({
-  //         id: state.length + 1,
-  //         date: Date.now(),
-  //         score: score,
-  //       }),
-  //     ]);
-  //   }
-  // }, [gameWon, score, difficulty]);
+  useEffect(() => {
+    if (gameWon === "yes") {
+      let res = { ...allScores };
+      res[difficulty].push({
+        id: Math.random(), //TODO: change to uuid?
+        date: new Date().toLocaleDateString("de-DE"),
+        score: score,
+      });
+      console.log("Add game score to", res[difficulty], res);
+      setUpdatedAllScores(res);
+    }
+  }, [gameWon, score, difficulty, allScores]);
 
   //LOCALSTORGAGE ⏩ SET
   // useEffect(() => {
@@ -308,7 +309,11 @@ function App() {
           })
         }
       />
-      <HighScores allScores={allScores} difficulty={difficulty} />
+      <HighScores
+        updatedAllScores={updatedAllScores}
+        difficulty={difficulty}
+        numEntries={options.displayHighScores.numEntries}
+      />
     </div>
   );
 }

@@ -6,5 +6,6 @@ const gameOptions = {
   pointsPerTimeLeft: 2,
   pointsPerWordLength: 10,
   soundOn: true,
+  displayHighScores: { yes: true, numEntries: 10 }, //10 -20 -30
 };
 export default gameOptions;
