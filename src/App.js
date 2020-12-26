@@ -9,55 +9,32 @@ import Score from "./components/Indicators/Score/Score";
 import Word from "./components/Word/Word";
 import chooseWord, { scrambleWord } from "./App_functions";
 import gameOptions from "./data/gameOptions";
-import initArr from "./data/testData";
+import initArr, { initScores } from "./data/testData";
 import GameDifficulty from "./components/GameDifficulty/GameDifficulty";
 import DisplayCategory from "./components/DisplayCategory/DisplayCategory";
 import Audio from "./components/Audio/Audio";
-import HighScores from "./components/Scoreboard/HighScores";
+import HighScores from "./components/HighScores/HighScores";
 // import Scoreboard, { Top10 } from "./components/Scoreboard/Scoreboard";
 // import Backdrop from "./components/Backdrop/Backdrop";
 // import AnimationsDisplay from "./components/AnimationsDisplay/AnimationsDisplay";
 // import WarningHandling from "./components/WarningHandling/WarningHandling";
 
+//TODO: Options
 //TODO: accessibility checklist
 //TODO: validation- word must be at least 2 letters
 //TODO: change handling of options obj to reducer
 //TODO: optimize performance
 //TODO: refactor
 
-const initHighScores = {
-  easy: [],
-  medium: [],
-  hard: [],
-  all: [],
-};
-const initScores = {
-  easy: [
-    // {
-    //   id: 1,
-    //   date: Date.now(),
-    //   score: 100,
-    // },
-    // {
-    //   id: 2,
-    //   date: Date.now(),
-    //   score: 200,
-    // },
-  ],
-  medium: [],
-  hard: [],
-  all: [],
-};
-
 function App() {
-  //OPTIONS + DATA
-  const [options, setOptions] = useState(gameOptions);
+  //DATA + OPTIONS
   const [array, setArray] = useState(initArr);
-  const [allScores, setAllScores] = useState(initScores);
+  const [allScores] = useState(initScores);
   const [updatedAllScores, setUpdatedAllScores] = useState(initScores);
-  const [difficulty, setDifficulty] = useState("all");
+  const [options, setOptions] = useState(gameOptions);
   //MAIN STATE
   const [gameStatus, setGameStatus] = useState("onLoad"); // "onLoad", "playing", "ended"
+  const [difficulty, setDifficulty] = useState("all"); //easy-medium-hard-all
   //IN GAME VARIABLES
   const [guessesLeft, setGuessesLeft] = useState(gameOptions.totalGuessesLeft);
   const [countdown, setCountdown] = useState(gameOptions.countdown);
@@ -65,36 +42,29 @@ function App() {
   const [scrambledWord, setScrambledWord] = useState("");
   const [guess, setGuess] = useState(null);
   //GAME ENDED
-  const [gameWon, setGameWon] = useState(null); //null, "yes", "no" -> don't change to true/false to pass only one prop
+  const [gameWon, setGameWon] = useState(null); //null, "yes", "no" -> don't change to true/false, falsy value is being used
   const [score, setScore] = useState(gameOptions.score);
   const [allowHighScoreEntry, setAllowHighScoreEntry] = useState(false); //prevents automatic highscore entry when changing level
-  //SCOREBOARD
-  // const [highScoreTables, setScoreboard] = useState([]);
-  //MODAL
-  // const [modalMessage, setModalMessage] = useState("Testing modal message");
-  // const [showModal, setShowModal] = useState(false);
 
-  // const [warning, setWarning] = ""; //emptyString
   const onSubmitHandler = (e, userText) => {
     e.preventDefault();
 
     switch (gameStatus) {
       case "onLoad":
-        //console.log("SETTING game status to scrambling");
         setGameStatus("scramblingWord");
+        //console.log("setting game status to scramblingWord");
         break;
       case "playing":
         if (userText === "") {
-          //setWarning("emptyString");
           return;
         } else {
-          //console.log("gamestatus is =>", gameStatus);
           setGuess(e.target.elements["input-text"].value); //alternatively use userText
         }
         break;
       case "ended":
         setCorrectWord(null); //prevents setScrambledWord to run before time
         setGameStatus("scramblingWord");
+        //console.log("setting game status to scramblingWord");
         setGameWon(null);
         break;
       default:
@@ -116,19 +86,15 @@ function App() {
       setGuessesLeft(gameOptions.totalGuessesLeft);
       setCountdown(gameOptions.countdown);
       setScore(gameOptions.score);
-      //setGameWon(null);
-      // setShowModal(false);
       setGameStatus("playing");
       setAllowHighScoreEntry(true);
     }
 
-    let timer = null;
+    let timer;
     if (gameStatus === "playing") {
       timer = setInterval(() => {
         setCountdown(state => state - 1);
       }, 1000);
-    } else {
-      clearInterval(timer);
     }
     //console.log("gameStatus useEFFECT :>> ", gameStatus);
     return () => {
@@ -136,7 +102,7 @@ function App() {
     };
   }, [gameStatus]);
 
-  //Sets Word 🥉
+  //Sets correct Word 🥉
   useEffect(() => {
     if (gameStatus === "scramblingWord") {
       setCorrectWord(null);
@@ -144,62 +110,50 @@ function App() {
     }
   }, [gameStatus, array, difficulty]);
 
-  //GENERATE RANDOM NUMBER AND WORD 🧣
+  //sets scrambled word 🧣
   useEffect(() => {
     if (correctWord && gameStatus === "scramblingWord") {
-      //console.log("scramblingWord", gameStatus);
       setScrambledWord(scrambleWord(correctWord));
       setGameStatus("setup");
-      //console.log("SETGAMESTATUS TO PLAYING");
+      //console.log("setting gameStatus to SETUP");
     }
     if (gameStatus === "ended") {
-      // console.log('on gameStatus "ended"');
       setScrambledWord(correctWord);
       setGuess("");
-      // setModalMessage("game over!");
-      // setShowModal(true);
     }
   }, [correctWord, gameStatus]);
 
   //GUESSES ⁉️
   useEffect(() => {
-    //console.log("on GUESS or CORRECT_WORD:", guess, correctWord);
     if (gameStatus === "playing" && guess && guess !== correctWord) {
       setGuessesLeft(state => state - 1);
       // console.log("WRONG GUESS, guess was", guess, "BUT WORD was", correctWord);
     }
-    //SCORING LOGIC 🎼
     if (gameStatus === "playing" && guess && guess === correctWord) {
       //console.log("Correct Word", correctWord, "guess", guess);
-
       setGameStatus("ended");
+      //console.log("setting gameStatus to ENDED")
     }
+    //console.log("on GUESS or CORRECT_WORD:", guess, correctWord);
   }, [gameStatus, guess, correctWord]);
 
-  //GAME ENDS 💥
-  //GAME ENDS IF GUESSES LEFT ARE 0
+  //GAME LOST GUESSES LEFT ARE 0 💥
   useEffect(() => {
     if (guessesLeft === 0) {
       setGameStatus("ended");
       setGameWon("no");
-      console.log("GAME ENDED, 0 GUESSES LEFT: ", guessesLeft);
+      //console.log("setting gameStatus to ENDED");
     }
   }, [guessesLeft]);
 
-  //GAME ENDS IF COUNTDOWN GETS TO 0 💥
+  //GAME LOST - COUNTDOWN GETS TO 0 💥
   useEffect(() => {
     if (countdown < 1) {
       setGameStatus("ended");
-      console.log("TIME IS UP!!!", countdown);
       setGameWon("no");
     }
+    //console.log("setting gameStatus to ENDED");
   }, [countdown]);
-
-  useEffect(() => {
-    if (gameStatus === "ended") {
-      // console.log(`Game over, you ${guessesLeft > 0 && countdown > 0 ? "WON" : "LOST"}`);
-    }
-  }, [gameStatus, guessesLeft, countdown]);
 
   //GAME WON 🏆
   useEffect(() => {
@@ -210,9 +164,7 @@ function App() {
           guessesLeft * options.pointsPerGuessLeft +
           correctWord.length * options.pointsPerWordLength
       );
-      //setAllScores({ id: allScores + 1, date: Date.now(), score: score });
     }
-    console.log(gameStatus);
   }, [correctWord, countdown, gameStatus, guessesLeft, options]);
 
   //HIGHSCORE 💯
@@ -230,31 +182,10 @@ function App() {
     }
   }, [gameWon, score, difficulty, allScores, allowHighScoreEntry]);
 
-  useEffect(() => {}, [updatedAllScores]);
-
   //LOCALSTORGAGE ⏩ SET
   useEffect(() => {
     window.localStorage.setItem("highScoreTables", JSON.stringify(updatedAllScores));
-    //console.log("3", updatedAllScores);
   }, [updatedAllScores]);
-
-  useEffect(() => {
-    console.log("allowHighScoreEntry", allowHighScoreEntry);
-    //console.log("score", score);
-    //console.log("------------");
-  }, [allowHighScoreEntry]);
-  useEffect(() => {
-    //console.log("correctWord", correctWord);
-    //console.log("------------");
-  }, [correctWord]);
-  useEffect(() => {
-    //console.log("scrambledWord", scrambledWord);
-    //console.log("------------");
-  }, [scrambledWord]);
-  // useEffect(() => {
-  //   // console.log("highScoreTables", highScoreTables);
-  //   //console.log("------------");
-  // }, [highScoreTables]);
 
   return (
     <div className="App">
@@ -289,14 +220,9 @@ function App() {
           <Instructions gameWon={gameWon} gameStatus={gameStatus} />
         </div>
       </main>
-      {/* <WarningHandling warning={warning} /> */}
-      {/* <Top10 highScoreTables={highScoreTables} /> */}
-      {/* <Scoreboard highScoreTables={highScoreTables} /> */}
-      {/* {showModal && <Backdrop modalStatus={false}>{modalMessage} </Backdrop>} */}
       <Audio
         gameWon={gameWon}
         soundOptions={options.soundOn}
-        // setAllowHighScoreEntry={() => setAllowHighScoreEntry(false)}
         setSoundOptions={() =>
           setOptions(state => {
             const copyObj = { ...state };

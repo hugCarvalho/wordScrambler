@@ -16,7 +16,6 @@ function Audio({ gameWon, soundOptions, setSoundOptions }) {
   }, [gameWon]);
 
   React.useEffect(() => {
-    console.log("audio", audioLoser.current);
     if (soundOptions && playSound && gameWon === "no") {
       audioLoser.current.play();
       setPlaySound(false);
@@ -40,12 +39,12 @@ function Audio({ gameWon, soundOptions, setSoundOptions }) {
           {soundOptions ? (
             <>
               <Emoji title="sound on">🔉 </Emoji>
-              <span>soundFX</span>
+              {/* <span>soundFX</span> */}
             </>
           ) : (
             <>
               <Emoji title="sound off">🔇</Emoji>
-              <span>soundFX</span>
+              {/* <span>soundFX</span> */}
             </>
           )}
         </label>
@@ -59,5 +58,4 @@ function Audio({ gameWon, soundOptions, setSoundOptions }) {
     </div>
   );
 }
-//🔈 🔇 🔉
 export default Audio;

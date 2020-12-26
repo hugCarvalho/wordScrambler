@@ -1,5 +1,6 @@
 import React from "react";
 import "./HighScores.scss";
+import PropTypes from "prop-types";
 
 function HighScores({ updatedAllScores, difficulty, numEntries }) {
   const [highScoreTable, setHighScoreTable] = React.useState([]);
@@ -43,5 +44,11 @@ function HighScores({ updatedAllScores, difficulty, numEntries }) {
     </table>
   );
 }
+
+HighScores.propTypes = {
+  updatedAllScores: PropTypes.object.isRequired,
+  difficulty: PropTypes.string.isRequired,
+  numEntries: PropTypes.number.isRequired,
+};
 
 export default HighScores;

@@ -1,6 +1,13 @@
 //"whale", "camel", "horse", "python"
 //const testData = ["MiKE"];
 
+export const initScores = {
+  easy: [],
+  medium: [],
+  hard: [],
+  all: [],
+};
+
 const testData = [
   "backpack",
   "boardgame",
