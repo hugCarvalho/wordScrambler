@@ -1,0 +1,19 @@
+.GameOptionsMenu {
+  //background-color: green;
+
+  button {
+    background-color: transparent;
+    font-size: 2rem;
+    color: whitesmoke;
+    opacity: 0.8;
+
+    &:focus {
+      //color: red;
+      outline: dotted;
+      opacity: 1;
+    }
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+.BackdropSlidingMenu {
+  background-color: rgb(40, 41, 41);
+  width: 101%;
+  min-height: 100vh;
+  height: auto;
+  padding-bottom: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 500;
+  text-align: left;
+  //transform: translatex(-101%);
+  transition: transform 0.3s ease;
+
+  input[type="number"] {
+    width: 70px;
+    //display: block;
+  }
+
+  input:invalid + span:after {
+    content: "✖";
+    padding-left: 5px;
+  }
+
+  input:valid + span:after {
+    content: "✓";
+    padding-left: 5px;
+  }
+
+  .close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+  }
+}

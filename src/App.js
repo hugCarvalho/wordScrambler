@@ -8,12 +8,15 @@ import Instructions from "./components/Instructions/RenderInstructions";
 import Score from "./components/Indicators/Score/Score";
 import Word from "./components/Word/Word";
 import chooseWord, { scrambleWord } from "./App_functions";
-import gameOptions from "./data/gameOptions";
+import GameOptionsMenu from "./components/MobileMenu/GameOptionsMenu";
 import initArr, { initScores } from "./data/testData";
 import GameDifficulty from "./components/GameDifficulty/GameDifficulty";
 import DisplayCategory from "./components/DisplayCategory/DisplayCategory";
 import Audio from "./components/Audio/Audio";
 import HighScores from "./components/HighScores/HighScores";
+import BackdropSlidingMenu from "./components/MobileMenu/BackdropSlidingMenu/BackdropSlidingMenu";
+import OptionsHighScores from "./components/MobileMenu/OptionsHighScores/OptionHighScores";
+import gameOptions from "./data/gameOptions";
 // import Scoreboard, { Top10 } from "./components/Scoreboard/Scoreboard";
 // import Backdrop from "./components/Backdrop/Backdrop";
 // import AnimationsDisplay from "./components/AnimationsDisplay/AnimationsDisplay";
@@ -220,17 +223,21 @@ function App() {
           <Instructions gameWon={gameWon} gameStatus={gameStatus} />
         </div>
       </main>
-      <Audio
-        gameWon={gameWon}
-        soundOptions={options.soundOn}
-        setSoundOptions={() =>
-          setOptions(state => {
-            const copyObj = { ...state };
-            copyObj.soundOn = !copyObj.soundOn;
-            return copyObj;
-          })
-        }
-      />
+      <section className="game-options">
+        <GameOptionsMenu />
+
+        <Audio
+          gameWon={gameWon}
+          soundOptions={options.soundOn}
+          setSoundOptions={() =>
+            setOptions(state => {
+              const copyObj = { ...state };
+              copyObj.soundOn = !copyObj.soundOn;
+              return copyObj;
+            })
+          }
+        />
+      </section>
       <HighScores
         updatedAllScores={updatedAllScores}
         difficulty={difficulty}

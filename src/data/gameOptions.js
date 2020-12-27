@@ -5,7 +5,7 @@ const gameOptions = {
   pointsPerGuessLeft: 5,
   pointsPerTimeLeft: 2,
   pointsPerWordLength: 10,
-  soundOn: true,
+  soundOn: false,
   displayHighScores: { yes: true, numEntries: 10 }, //10 -20 -30
 };
 export default gameOptions;
