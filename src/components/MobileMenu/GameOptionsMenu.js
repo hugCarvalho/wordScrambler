@@ -3,8 +3,13 @@ import "./GameOptionsMenu.scss";
 import BackdropSlidingMenu from "./BackdropSlidingMenu/BackdropSlidingMenu";
 import OptionsHighScores from "./OptionsHighScores/OptionHighScores";
 
-function GameOptionsMenu() {
+//TODO: change to useContext to avoid prop-drilling
+
+function GameOptionsMenu({ options, onChange }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const { numEntries } = options.displayHighScores; //change key name in original obj
+  console.log(numEntries);
+  console.log(onChange);
 
   return (
     <>
@@ -21,7 +26,7 @@ function GameOptionsMenu() {
         closeMenu={() => setIsMenuOpen(state => !state)}
       >
         <h2>Options</h2>
-        <OptionsHighScores />
+        <OptionsHighScores numEntries={numEntries} onChange={onChange} />
       </BackdropSlidingMenu>
     </>
   );

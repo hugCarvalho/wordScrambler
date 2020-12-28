@@ -1,6 +1,9 @@
 import React from "react";
 
-function OptionsHighScores() {
+function OptionsHighScores(numEntries, onChange) {
+  //const [num, setNumEntries] = React.useState(numEntries);
+  console.log(onChange);
+
   return (
     <form>
       <div>
@@ -12,7 +15,8 @@ function OptionsHighScores() {
           step="5"
           min="5"
           max="50"
-          value="10"
+          value={numEntries.numEntries}
+          onChange={onChange}
           required
         />
         <span className="validity"></span>

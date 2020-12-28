@@ -14,8 +14,8 @@ import GameDifficulty from "./components/GameDifficulty/GameDifficulty";
 import DisplayCategory from "./components/DisplayCategory/DisplayCategory";
 import Audio from "./components/Audio/Audio";
 import HighScores from "./components/HighScores/HighScores";
-import BackdropSlidingMenu from "./components/MobileMenu/BackdropSlidingMenu/BackdropSlidingMenu";
-import OptionsHighScores from "./components/MobileMenu/OptionsHighScores/OptionHighScores";
+// import BackdropSlidingMenu from "./components/MobileMenu/BackdropSlidingMenu/BackdropSlidingMenu";
+//import OptionsHighScores from "./components/MobileMenu/OptionsHighScores/OptionHighScores";
 import gameOptions from "./data/gameOptions";
 // import Scoreboard, { Top10 } from "./components/Scoreboard/Scoreboard";
 // import Backdrop from "./components/Backdrop/Backdrop";
@@ -224,7 +224,14 @@ function App() {
         </div>
       </main>
       <section className="game-options">
-        <GameOptionsMenu />
+        {/* <GameOptionsMenu
+          options={options}
+          onChange={() =>
+            setOptions(state => {
+              return { ...state, numEntries: 20 };
+            })
+          }
+        /> */}
 
         <Audio
           gameWon={gameWon}
