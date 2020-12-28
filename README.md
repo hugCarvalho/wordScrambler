@@ -4,7 +4,7 @@ Ongoing but functional project. New features are being added based on planned fe
 
 Guess the right word in the least amount of time, expending the least amount of guesses, to score the most...
 
-📡 [live]:[https://condescending-raman-a3f123.netlify.app/] (ctrl + click to open in a new window)
+📡 [live](https://condescending-raman-a3f123.netlify.app/) (ctrl + click to open in a new window)
 
 ## Project specs
 
