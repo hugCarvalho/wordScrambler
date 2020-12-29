@@ -2,13 +2,11 @@ import React from "react";
 import { CustomOptionsContext } from "../../../App";
 
 function OptionsHighScores() {
-  //const [num, setNumEntries] = React.useState(numEntries);
-
-  // console.log(customizableOptions);
   //🥇
   return (
-    <form>
+    <form className="OptionsHighScores">
       <div>
+        🥇
         <ShowHighScoreOption />
         <SelectHighScoreEntriesToDisplay />
         {/* <span className="validity"></span> */}
@@ -25,8 +23,8 @@ export function SelectHighScoreEntriesToDisplay() {
   };
 
   return (
-    <div className="Select">
-      <label htmlFor="high-scores">High Score entries: </label>
+    <div className="SelectHighScoreEntriesToDisplay">
+      <label htmlFor="high-scores">High Score entries</label>
       <select
         name="highScores"
         id="high-scores"
@@ -54,7 +52,7 @@ export function ShowHighScoreOption() {
 
   return (
     <div className="ShowHighScoreOption">
-      <label htmlFor="show-high-scores">Show high scores:</label>
+      <label htmlFor="show-high-scores">Show high scores</label>
       <input
         id="show-high-scores"
         type="checkbox"
