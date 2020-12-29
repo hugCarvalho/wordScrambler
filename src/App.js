@@ -36,7 +36,7 @@ function App() {
   const [options, setOptions] = useState(gameOptions);
   //MAIN STATE
   const [gameStatus, setGameStatus] = useState("onLoad"); // "onLoad", "playing", "ended"
-  const [difficulty, setDifficulty] = useState("all"); //easy-medium-hard-all
+  const [difficulty, setDifficulty] = useState("easy"); //easy-medium-hard-all
   //IN GAME VARIABLES
   const [guessesLeft, setGuessesLeft] = useState(gameOptions.totalGuessesLeft);
   const [countdown, setCountdown] = useState(gameOptions.countdown);
@@ -49,10 +49,6 @@ function App() {
   const [allowHighScoreEntry, setAllowHighScoreEntry] = useState(false); //prevents automatic highscore entry when changing level
   //USE CONTEXT
   const [customOptions, setCustomOptions] = useState(optionsCustom);
-
-  useEffect(() => {
-    console.log("CUSTOM OPTIONS", customOptions);
-  }, [customOptions]);
 
   const onSubmitHandler = (e, userText) => {
     e.preventDefault();
