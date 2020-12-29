@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import "./App.scss";
 import Countdown from "./components/Indicators/Countdown/Countdown";
 import GuessesLeft from "./components/Indicators/GuessesLeft/GuessesLeft";
@@ -17,10 +17,7 @@ import HighScores from "./components/HighScores/HighScores";
 // import BackdropSlidingMenu from "./components/MobileMenu/BackdropSlidingMenu/BackdropSlidingMenu";
 //import OptionsHighScores from "./components/MobileMenu/OptionsHighScores/OptionHighScores";
 import gameOptions from "./data/gameOptions";
-// import Scoreboard, { Top10 } from "./components/Scoreboard/Scoreboard";
-// import Backdrop from "./components/Backdrop/Backdrop";
-// import AnimationsDisplay from "./components/AnimationsDisplay/AnimationsDisplay";
-// import WarningHandling from "./components/WarningHandling/WarningHandling";
+import { optionsCustom } from "./data/gameOptions";
 
 //TODO: Options
 //TODO: accessibility checklist
@@ -28,6 +25,8 @@ import gameOptions from "./data/gameOptions";
 //TODO: change handling of options obj to reducer
 //TODO: optimize performance
 //TODO: refactor
+
+export const CustomOptionsContext = createContext();
 
 function App() {
   //DATA + OPTIONS
@@ -48,6 +47,12 @@ function App() {
   const [gameWon, setGameWon] = useState(null); //null, "yes", "no" -> don't change to true/false, falsy value is being used
   const [score, setScore] = useState(gameOptions.score);
   const [allowHighScoreEntry, setAllowHighScoreEntry] = useState(false); //prevents automatic highscore entry when changing level
+  //USE CONTEXT
+  const [customOptions, setCustomOptions] = useState(optionsCustom);
+
+  useEffect(() => {
+    console.log("CUSTOM OPTIONS", customOptions);
+  }, [customOptions]);
 
   const onSubmitHandler = (e, userText) => {
     e.preventDefault();
@@ -190,6 +195,10 @@ function App() {
     window.localStorage.setItem("highScoreTables", JSON.stringify(updatedAllScores));
   }, [updatedAllScores]);
 
+  useEffect(() => {
+    console.log("VALUE", customOptions);
+  }, [customOptions]);
+
   return (
     <div className="App">
       <Header />
@@ -224,14 +233,14 @@ function App() {
         </div>
       </main>
       <section className="game-options">
-        {/* <GameOptionsMenu
-          options={options}
-          onChange={() =>
-            setOptions(state => {
-              return { ...state, numEntries: 20 };
-            })
-          }
-        /> */}
+        <CustomOptionsContext.Provider
+          value={{
+            customOptions,
+            setCustomOptions,
+          }}
+        >
+          <GameOptionsMenu options={customOptions} />
+        </CustomOptionsContext.Provider>
 
         <Audio
           gameWon={gameWon}
@@ -248,7 +257,7 @@ function App() {
       <HighScores
         updatedAllScores={updatedAllScores}
         difficulty={difficulty}
-        numEntries={options.displayHighScores.numEntries}
+        numEntries={customOptions.defaultHighScoreEntries}
       />
     </div>
   );

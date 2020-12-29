@@ -29,6 +29,5 @@ Guess the right word in the least amount of time, expending the least amount of 
 #### Main limitations so far
 
 - Optimized for Chrome and Firefox only
-- Desktop version not optimized yet (not responsive)
-- data is retrieved locally from a test file with a relatively small amount of words
--
+- Not responsive
+- Data is retrieved locally from a test file with a relatively small amount of words

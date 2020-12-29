@@ -1,27 +1,48 @@
 import React from "react";
+import { CustomOptionsContext } from "../../../App";
 
-function OptionsHighScores(numEntries, onChange) {
+function OptionsHighScores() {
   //const [num, setNumEntries] = React.useState(numEntries);
-  console.log(onChange);
 
+  // console.log(customizableOptions);
+  //🥇
   return (
     <form>
       <div>
-        <label htmlFor="high-scores">🥇 - high score entries (5-50):</label>
-        <input
-          id="high-scores"
-          type="number"
-          name="highScores"
-          step="5"
-          min="5"
-          max="50"
-          value={numEntries.numEntries}
-          onChange={onChange}
-          required
-        />
-        <span className="validity"></span>
+        <SelectHighScoreEntriesToDisplay />
+        {/* <span className="validity"></span> */}
       </div>
     </form>
+  );
+}
+
+export function SelectHighScoreEntriesToDisplay() {
+  const { customOptions, setCustomOptions } = React.useContext(CustomOptionsContext);
+
+  const chooseNumberOfHighScoreEntriesToDisplay = (e, obj) => {
+    let copyObj = { ...obj };
+    copyObj.defaultHighScoreEntries = +e.target.value;
+    setCustomOptions(copyObj);
+  };
+
+  return (
+    <div className="Select">
+      <label htmlFor="high-scores">High Score entries: </label>
+      <select
+        name="highScores"
+        id="high-scores"
+        onChange={e => chooseNumberOfHighScoreEntriesToDisplay(e, customOptions)}
+        defaultValue={customOptions.defaultHighScoreEntries}
+      >
+        {customOptions.highScoreEntries.map((item, i) => {
+          return (
+            <option key={i} value={item}>
+              {item}
+            </option>
+          );
+        })}
+      </select>
+    </div>
   );
 }
 
