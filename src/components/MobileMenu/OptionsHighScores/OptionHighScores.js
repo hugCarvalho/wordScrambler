@@ -9,6 +9,7 @@ function OptionsHighScores() {
   return (
     <form>
       <div>
+        <ShowHighScoreOption />
         <SelectHighScoreEntriesToDisplay />
         {/* <span className="validity"></span> */}
       </div>
@@ -19,10 +20,8 @@ function OptionsHighScores() {
 export function SelectHighScoreEntriesToDisplay() {
   const { customOptions, setCustomOptions } = React.useContext(CustomOptionsContext);
 
-  const chooseNumberOfHighScoreEntriesToDisplay = (e, obj) => {
-    let copyObj = { ...obj };
-    copyObj.defaultHighScoreEntries = +e.target.value;
-    setCustomOptions(copyObj);
+  const chooseNumberOfHighScoreEntriesToDisplay = (e, optionsObj) => {
+    setCustomOptions({ ...optionsObj, defaultHighScoreEntries: +e.target.value });
   };
 
   return (
@@ -42,6 +41,26 @@ export function SelectHighScoreEntriesToDisplay() {
           );
         })}
       </select>
+    </div>
+  );
+}
+
+export function ShowHighScoreOption() {
+  const { customOptions, setCustomOptions } = React.useContext(CustomOptionsContext);
+
+  const toggleShowHighScore = optionsObj => {
+    return setCustomOptions({ ...optionsObj, showHighScore: !optionsObj.showHighScore });
+  };
+
+  return (
+    <div className="ShowHighScoreOption">
+      <label htmlFor="show-high-scores">Show high scores:</label>
+      <input
+        id="show-high-scores"
+        type="checkbox"
+        checked={customOptions.showHighScore}
+        onChange={() => toggleShowHighScore(customOptions)}
+      />
     </div>
   );
 }

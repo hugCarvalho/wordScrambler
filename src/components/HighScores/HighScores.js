@@ -2,8 +2,9 @@ import React from "react";
 import "./HighScores.scss";
 import PropTypes from "prop-types";
 
-function HighScores({ updatedAllScores, difficulty, numEntries }) {
+function HighScores({ updatedAllScores, difficulty, numEntries, customOptions }) {
   const [highScoreTable, setHighScoreTable] = React.useState([]);
+  const { defaultHighScoreEntries, showHighScore } = customOptions;
 
   React.useEffect(() => {
     //console.log("updatedAllScores", updatedAllScores);
@@ -17,7 +18,7 @@ function HighScores({ updatedAllScores, difficulty, numEntries }) {
   }, [difficulty, updatedAllScores, numEntries]);
 
   return (
-    <table className="HighScores">
+    <table className="HighScores" style={showHighScore ? {} : { display: "none" }}>
       <thead>
         <tr>
           <th className="cells" colSpan="3">

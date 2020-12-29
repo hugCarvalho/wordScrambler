@@ -257,6 +257,7 @@ function App() {
       <HighScores
         updatedAllScores={updatedAllScores}
         difficulty={difficulty}
+        customOptions={customOptions}
         numEntries={customOptions.defaultHighScoreEntries}
       />
     </div>
