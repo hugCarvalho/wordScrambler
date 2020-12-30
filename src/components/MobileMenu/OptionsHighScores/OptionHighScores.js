@@ -3,6 +3,7 @@ import SelectHighScoreEntriesToDisplay from "./SelectHighScoreEntriesToDisplay/S
 import ShowHighScore from "./ShowHighScore/ShowHighScore";
 import { CustomOptionsContext } from "../../../App";
 import Emoji from "../../../reusable/Emoji/Emoji";
+import SelectEntriesToDisplay from "../OptionsDifficulty/OptionsDifficulty";
 
 function OptionsHighScores() {
   //Using useContext here allows for PropTypes nested components. Otherwise won't work
@@ -20,6 +21,12 @@ function OptionsHighScores() {
           toggleShowHighScore={() => toggleShowHighScore(customOptions)}
         />
         <SelectHighScoreEntriesToDisplay
+          customOptions={customOptions}
+          setCustomOptions={setCustomOptions}
+        />
+        <Emoji ariaLabel="high scores section">📈</Emoji>
+
+        <SelectEntriesToDisplay
           customOptions={customOptions}
           setCustomOptions={setCustomOptions}
         />

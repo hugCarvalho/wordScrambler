@@ -29,11 +29,17 @@ function App() {
   //DATA + OPTIONS
   const [array] = useState(initArr);
   const [allScores] = useState(initScores);
-  const [updatedAllScores, setUpdatedAllScores] = useState(initScores);
+  const [updatedAllScores, setUpdatedAllScores] = useState(
+    () => JSON.parse(window.localStorage.getItem("highScoreTables")) || initScores
+  );
   const [options, setOptions] = useState(gameOptions);
   //MAIN STATE
   const [gameStatus, setGameStatus] = useState("onLoad"); // "onLoad", "playing", "ended"
-  const [difficulty, setDifficulty] = useState("easy"); //easy-medium-hard-all
+  //USE CONTEXT
+  const [customOptions, setCustomOptions] = useState(
+    () => JSON.parse(window.localStorage.getItem("customOptions")) || customOptions
+  );
+  const [difficulty, setDifficulty] = useState(customOptions.defaultDifficulty); //easy-medium-hard-all
   //IN GAME VARIABLES
   const [guessesLeft, setGuessesLeft] = useState(gameOptions.totalGuessesLeft);
   const [countdown, setCountdown] = useState(gameOptions.countdown);
@@ -44,8 +50,6 @@ function App() {
   const [gameWon, setGameWon] = useState(null); //null, "yes", "no" -> don't change to true/false, falsy value is being used
   const [score, setScore] = useState(gameOptions.score);
   const [allowHighScoreEntry, setAllowHighScoreEntry] = useState(false); //prevents automatic highscore entry when changing level
-  //USE CONTEXT
-  const [customOptions, setCustomOptions] = useState(optionsCustom);
 
   const onSubmitHandler = (e, userText) => {
     e.preventDefault();
@@ -74,14 +78,14 @@ function App() {
   };
 
   //LOCALSTORAGE ⏩ GET
-  useEffect(() => {
-    if (localStorage.highScoreTables) {
-      setUpdatedAllScores(JSON.parse(window.localStorage.getItem("highScoreTables")));
-    }
-    if (localStorage.customOptions) {
-      setCustomOptions(JSON.parse(window.localStorage.getItem("customOptions")));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.highScoreTables) {
+  //     setUpdatedAllScores(JSON.parse(window.localStorage.getItem("highScoreTables")));
+  //   }
+  //   if (localStorage.customOptions) {
+  //     setCustomOptions(JSON.parse(window.localStorage.getItem("customOptions")));
+  //   }
+  // }, []);
 
   //Timer ⏲️
   useEffect(() => {
@@ -192,12 +196,13 @@ function App() {
   }, [updatedAllScores]);
 
   useEffect(() => {
+    console.log("custom effect");
     window.localStorage.setItem("customOptions", JSON.stringify(customOptions));
   }, [customOptions]);
 
-  // useEffect(() => {
-  //   console.log("CUSTOmOPTIONS", customOptions);
-  // }, [customOptions]);
+  useEffect(() => {
+    console.log("CUSTOmOPTIONS", customOptions);
+  }, [customOptions]);
 
   return (
     <div className="App">

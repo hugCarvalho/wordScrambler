@@ -12,7 +12,8 @@ export const optionsCustom = {
   showHighScore: true,
   highScoreEntries: [10, 20, 30, 40, 50],
   defaultHighScoreEntries: 10,
-  defaultDifficulty: "easy",
+  difficulty: ["easy", "medium", "hard", "all"],
+  defaultDifficulty: "hard",
 };
 
 export default gameOptions;
