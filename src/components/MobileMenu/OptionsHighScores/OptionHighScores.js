@@ -2,17 +2,19 @@ import React from "react";
 import SelectHighScoreEntriesToDisplay from "./SelectHighScoreEntriesToDisplay/SelectHighScoreEntriesToDisplay";
 import ShowHighScore from "./ShowHighScore/ShowHighScore";
 import { CustomOptionsContext } from "../../../App";
+import Emoji from "../../../reusable/Emoji/Emoji";
 
 function OptionsHighScores() {
+  //Using useContext here allows for PropTypes nested components. Otherwise won't work
   const { customOptions, setCustomOptions } = React.useContext(CustomOptionsContext);
 
   const toggleShowHighScore = optionsObj => {
     return setCustomOptions({ ...optionsObj, showHighScore: !optionsObj.showHighScore });
   };
   return (
-    <form className="OptionsHighScores">
+    <section className="OptionsHighScores">
       <div>
-        🥇
+        <Emoji ariaLabel="high scores section">🥇</Emoji>
         <ShowHighScore
           customOptions={customOptions}
           toggleShowHighScore={() => toggleShowHighScore(customOptions)}
@@ -22,7 +24,7 @@ function OptionsHighScores() {
           setCustomOptions={setCustomOptions}
         />
       </div>
-    </form>
+    </section>
   );
 }
 

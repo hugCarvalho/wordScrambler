@@ -14,11 +14,9 @@ import GameDifficulty from "./components/GameDifficulty/GameDifficulty";
 import DisplayCategory from "./components/DisplayCategory/DisplayCategory";
 import Audio from "./components/Audio/Audio";
 import HighScores from "./components/HighScores/HighScores";
-//import OptionsHighScores from "./components/MobileMenu/OptionsHighScores/OptionHighScores";
 import gameOptions from "./data/gameOptions";
 import { optionsCustom } from "./data/gameOptions";
 
-//TODO: Options
 //TODO: accessibility checklist
 //TODO: validation- word must be at least 2 letters
 //TODO: change handling of options obj to reducer
@@ -79,6 +77,9 @@ function App() {
   useEffect(() => {
     if (localStorage.highScoreTables) {
       setUpdatedAllScores(JSON.parse(window.localStorage.getItem("highScoreTables")));
+    }
+    if (localStorage.customOptions) {
+      setCustomOptions(JSON.parse(window.localStorage.getItem("customOptions")));
     }
   }, []);
 
@@ -189,6 +190,10 @@ function App() {
   useEffect(() => {
     window.localStorage.setItem("highScoreTables", JSON.stringify(updatedAllScores));
   }, [updatedAllScores]);
+
+  useEffect(() => {
+    window.localStorage.setItem("customOptions", JSON.stringify(customOptions));
+  }, [customOptions]);
 
   // useEffect(() => {
   //   console.log("CUSTOmOPTIONS", customOptions);
