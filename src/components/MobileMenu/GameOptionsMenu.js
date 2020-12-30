@@ -2,14 +2,9 @@ import React from "react";
 import "./GameOptionsMenu.scss";
 import MobileSlidingMenu from "./MobileSlidingMenu/MobileSlidingMenu";
 import OptionsHighScores from "./OptionsHighScores/OptionHighScores";
-//TODO: change to useContext to avoid prop-drilling
 
-function GameOptionsMenu({ options }) {
+function GameOptionsMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
-  React.useEffect(() => {
-    console.log("options", options);
-  }, [options]);
 
   return (
     <>
@@ -21,9 +16,9 @@ function GameOptionsMenu({ options }) {
         ></button>
       </div>
       <MobileSlidingMenu
-        closeIcon={`❌`}
+        closeMenuIcon={`❌`}
         isMenuOpen={isMenuOpen}
-        closeMenu={() => setIsMenuOpen(state => !state)}
+        onClick={() => setIsMenuOpen(state => !state)}
       >
         <h2>Options</h2>
 

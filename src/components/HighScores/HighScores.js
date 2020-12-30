@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 function HighScores({ updatedAllScores, difficulty, numEntries, customOptions }) {
   const [highScoreTable, setHighScoreTable] = React.useState([]);
-  const { defaultHighScoreEntries, showHighScore } = customOptions;
+  const { showHighScore } = customOptions;
 
   React.useEffect(() => {
     //console.log("updatedAllScores", updatedAllScores);

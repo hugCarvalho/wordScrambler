@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import "./App.scss";
 import Countdown from "./components/Indicators/Countdown/Countdown";
 import GuessesLeft from "./components/Indicators/GuessesLeft/GuessesLeft";
@@ -14,7 +14,6 @@ import GameDifficulty from "./components/GameDifficulty/GameDifficulty";
 import DisplayCategory from "./components/DisplayCategory/DisplayCategory";
 import Audio from "./components/Audio/Audio";
 import HighScores from "./components/HighScores/HighScores";
-// import BackdropSlidingMenu from "./components/MobileMenu/BackdropSlidingMenu/BackdropSlidingMenu";
 //import OptionsHighScores from "./components/MobileMenu/OptionsHighScores/OptionHighScores";
 import gameOptions from "./data/gameOptions";
 import { optionsCustom } from "./data/gameOptions";
@@ -30,7 +29,7 @@ export const CustomOptionsContext = createContext();
 
 function App() {
   //DATA + OPTIONS
-  const [array, setArray] = useState(initArr);
+  const [array] = useState(initArr);
   const [allScores] = useState(initScores);
   const [updatedAllScores, setUpdatedAllScores] = useState(initScores);
   const [options, setOptions] = useState(gameOptions);
@@ -191,9 +190,9 @@ function App() {
     window.localStorage.setItem("highScoreTables", JSON.stringify(updatedAllScores));
   }, [updatedAllScores]);
 
-  useEffect(() => {
-    console.log("VALUE", customOptions);
-  }, [customOptions]);
+  // useEffect(() => {
+  //   console.log("CUSTOmOPTIONS", customOptions);
+  // }, [customOptions]);
 
   return (
     <div className="App">

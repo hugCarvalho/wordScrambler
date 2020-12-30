@@ -6,6 +6,7 @@ import ObjectiveInstructions from "./ObjectiveInstructions/ObjectiveInstructions
 import OptionsInstructions from "./OptionsInstructions/OptionsInstructions";
 import FooterInstructions from "./FooterInstructions/FooterInstructions";
 import OpenCloseInstructions from "./OpenCloseInstructions/OpenCloseInstructions";
+import PropTypes from "prop-types";
 
 //TODO: make scoring text dynamic
 //TODO: display msg about not being possible to open while playing
@@ -59,5 +60,10 @@ function Instructions({ gameStatus, gameWon }) {
     </div>
   );
 }
+
+Instructions.propTypes = {
+  gameStatus: PropTypes.string.isRequired,
+  gameWon: PropTypes.string,
+};
 
 export default Instructions;

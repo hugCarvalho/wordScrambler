@@ -2,7 +2,7 @@ import React from "react";
 import "./DisplayCategory.scss";
 
 function DisplayCategory() {
-  const [category] = React.useState("Object");
+  const [category] = React.useState("Objects");
 
   return (
     <div className="DisplayCategory" title="category the word belongs to">
