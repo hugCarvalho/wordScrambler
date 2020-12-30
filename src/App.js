@@ -37,7 +37,7 @@ function App() {
   const [gameStatus, setGameStatus] = useState("onLoad"); // "onLoad", "playing", "ended"
   //USE CONTEXT
   const [customOptions, setCustomOptions] = useState(
-    () => JSON.parse(window.localStorage.getItem("customOptions")) || customOptions
+    () => JSON.parse(window.localStorage.getItem("customOptions")) || optionsCustom
   );
   const [difficulty, setDifficulty] = useState(customOptions.defaultDifficulty); //easy-medium-hard-all
   //IN GAME VARIABLES
