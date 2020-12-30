@@ -5,7 +5,6 @@ const gameOptions = {
   pointsPerGuessLeft: 5,
   pointsPerTimeLeft: 2,
   pointsPerWordLength: 10,
-  soundOn: false,
 };
 
 export const optionsCustom = {
@@ -13,6 +12,7 @@ export const optionsCustom = {
   showHighScore: true,
   highScoreEntries: [10, 20, 30, 40, 50],
   defaultHighScoreEntries: 10,
+  defaultDifficulty: "easy",
 };
 
 export default gameOptions;

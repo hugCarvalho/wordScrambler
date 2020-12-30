@@ -244,12 +244,10 @@ function App() {
 
         <Audio
           gameWon={gameWon}
-          soundOptions={options.soundOn}
+          soundOn={optionsCustom.soundOn}
           setSoundOptions={() =>
             setOptions(state => {
-              const copyObj = { ...state };
-              copyObj.soundOn = !copyObj.soundOn;
-              return copyObj;
+              return { ...state, soundOn: !state.soundOn };
             })
           }
         />
