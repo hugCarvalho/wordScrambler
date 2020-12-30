@@ -10,6 +10,8 @@ function Audio({ gameWon, soundOn, setSoundOptions }) {
   const audioLoser = useRef();
   const audioWinner = useRef();
 
+  console.log("soundOn", soundOn);
+
   React.useEffect(() => {
     if (gameWon) {
       setPlaySound(true);

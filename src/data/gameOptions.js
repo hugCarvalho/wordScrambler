@@ -8,7 +8,7 @@ const gameOptions = {
 };
 
 export const optionsCustom = {
-  soundOn: true,
+  soundOn: false,
   showHighScore: true,
   highScoreEntries: [10, 20, 30, 40, 50],
   defaultHighScoreEntries: 10,

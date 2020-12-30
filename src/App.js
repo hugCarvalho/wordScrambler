@@ -249,9 +249,10 @@ function App() {
 
         <Audio
           gameWon={gameWon}
-          soundOn={optionsCustom.soundOn}
+          soundOn={customOptions.soundOn}
+          // setSoundOptions={() => console.log("CLICKED")}
           setSoundOptions={() =>
-            setOptions(state => {
+            setCustomOptions(state => {
               return { ...state, soundOn: !state.soundOn };
             })
           }
