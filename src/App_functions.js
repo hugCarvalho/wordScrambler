@@ -8,8 +8,8 @@ const filterWordAccordingDifficulty = (array, difficulty) => {
   } else {
     return filteredArray.filter(word => {
       if (difficulty === "easy") return word.length >= 3 && word.length <= 5;
-      if (difficulty === "medium") return word.length >= 6 && word.length <= 8;
-      if (difficulty === "hard") return word.length >= 9;
+      if (difficulty === "medium") return word.length >= 6 && word.length <= 7;
+      if (difficulty === "hard") return word.length >= 8;
       throw new Error("Wrong difficulty setting. Check your typing");
     });
   }

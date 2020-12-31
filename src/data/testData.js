@@ -98,5 +98,13 @@ const testData = [
   "braces",
   "lantern",
   "wrench",
+  "wheel",
+  "knife",
+  "spoon",
+  "vase",
+  "coat",
+  "cupboard",
+  "elevator",
+  "newspaper",
 ];
 export default testData;

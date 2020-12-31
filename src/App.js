@@ -18,7 +18,6 @@ import gameOptions from "./data/gameOptions";
 import { optionsCustom } from "./data/gameOptions";
 
 //TODO: accessibility checklist
-//TODO: validation- word must be at least 2 letters
 //TODO: change handling of options obj to reducer
 //TODO: optimize performance
 //TODO: refactor
@@ -244,7 +243,10 @@ function App() {
             setCustomOptions,
           }}
         >
-          <GameOptionsMenu options={customOptions} />
+          <GameOptionsMenu
+            options={customOptions}
+            toggleShowInstructionsOnLoad={() => {}}
+          />
         </CustomOptionsContext.Provider>
 
         <Audio
