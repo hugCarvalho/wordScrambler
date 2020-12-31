@@ -7,16 +7,10 @@
     position: relative;
   }
 
-  .guess-right-wrong {
+  .info {
     font-size: 2rem;
-    margin-left: 10px;
-    opacity: 1;
-    //display: none;
-  }
-
-  .guess-right-wrong {
     position: absolute;
-    top: 25%;
-    right: -100%;
+    padding-left: 10px;
+    bottom: 10px;
   }
 }

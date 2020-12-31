@@ -22,6 +22,7 @@ function Word({ gameStatus, scrambledWord }) {
             rel="noopener noreferrer"
           >
             {scrambledWord}
+            <span className="info fas fa-info-circle" />
           </a>
         ) : (
           scrambledWord
@@ -36,4 +37,8 @@ Word.propTypes = {
   scrambledWord: PropTypes.string.isRequired,
 };
 
+//ℹ️❔
+//<i class="fas fa-info-circle"></i>
+//<i class="fas fa-question-circle"></i>
+//<i class="far fa-question-circle"></i>
 export default Word;
