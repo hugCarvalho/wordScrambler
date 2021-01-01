@@ -25,7 +25,7 @@ function Word({ gameStatus, scrambledWord }) {
             <span className="info fas fa-info-circle" />
           </a>
         ) : (
-          scrambledWord
+          <>{scrambledWord}</>
         )}
       </span>
     </div>

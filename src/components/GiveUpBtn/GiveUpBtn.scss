@@ -1,0 +1,28 @@
+.GiveUpBtn {
+  background-color: #5c0909;
+  color: white;
+  position: absolute;
+  bottom: 45px;
+  left: 116px;
+  width: 80px;
+  z-index: 501;
+  padding: 7px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  border-radius: 6px;
+  border: 2px solid rgb(150, 33, 33);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+
+  .GiveUpBtn.showBtn {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: lighten(#5c0909, 8);
+  }
+}

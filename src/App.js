@@ -16,6 +16,7 @@ import Audio from "./components/Audio/Audio";
 import HighScores from "./components/HighScores/HighScores";
 import gameOptions from "./data/gameOptions";
 import { optionsCustom } from "./data/gameOptions";
+import GiveUpBtn from "./components/GiveUpBtn/GiveUpBtn";
 
 //TODO: accessibility checklist
 //TODO: change handling of options obj to reducer
@@ -234,6 +235,12 @@ function App() {
           />
 
           <Instructions gameWon={gameWon} gameStatus={gameStatus} />
+          <GiveUpBtn
+            countdown={countdown}
+            options={options}
+            gameStatus={gameStatus}
+            setGuessesLeft={setGuessesLeft}
+          />
         </div>
       </main>
       <section className="game-options">
@@ -260,12 +267,14 @@ function App() {
           }
         />
       </section>
-      <HighScores
-        updatedAllScores={updatedAllScores}
-        difficulty={difficulty}
-        customOptions={customOptions}
-        numEntries={customOptions.defaultHighScoreEntries}
-      />
+      <section>
+        <HighScores
+          updatedAllScores={updatedAllScores}
+          difficulty={difficulty}
+          customOptions={customOptions}
+          numEntries={customOptions.defaultHighScoreEntries}
+        />
+      </section>
     </div>
   );
 }
