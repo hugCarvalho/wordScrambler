@@ -43,7 +43,10 @@
       outline: 1px dotted whitesmoke;
     }
   }
-  .ShowHighScoreOption {
+
+  //move to another file
+  .ShowHighScoreOption,
+  .ShowInstructionsOnLoad {
     //background-color: rgb(125, 129, 125);
     //color: green;
     input {
@@ -68,6 +71,4 @@
       width: auto;
     }
   }
-  // .OptionsHighScores {
-  // }
 }

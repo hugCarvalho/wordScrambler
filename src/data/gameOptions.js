@@ -10,7 +10,7 @@ const gameOptions = {
 export const optionsCustom = {
   soundOn: false,
   showHighScore: true,
-  showInstructionsOnLoad: true,
+  showInstructionsOnLoad: false,
   highScoreEntries: [10, 20, 30, 40, 50],
   defaultHighScoreEntries: 10,
   difficulty: ["easy", "medium", "hard", "all"],

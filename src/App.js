@@ -197,6 +197,7 @@ function App() {
 
   useEffect(() => {
     window.localStorage.setItem("customOptions", JSON.stringify(customOptions));
+    console.log("customOptions", customOptions);
   }, [customOptions]);
 
   // useEffect(() => {
@@ -240,7 +241,11 @@ function App() {
             options={options}
           />
 
-          <Instructions gameWon={gameWon} gameStatus={gameStatus} />
+          <Instructions
+            gameWon={gameWon}
+            gameStatus={gameStatus}
+            customOptions={customOptions}
+          />
         </div>
       </main>
       <section className="game-options">

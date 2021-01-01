@@ -11,9 +11,14 @@ import PropTypes from "prop-types";
 //TODO: make scoring text dynamic
 //TODO: display msg about not being possible to open while playing
 
-function Instructions({ gameStatus, gameWon }) {
+function Instructions({ gameStatus, gameWon, customOptions }) {
   const [activePage, setActivePage] = React.useState(1);
-  const [showInstructions, setShowInstructions] = React.useState(true);
+  const [showInstructions, setShowInstructions] = React.useState(
+    customOptions.showInstructionsOnLoad
+    //false
+  );
+
+  console.log("showInstructions", showInstructions);
 
   const onPageChange = () => {
     if (activePage === 2)
