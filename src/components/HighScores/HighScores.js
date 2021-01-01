@@ -12,8 +12,10 @@ function HighScores({ updatedAllScores, difficulty, numEntries, customOptions })
       ...updatedAllScores[difficulty].sort((a, b) => b.score - a.score),
     ];
     while (sortedScores.length < numEntries) {
+      console.log("while");
       sortedScores.push(null);
     }
+    sortedScores = sortedScores.slice(0, numEntries);
     setHighScoreTable(sortedScores);
   }, [difficulty, updatedAllScores, numEntries]);
 
