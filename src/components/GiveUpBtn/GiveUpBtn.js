@@ -6,7 +6,7 @@ function GiveUpBtn({ countdown, options, gameStatus, setGuessesLeft }) {
 
   React.useEffect(() => {
     const setStyle = () => {
-      const percent = options.countdown * 0.9;
+      const percent = options.countdown * 1;
       console.log(gameStatus);
       if (gameStatus === "playing" && countdown < percent) {
         setShowBtn(true);
@@ -24,7 +24,7 @@ function GiveUpBtn({ countdown, options, gameStatus, setGuessesLeft }) {
       type="button"
       className={`GiveUpBtn`}
       onClick={() => setGuessesLeft(0)}
-      style={showBtn ? { opacity: 1, pointerEvents: "all" } : {}}
+      style={showBtn ? { opacity: 1, pointerEvents: "all", cursor: "pointer" } : {}}
     >
       Give up
     </button>

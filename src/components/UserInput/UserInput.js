@@ -3,10 +3,19 @@ import Emoji from "../../reusable/Emoji/Emoji";
 import Button from "./Button/Button";
 import "./UserInput.scss";
 import PropTypes from "prop-types";
+import GiveUpBtn from "../GiveUpBtn/GiveUpBtn";
 
 // import ReactTooltip from "react-tooltip";
 
-function Form({ onSubmitHandler, gameStatus, gameWon, guessesLeft }) {
+function Form({
+  onSubmitHandler,
+  gameStatus,
+  gameWon,
+  guessesLeft,
+  countdown,
+  options,
+  setGuessesLeft,
+}) {
   const [userText, setUserText] = useState("");
   const [showWrongGuessIndicator, setShowWrongGuessIndicator] = useState(false);
   const userInput = useRef();
@@ -18,7 +27,11 @@ function Form({ onSubmitHandler, gameStatus, gameWon, guessesLeft }) {
     if (gameStatus === "playing") {
       userInput.current.focus();
     }
-  }, [gameStatus]);
+
+    if (userText === "" && gameStatus === "playing") {
+      setShowWrongGuessIndicator(false);
+    }
+  }, [userText, gameStatus]);
 
   //Removes wrong guess indicator after user types(or deletes) text again
   useEffect(() => {
@@ -47,7 +60,6 @@ function Form({ onSubmitHandler, gameStatus, gameWon, guessesLeft }) {
           autoComplete="off"
           value={userText}
           onChange={e => setUserText(e.target.value.toLowerCase())}
-          //placeholder="press start to begin a game"
           ref={userInput}
         />
         <label htmlFor="input-text"></label>
@@ -69,19 +81,27 @@ function Form({ onSubmitHandler, gameStatus, gameWon, guessesLeft }) {
         </Emoji>
       </div>
       {}
-      <Button
-        focus={() => userInput.current.focus()}
-        gameStatus={gameStatus}
-        type="submit"
-      >
-        <b>
-          {gameStatus === "onLoad"
-            ? "Start"
-            : gameStatus === "playing" || gameStatus === "setup"
-            ? "Guess"
-            : "Play again"}
-        </b>
-      </Button>
+      <div className="btns">
+        <GiveUpBtn
+          countdown={countdown}
+          options={options}
+          gameStatus={gameStatus}
+          setGuessesLeft={setGuessesLeft}
+        />
+        <Button
+          focus={() => userInput.current.focus()}
+          gameStatus={gameStatus}
+          type="submit"
+        >
+          <b>
+            {gameStatus === "onLoad"
+              ? "Start"
+              : gameStatus === "playing" || gameStatus === "setup"
+              ? "Guess"
+              : "Play again"}
+          </b>
+        </Button>
+      </div>
       {/* <ReactTooltip delayHide={1000} disable={false}>
         <p>Start typing...</p>
       </ReactTooltip> */}

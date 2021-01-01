@@ -196,13 +196,16 @@ function App() {
   }, [updatedAllScores]);
 
   useEffect(() => {
-    console.log("custom effect");
     window.localStorage.setItem("customOptions", JSON.stringify(customOptions));
   }, [customOptions]);
 
+  // useEffect(() => {
+  //   console.log("CUSTOmOPTIONS", customOptions);
+  // }, [customOptions]);
+
   useEffect(() => {
-    console.log("CUSTOmOPTIONS", customOptions);
-  }, [customOptions]);
+    console.log("gameWon", gameWon);
+  }, [gameWon]);
 
   return (
     <div className="App">
@@ -232,15 +235,12 @@ function App() {
             gameStatus={gameStatus}
             guessesLeft={guessesLeft}
             gameWon={gameWon}
+            setGuessesLeft={setGuessesLeft}
+            countdown={countdown}
+            options={options}
           />
 
           <Instructions gameWon={gameWon} gameStatus={gameStatus} />
-          <GiveUpBtn
-            countdown={countdown}
-            options={options}
-            gameStatus={gameStatus}
-            setGuessesLeft={setGuessesLeft}
-          />
         </div>
       </main>
       <section className="game-options">
