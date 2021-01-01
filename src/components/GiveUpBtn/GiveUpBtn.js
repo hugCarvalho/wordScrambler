@@ -6,9 +6,8 @@ function GiveUpBtn({ countdown, options, gameStatus, setGuessesLeft }) {
 
   React.useEffect(() => {
     const setStyle = () => {
-      const percent = options.countdown * 1;
-      console.log(gameStatus);
-      if (gameStatus === "playing" && countdown < percent) {
+      const percent = options.countdown * 0.75;
+      if (gameStatus === "playing" && countdown <= percent) {
         setShowBtn(true);
       }
     };
