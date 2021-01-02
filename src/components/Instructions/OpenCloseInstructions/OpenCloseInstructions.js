@@ -11,13 +11,11 @@ function OpenCloseInstructions({ toggleCloseOpen, showInstructions }) {
       <section>
         <button
           aria-hidden="false"
-          title="slide down"
           onClick={toggleCloseOpen}
           className={`fas fa-angle-double-down ${showInstructions ? "close" : "open"}`}
         ></button>
         <button
           aria-hidden="false"
-          title="slide up"
           onClick={toggleCloseOpen}
           className={`fas fa-angle-double-up ${showInstructions ? "open" : "close"}`}
         ></button>

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 function Button({ type, children, onClick: focus }) {
   return (
-    <button onClick={focus} className="Button" type={type}>
+    <button onClick={focus} className="Button" type={type} name="main-button">
       {children}
     </button>
   );
@@ -12,7 +12,6 @@ function Button({ type, children, onClick: focus }) {
 
 Button.propTypes = {
   type: PropTypes.string.isRequired,
-  children: PropTypes.any,
   onClick: PropTypes.func,
 };
 

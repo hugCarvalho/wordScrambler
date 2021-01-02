@@ -18,8 +18,6 @@ function Instructions({ gameStatus, gameWon, customOptions }) {
     //false
   );
 
-  console.log("showInstructions", showInstructions);
-
   const onPageChange = () => {
     if (activePage === 2)
       return {

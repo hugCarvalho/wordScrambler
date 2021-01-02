@@ -5,14 +5,14 @@ $bg-color: #448159;
   background-color: #28d2d2; //Start
   background-color: $bg-color; //guess
   border: 2px solid lighten($bg-color, 20);
-
+  font-size: 2rem;
   //margin: 17px auto;
   width: 70%;
   border-radius: 6px;
   //padding: 8px 10px;
   min-width: 180px;
   font-weight: 500;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   color: white;
 
   text-transform: uppercase;

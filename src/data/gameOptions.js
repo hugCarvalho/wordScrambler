@@ -8,13 +8,13 @@ const gameOptions = {
 };
 
 export const optionsCustom = {
-  soundOn: false,
+  soundOn: true,
   showHighScore: true,
-  showInstructionsOnLoad: false,
+  showInstructionsOnLoad: true,
   highScoreEntries: [10, 20, 30, 40, 50],
   defaultHighScoreEntries: 10,
   difficulty: ["easy", "medium", "hard", "all"],
-  defaultDifficulty: "hard",
+  defaultDifficulty: "easy",
 };
 
 export default gameOptions;

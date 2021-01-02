@@ -34,7 +34,7 @@ function App() {
   );
   const [options, setOptions] = useState(gameOptions);
   //MAIN STATE
-  const [gameStatus, setGameStatus] = useState("onLoad"); // "onLoad", "playing", "ended"
+  const [gameStatus, setGameStatus] = useState("onLoad"); // "onLoad", "scrambling", "playing", "ended"
   //USE CONTEXT
   const [customOptions, setCustomOptions] = useState(
     () => JSON.parse(window.localStorage.getItem("customOptions")) || optionsCustom
@@ -197,7 +197,7 @@ function App() {
 
   useEffect(() => {
     window.localStorage.setItem("customOptions", JSON.stringify(customOptions));
-    console.log("customOptions", customOptions);
+    //console.log("customOptions", customOptions);
   }, [customOptions]);
 
   // useEffect(() => {
@@ -205,7 +205,7 @@ function App() {
   // }, [customOptions]);
 
   useEffect(() => {
-    console.log("gameWon", gameWon);
+    //console.log("gameWon", gameWon);
   }, [gameWon]);
 
   return (

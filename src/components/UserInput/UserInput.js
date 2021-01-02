@@ -93,13 +93,11 @@ function Form({
           gameStatus={gameStatus}
           type="submit"
         >
-          <b>
-            {gameStatus === "onLoad"
-              ? "Start"
-              : gameStatus === "playing" || gameStatus === "setup"
-              ? "Guess"
-              : "Play again"}
-          </b>
+          {gameStatus === "onLoad"
+            ? "Start"
+            : gameStatus === "ended"
+            ? "Play again"
+            : "Guess"}
         </Button>
       </div>
       {/* <ReactTooltip delayHide={1000} disable={false}>

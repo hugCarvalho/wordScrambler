@@ -21,6 +21,7 @@ function GiveUpBtn({ countdown, options, gameStatus, setGuessesLeft }) {
   return (
     <button
       type="button"
+      name="secondary-btn"
       className={`GiveUpBtn`}
       onClick={() => setGuessesLeft(0)}
       style={showBtn ? { opacity: 1, pointerEvents: "all", cursor: "pointer" } : {}}
