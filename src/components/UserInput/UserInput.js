@@ -65,6 +65,7 @@ function Form({
         <label htmlFor="input-text"></label>
         <Emoji
           className="guess-result"
+          id="wrong-guess"
           style={showWrongGuessIndicator ? { display: "inline" } : { display: "none" }}
           ariaLabel="wrong guess"
           title="wrong guess"
@@ -74,7 +75,7 @@ function Form({
         <Emoji
           className="guess-result"
           style={gameWon === "yes" ? { display: "inline" } : { display: "none" }}
-          ariaLabel="guess correct"
+          ariaLabel="correct guess"
           title="guess correct"
         >
           ✅

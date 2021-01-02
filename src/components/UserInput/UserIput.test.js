@@ -10,7 +10,7 @@ const renderWithIput = (gameStatus = "playing", guessesLeft = 3) => {
       gameStatus={gameStatus}
       guessesLeft={guessesLeft}
       gameWon={null}
-      setGuessesLeft={() => {}}
+      //setGuessesLeft={() => {}}
       countdown={30}
       options={{}}
     />
@@ -36,16 +36,14 @@ describe("user input section", () => {
     screen.getByText(/play again/i);
   });
 
-  test("renders secondary button with right text content", () => {
+  test("renders secondary button", () => {
     //secondary button
     render(renderWithIput("playing"));
     screen.getByRole("button", { name: /give up/i });
   });
 
-  test("renders correctly text content related with the chose word", () => {
-    render(renderWithIput(undefined, 4));
-    const indicatorWrongGuess = screen.getByText(/🔴/i);
-    //const indicatorWrongGuess = screen.getByRole("button", { name: /give up/i });
-    expect(indicatorWrongGuess).toBeInTheDocument();
+  test("renders input", () => {
+    render(renderWithIput());
+    screen.getByRole("textbox", { name: /user guess/i });
   });
 });
