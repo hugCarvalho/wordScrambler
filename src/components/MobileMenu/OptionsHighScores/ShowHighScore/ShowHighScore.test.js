@@ -1,4 +1,4 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ShowHighScore from "./ShowHighScore";
 
@@ -6,7 +6,7 @@ const toggle = jest.fn();
 const renderWithInput = (customOptions = { showHighScore: true }) => {
   return <ShowHighScore customOptions={customOptions} toggleShowHighScore={toggle} />;
 };
-test("should ", () => {
+test("should toggle checkbox checked state ", () => {
   //const handleChange = jest.fn()
   const { rerender } = render(renderWithInput({ showHighScore: true }));
   const checkbox = screen.getByRole("checkbox");

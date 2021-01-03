@@ -3,7 +3,7 @@ import SelectHighScoreEntriesToDisplay from "./SelectHighScoreEntriesToDisplay/S
 import ShowHighScore from "./ShowHighScore/ShowHighScore";
 import { CustomOptionsContext } from "../../../App";
 import Emoji from "../../../reusable/Emoji/Emoji";
-import SelectEntriesToDisplay from "../OptionsDifficulty/OptionsDifficulty";
+import SelectDefaultDifficulty from "../OptionsDifficulty/selectDefaultDifficulty";
 import ShowInstructionsOnLoad from "../OptionsInstructions/ShowInstructionsOnLoad";
 
 function OptionsHighScores() {
@@ -35,9 +35,10 @@ function OptionsHighScores() {
         />
 
         <Emoji ariaLabel="difficulty section">📈</Emoji>
-        <SelectEntriesToDisplay
+        <SelectDefaultDifficulty
           customOptions={customOptions}
           setCustomOptions={setCustomOptions}
+          defaultValue={customOptions.defaultDifficulty}
         />
 
         <Emoji ariaLabel="instructions section">📖</Emoji>
