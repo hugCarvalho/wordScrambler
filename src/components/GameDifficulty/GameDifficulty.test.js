@@ -1,4 +1,5 @@
 import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import GameDifficulty from "./GameDifficulty";
 
 const renderWithInput = (level = "easy", gameStatus = "playing") => {
@@ -32,7 +33,6 @@ describe("testing", () => {
     expect(medium).not.toHaveAttribute("checked");
     expect(hard).not.toHaveAttribute("checked");
     expect(all).not.toHaveAttribute("checked");
-    //expect(btn.index).toBe(0);
   });
 
   test("only medium should be checked", () => {
