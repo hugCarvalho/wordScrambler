@@ -16,9 +16,10 @@ import Audio from "./components/Audio/Audio";
 import HighScores from "./components/HighScores/HighScores";
 import gameOptions from "./data/gameOptions";
 import { optionsCustom } from "./data/gameOptions";
-import GiveUpBtn from "./components/GiveUpBtn/GiveUpBtn";
+import GiveUpBtn from "./components/UserInput/GiveUpBtn/GiveUpBtn";
 
 //TODO: accessibility checklist
+//TODO: colocate state
 //TODO: change handling of options obj to reducer
 //TODO: optimize performance
 //TODO: refactor

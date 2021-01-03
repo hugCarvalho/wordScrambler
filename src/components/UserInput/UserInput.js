@@ -3,7 +3,7 @@ import Emoji from "../../reusable/Emoji/Emoji";
 import Button from "./Button/Button";
 import "./UserInput.scss";
 import PropTypes from "prop-types";
-import GiveUpBtn from "../GiveUpBtn/GiveUpBtn";
+import GiveUpBtn from "./GiveUpBtn/GiveUpBtn";
 
 // import ReactTooltip from "react-tooltip";
 

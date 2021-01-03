@@ -1,7 +1,7 @@
 import React from "react";
 import "./GiveUpBtn.scss";
 
-function GiveUpBtn({ countdown, options, gameStatus, setGuessesLeft }) {
+function GiveUpBtn({ countdown, options, gameStatus, setGuessesLeft, disabled }) {
   const [showBtn, setShowBtn] = React.useState(false);
 
   React.useEffect(() => {
@@ -20,6 +20,7 @@ function GiveUpBtn({ countdown, options, gameStatus, setGuessesLeft }) {
 
   return (
     <button
+      disabled={!showBtn} //for testing purpose
       type="button"
       name="secondary-btn"
       className={`GiveUpBtn`}

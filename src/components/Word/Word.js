@@ -9,8 +9,10 @@ function Word({ gameStatus, scrambledWord }) {
 
   return (
     <div className="Word">
-      <span>
-        {gameStatus === "onLoad" || gameStatus === "scramblingWord" ? (
+      <span aria-label="word to guess">
+        {gameStatus === "onLoad" ||
+        gameStatus === "scramblingWord" ||
+        gameStatus === "setup" ? (
           "❓"
         ) : gameStatus === "ended" ? (
           <a

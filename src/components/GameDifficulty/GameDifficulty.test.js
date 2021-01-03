@@ -16,10 +16,12 @@ describe("testing", () => {
     );
     const levels = screen.getAllByRole("radio");
     expect(levels).toHaveLength(4);
+
     screen.getByText(/easy/i);
     screen.getByText(/medium/i);
     screen.getByText(/hard/i);
     screen.getByText(/all/i);
+
     const easy = screen.getByRole("radio", { name: /easy/i });
     const medium = screen.getByRole("radio", { name: /medium/i });
     const hard = screen.getByRole("radio", { name: /hard/i });
@@ -52,17 +54,20 @@ describe("testing", () => {
     const medium = screen.getByRole("radio", { name: /medium/i });
     const hard = screen.getByRole("radio", { name: /hard/i });
     const all = screen.getByRole("radio", { name: /all/i });
+
     expect(easy).not.toHaveAttribute("checked");
     expect(medium).not.toHaveAttribute("checked");
     expect(hard).toHaveAttribute("checked");
     expect(all).not.toHaveAttribute("checked");
   });
+
   test("only all should be checked", () => {
     render(renderWithInput("all"));
     const easy = screen.getByRole("radio", { name: /easy/i });
     const medium = screen.getByRole("radio", { name: /medium/i });
     const hard = screen.getByRole("radio", { name: /hard/i });
     const all = screen.getByRole("radio", { name: /all/i });
+
     expect(easy).not.toHaveAttribute("checked");
     expect(medium).not.toHaveAttribute("checked");
     expect(hard).not.toHaveAttribute("checked");
@@ -80,10 +85,12 @@ describe("testing", () => {
     let all = screen.getAllByRole("radio");
     all.forEach(btn => expect(btn).not.toBeDisabled());
     cleanup();
+
     render(renderWithInput("easy", "ended"));
     all = screen.getAllByRole("radio");
     all.forEach(btn => expect(btn).not.toBeDisabled());
     cleanup();
+
     render(renderWithInput("easy", "scramblingWord"));
     all = screen.getAllByRole("radio");
     all.forEach(btn => expect(btn).not.toBeDisabled());
