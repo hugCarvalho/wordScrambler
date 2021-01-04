@@ -3,7 +3,7 @@ import SelectHighScoreEntriesToDisplay from "./SelectHighScoreEntriesToDisplay/S
 import ShowHighScore from "./ShowHighScore/ShowHighScore";
 import { CustomOptionsContext } from "../../../App";
 import Emoji from "../../../reusable/Emoji/Emoji";
-import SelectDefaultDifficulty from "../OptionsDifficulty/selectDefaultDifficulty";
+import SelectDefaultDifficulty from "../OptionsDifficulty/SelectDefaultDifficulty";
 import ShowInstructionsOnLoad from "../OptionsInstructions/ShowInstructionsOnLoad";
 
 function OptionsHighScores() {

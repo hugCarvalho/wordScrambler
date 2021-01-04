@@ -1,5 +1,5 @@
-import { cleanup, render, screen } from "@testing-library/react";
-import SelectDefaultDifficulty from "./selectDefaultDifficulty";
+import { render, screen } from "@testing-library/react";
+import SelectDefaultDifficulty from "./SelectDefaultDifficulty";
 
 //TODO: Change
 const renderWithInput = (
@@ -45,7 +45,6 @@ describe("Defaultdifficulty", () => {
     expect(medium.selected).toBeTruthy();
     expect(hard.selected).toBeFalsy();
     expect(all.selected).toBeFalsy();
-    cleanup();
   });
 
   test("renders select option with 4 options and 'hard' is selected", () => {
