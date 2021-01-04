@@ -1,7 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export function SelectHighScoreEntriesToDisplay({ customOptions, setCustomOptions }) {
+export function SelectHighScoreEntriesToDisplay({
+  customOptions,
+  setCustomOptions,
+  defaultValue,
+}) {
   const chooseNumberOfHighScoreEntriesToDisplay = (e, optionsObj) => {
     setCustomOptions({ ...optionsObj, defaultHighScoreEntries: +e.target.value });
   };
@@ -13,7 +17,7 @@ export function SelectHighScoreEntriesToDisplay({ customOptions, setCustomOption
         name="highScores"
         id="high-scores"
         onChange={e => chooseNumberOfHighScoreEntriesToDisplay(e, customOptions)}
-        defaultValue={customOptions.defaultHighScoreEntries}
+        defaultValue={defaultValue}
       >
         {customOptions.highScoreEntries.map((item, i) => {
           return (

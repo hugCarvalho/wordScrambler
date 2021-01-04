@@ -32,6 +32,7 @@ function OptionsHighScores() {
         <SelectHighScoreEntriesToDisplay
           customOptions={customOptions}
           setCustomOptions={setCustomOptions}
+          defaultValue={customOptions.defaultHighScoreEntries}
         />
 
         <Emoji ariaLabel="difficulty section">📈</Emoji>
