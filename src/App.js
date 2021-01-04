@@ -16,7 +16,6 @@ import Audio from "./components/Audio/Audio";
 import HighScores from "./components/HighScores/HighScores";
 import gameOptions from "./data/gameOptions";
 import { optionsCustom } from "./data/gameOptions";
-import GiveUpBtn from "./components/UserInput/GiveUpBtn/GiveUpBtn";
 
 //TODO: accessibility checklist
 //TODO: colocate state
@@ -29,11 +28,10 @@ export const CustomOptionsContext = createContext();
 function App() {
   //DATA + OPTIONS
   const [array] = useState(initArr);
-  const [allScores] = useState(initScores);
-  const [updatedAllScores, setUpdatedAllScores] = useState(
+  const [options] = useState(gameOptions);
+  const [scoresObj, setScoresObj] = useState(
     () => JSON.parse(window.localStorage.getItem("highScoreTables")) || initScores
   );
-  const [options, setOptions] = useState(gameOptions);
   //MAIN STATE
   const [gameStatus, setGameStatus] = useState("onLoad"); // "onLoad", "scrambling", "playing", "ended"
   //USE CONTEXT
@@ -179,22 +177,24 @@ function App() {
   //HIGHSCORE 💯
   useEffect(() => {
     if (gameWon === "yes" && allowHighScoreEntry) {
-      let scores = { ...allScores };
+      let scores = { ...scoresObj };
       scores[difficulty].push({
         id: Math.random(), //TODO: change to uuid?
         date: new Date().toLocaleDateString("de-DE"),
         score: score,
       });
       //console.log("Add game score to", scores[difficulty], scores);
-      setUpdatedAllScores(scores);
+      setScoresObj(scores);
       setAllowHighScoreEntry(false);
+      console.log("updatedallScores", scoresObj);
     }
-  }, [gameWon, score, difficulty, allScores, allowHighScoreEntry]);
+  }, [gameWon, score, difficulty, allowHighScoreEntry, scoresObj]);
 
   //LOCALSTORGAGE ⏩ SET
   useEffect(() => {
-    window.localStorage.setItem("highScoreTables", JSON.stringify(updatedAllScores));
-  }, [updatedAllScores]);
+    console.log("updatedAllScores", scoresObj);
+    window.localStorage.setItem("highScoreTables", JSON.stringify(scoresObj));
+  }, [scoresObj]);
 
   useEffect(() => {
     window.localStorage.setItem("customOptions", JSON.stringify(customOptions));
@@ -275,7 +275,7 @@ function App() {
       </section>
       <section>
         <HighScores
-          updatedAllScores={updatedAllScores}
+          updatedAllScores={scoresObj}
           difficulty={difficulty}
           customOptions={customOptions}
           numEntries={customOptions.defaultHighScoreEntries}
