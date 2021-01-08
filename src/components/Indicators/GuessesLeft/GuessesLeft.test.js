@@ -28,12 +28,12 @@ test("renders appropriate icon according to number of guesses left", () => {
 });
 
 //the same as before
-// test("renders appropriate icon according to number of guesses left II", () => {
-//   expect(renderEmojiFace(3, { totalGuessesLeft: 3 })).toBe("🧐");
-//   expect(renderEmojiFace(2, { totalGuessesLeft: 3 })).toBe("😨");
-//   expect(renderEmojiFace(1, { totalGuessesLeft: 3 })).toBe("😲");
-//   expect(renderEmojiFace(0, { totalGuessesLeft: 3 })).toBe("🤯");
-// });
+test("renders appropriate icon according to number of guesses left II", () => {
+  expect(renderEmojiFace(3, { totalGuessesLeft: 3 })).toBe("🧐");
+  expect(renderEmojiFace(2, { totalGuessesLeft: 3 })).toBe("😨");
+  expect(renderEmojiFace(1, { totalGuessesLeft: 3 })).toBe("😲");
+  expect(renderEmojiFace(0, { totalGuessesLeft: 3 })).toBe("🤯");
+});
 
 test("color changes according to num guesses left", () => {
   expect(changeGuessesLeftColor(2)).toEqual({ color: "#83d04e" });

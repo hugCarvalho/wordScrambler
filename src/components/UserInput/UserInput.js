@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import Emoji from "../../reusable/Emoji/Emoji";
-import Button from "./Button/Button";
+import Button from "../../reusable/Button";
 import "./UserInput.scss";
+import "./MainButton/MainButton.scss";
 import PropTypes from "prop-types";
 import GiveUpBtn from "./GiveUpBtn/GiveUpBtn";
 
@@ -90,8 +91,8 @@ function Form({
           setGuessesLeft={setGuessesLeft}
         />
         <Button
-          focus={() => userInput.current.focus()}
-          gameStatus={gameStatus}
+          className="MainBtn"
+          onClick={() => userInput.current.focus()}
           type="submit"
         >
           {gameStatus === "onLoad"

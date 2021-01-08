@@ -5,7 +5,7 @@ const renderWithInput = (gameStatus = "playing", scrambledWord = "test") => {
   return <Word gameStatus={gameStatus} scrambledWord={scrambledWord} />;
 };
 
-test("should render question mark with right gameStatus", () => {
+test("should render question mark with certain gameStatus", () => {
   render(renderWithInput("onLoad"));
   const questionEmoji = screen.getByText("❓");
   screen.getByLabelText("word to guess");

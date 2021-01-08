@@ -6,7 +6,7 @@ const toggle = jest.fn();
 const renderWithInput = (customOptions = { showHighScore: true }) => {
   return <ShowHighScore customOptions={customOptions} toggleShowHighScore={toggle} />;
 };
-test("should toggle checkbox checked state ", () => {
+test("should toggle checkbox checked state", () => {
   //const handleChange = jest.fn()
   const { rerender } = render(renderWithInput({ showHighScore: true }));
   const checkbox = screen.getByRole("checkbox");
