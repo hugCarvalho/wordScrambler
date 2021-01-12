@@ -14,7 +14,7 @@ function FooterInstructions({ activePage, setActivePage }) {
           👈
         </Emoji>
       </button>
-      <span>{activePage}</span>
+      <span data-testid="active-page">{activePage}</span>
       <button
         className="turn-page"
         onClick={() => setActivePage(state => state + 1)}

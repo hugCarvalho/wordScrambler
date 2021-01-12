@@ -70,7 +70,7 @@ const testData = [
   "sheet",
   "shower",
   "sink",
-  "snicker",
+  "snickers",
   "sock",
   "socket",
   "stereo",
@@ -106,5 +106,6 @@ const testData = [
   "cupboard",
   "elevator",
   "newspaper",
+  "microphone"
 ];
 export default testData;

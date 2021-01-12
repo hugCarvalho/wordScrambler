@@ -8,6 +8,7 @@ import FooterInstructions from "./FooterInstructions/FooterInstructions";
 import OpenCloseInstructions from "./OpenCloseInstructions/OpenCloseInstructions";
 import PropTypes from "prop-types";
 
+import onPageChange from "./fns";
 //TODO: make scoring text dynamic
 //TODO: display msg about not being possible to open while playing
 
@@ -17,22 +18,6 @@ function Instructions({ gameStatus, gameWon, customOptions }) {
     customOptions.showInstructionsOnLoad
     //false
   );
-
-  const onPageChange = () => {
-    if (activePage === 2)
-      return {
-        instructions: { transform: "translateX(-100%)" },
-        score: { transform: "translateX(-307px)" }, //transform: width instructions text container + margin
-        options: { transform: "translateX(-292px)" },
-      };
-    if (activePage === 3)
-      return {
-        instructions: { transform: "translateX(-100%)" },
-        score: { transform: "translateX(-200%)" },
-        options: { transform: "translateX(-599px)" },
-      };
-    return { instructions: {}, score: {} };
-  };
 
   React.useEffect(() => {
     // console.log("GAMESTATUS", gameStatus);
@@ -48,9 +33,9 @@ function Instructions({ gameStatus, gameWon, customOptions }) {
     <div className="Instructions">
       <div className="instructions__container">
         <div className="wrapper">
-          <ObjectiveInstructions onPageChange={onPageChange} />
-          <ScoreInstructions onPageChange={onPageChange} />
-          <OptionsInstructions onPageChange={onPageChange} />
+          <ObjectiveInstructions onPageChange={() => onPageChange(activePage)} />
+          <ScoreInstructions onPageChange={() => onPageChange(activePage)} />
+          <OptionsInstructions onPageChange={() => onPageChange(activePage)} />
         </div>
       </div>
       <FooterInstructions activePage={activePage} setActivePage={setActivePage} />

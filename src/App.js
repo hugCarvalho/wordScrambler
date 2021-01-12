@@ -186,13 +186,11 @@ function App() {
       //console.log("Add game score to", scores[difficulty], scores);
       setScoresObj(scores);
       setAllowHighScoreEntry(false);
-      console.log("updatedallScores", scoresObj);
     }
   }, [gameWon, score, difficulty, allowHighScoreEntry, scoresObj]);
 
   //LOCALSTORGAGE ⏩ SET
   useEffect(() => {
-    console.log("updatedAllScores", scoresObj);
     window.localStorage.setItem("highScoreTables", JSON.stringify(scoresObj));
   }, [scoresObj]);
 
