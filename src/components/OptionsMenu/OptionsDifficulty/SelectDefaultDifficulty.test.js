@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import SelectDefaultDifficulty from "./SelectDefaultDifficulty";
+//import SelectDefaultDifficulty from "./SelectDefaultDifficulty";
+import SelectDefaultDifficulty from "./SelectDefaultDifficulty"
 
 //TODO: Change
 const renderWithInput = (
@@ -15,7 +16,7 @@ const renderWithInput = (
   );
 };
 
-describe("Defaultdifficulty", () => {
+describe("Default Difficulty", () => {
   test("renders select option with 4 options and 'easy' is selected", () => {
     render(renderWithInput("easy"));
 

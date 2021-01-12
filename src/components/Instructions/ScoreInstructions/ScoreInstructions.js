@@ -4,7 +4,6 @@ import gameOptions from "../../../data/gameOptions";
 
 function ScoreInstructions({ onPageChange }) {
   const { pointsPerGuessLeft, pointsPerWordLength } = gameOptions;
-  console.log(onPageChange);
   return (
     <article className="ScoreInstructions" style={onPageChange().score}>
       <h4>Score:</h4>

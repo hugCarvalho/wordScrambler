@@ -1,14 +1,14 @@
 import React from "react";
-import "./GameOptionsMenu.scss";
-import MobileSlidingMenu from "./MobileSlidingMenu/MobileSlidingMenu";
+import "./OptionsMenu.scss";
+import MobileSlidingMenu from "../MobileMenu/MobileSlidingMenu/MobileSlidingMenu";
 import OptionsHighScores from "./OptionsHighScores/OptionHighScores";
 
-function GameOptionsMenu() {
+function OptionsMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   return (
     <>
-      <div className="GameOptionsMenu">
+      <div className="OptionsMenu">
         <button
           title="options"
           className="fas fa-cog"
@@ -21,11 +21,10 @@ function GameOptionsMenu() {
         onClick={() => setIsMenuOpen(state => !state)}
       >
         <h2>Options</h2>
-
         <OptionsHighScores />
       </MobileSlidingMenu>
     </>
   );
 }
 
-export default GameOptionsMenu;
+export default OptionsMenu;

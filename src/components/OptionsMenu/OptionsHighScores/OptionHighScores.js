@@ -15,7 +15,6 @@ function OptionsHighScores() {
   };
 
   const toggleShowInstructionsOnLoad = optionsObj => {
-    console.log("fn", optionsObj);
     return setCustomOptions({
       ...optionsObj,
       showInstructionsOnLoad: !optionsObj.showInstructionsOnLoad,

@@ -8,7 +8,7 @@ import Instructions from "./components/Instructions/RenderInstructions";
 import Score from "./components/Indicators/Score/Score";
 import Word from "./components/Word/Word";
 import chooseWord, { scrambleWord } from "./App_functions";
-import GameOptionsMenu from "./components/MobileMenu/GameOptionsMenu";
+import OptionsMenu from "./components/OptionsMenu/OptionsMenu";
 import initArr, { initScores } from "./data/testData";
 import GameDifficulty from "./components/GameDifficulty/GameDifficulty";
 import DisplayCategory from "./components/DisplayCategory/DisplayCategory";
@@ -254,7 +254,7 @@ function App() {
             setCustomOptions,
           }}
         >
-          <GameOptionsMenu
+          <OptionsMenu
             options={customOptions}
             toggleShowInstructionsOnLoad={() => {}}
           />
