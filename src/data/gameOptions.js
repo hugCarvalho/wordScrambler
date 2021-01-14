@@ -1,3 +1,5 @@
+import testData from "./testData";
+
 const gameOptions = {
   totalGuessesLeft: 3,
   countdown: 20,
@@ -18,8 +20,9 @@ export const optionsCustom = {
 };
 
 export const categories = {
-  objects: ["spoon"],
+  objects: testData,
   animals: ["dog", "donkey"],
+  selected: "animals",
 };
 
 export default gameOptions;

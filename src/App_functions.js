@@ -15,10 +15,11 @@ const filterWordAccordingDifficulty = (array, difficulty) => {
   }
 };
 
+//TODO: Add logic for alert in case no words in the given array
 const chooseWord = (categoryArr, difficulty) => {
   const filteredArr = filterWordAccordingDifficulty(categoryArr, difficulty);
   const randomWord = filteredArr[Math.floor(Math.random() * filteredArr.length)];
-  return randomWord.toLowerCase();
+  return randomWord ? randomWord.toLowerCase() : "";
 };
 
 export const scrambleWord = word => {

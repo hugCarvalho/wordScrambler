@@ -14,7 +14,7 @@ import GameDifficulty from "./components/GameDifficulty/GameDifficulty";
 import DisplayCategory from "./components/DisplayCategory/DisplayCategory";
 import Audio from "./components/Audio/Audio";
 import HighScores from "./components/HighScores/HighScores";
-import gameOptions from "./data/gameOptions";
+import gameOptions, { categories } from "./data/gameOptions";
 import { optionsCustom } from "./data/gameOptions";
 
 //TODO: accessibility checklist
@@ -22,12 +22,15 @@ import { optionsCustom } from "./data/gameOptions";
 //TODO: change handling of options obj to reducer
 //TODO: optimize performance
 //TODO: refactor
+//TODO: do condition for no categories
 
 export const CustomOptionsContext = createContext();
+export const SelectedCategory = createContext();
 
 function App() {
   //DATA + OPTIONS
-  const [array] = useState(initArr);
+  const [selectedCategory, setSelectedCategory] = useState(categories.selected);
+  const [array, setArray] = useState(categories[selectedCategory]);
   const [options] = useState(gameOptions);
   const [scoresObj, setScoresObj] = useState(
     () => JSON.parse(window.localStorage.getItem("highScoreTables")) || initScores
@@ -52,7 +55,6 @@ function App() {
 
   const onSubmitHandler = (e, userText) => {
     e.preventDefault();
-
     switch (gameStatus) {
       case "onLoad":
         setGameStatus("scramblingWord");
@@ -75,6 +77,11 @@ function App() {
         throw new Error("OOOps, check status strings");
     }
   };
+
+  useEffect(() => {
+    console.log(selectedCategory);
+    setArray(categories[selectedCategory]);
+  }, [selectedCategory]);
 
   //LOCALSTORAGE ⏩ GET
   // useEffect(() => {
@@ -113,6 +120,7 @@ function App() {
   useEffect(() => {
     if (gameStatus === "scramblingWord") {
       setCorrectWord(null);
+      console.log(selectedCategory, array);
       setCorrectWord(chooseWord(array, difficulty));
     }
   }, [gameStatus, array, difficulty]);
@@ -216,7 +224,8 @@ function App() {
         setDifficulty={e => setDifficulty(e.target.value)}
         gameStatus={gameStatus}
       />
-      <DisplayCategory />
+      <DisplayCategory category={selectedCategory} />
+
       <main className="container__app">
         <div className="wrapper__app">
           <div className="indicators">
@@ -224,6 +233,7 @@ function App() {
             <Countdown countdown={countdown} />
             <Score score={score} gameWon={gameWon} />
           </div>
+
           <Word
             gameStatus={gameStatus}
             correctWord={correctWord}
@@ -248,17 +258,16 @@ function App() {
         </div>
       </main>
       <section className="game-options">
-        <CustomOptionsContext.Provider
-          value={{
-            customOptions,
-            setCustomOptions,
-          }}
-        >
-          <OptionsMenu
-            options={customOptions}
-            toggleShowInstructionsOnLoad={() => {}}
-          />
-        </CustomOptionsContext.Provider>
+        <SelectedCategory.Provider value={{ selectedCategory, setSelectedCategory }}>
+          <CustomOptionsContext.Provider
+            value={{
+              customOptions,
+              setCustomOptions,
+            }}
+          >
+            <OptionsMenu options={customOptions} />
+          </CustomOptionsContext.Provider>
+        </SelectedCategory.Provider>
 
         <Audio
           gameWon={gameWon}

@@ -1,14 +1,17 @@
 import React from "react";
-import SelectHighScoreEntriesToDisplay from "./SelectHighScoreEntriesToDisplay/SelectHighScoreEntriesToDisplay";
-import ShowHighScore from "./ShowHighScore/ShowHighScore";
-import { CustomOptionsContext } from "../../../App";
-import Emoji from "../../../reusable/Emoji/Emoji";
-import SelectDefaultDifficulty from "../OptionsDifficulty/SelectDefaultDifficulty";
-import ShowInstructionsOnLoad from "../OptionsInstructions/ShowInstructionsOnLoad";
+import SelectHighScoreEntriesToDisplay from "./OptionsHighScores/SelectHighScoreEntriesToDisplay/SelectHighScoreEntriesToDisplay";
+import ShowHighScore from "./OptionsHighScores/ShowHighScore/ShowHighScore";
+import { CustomOptionsContext, SelectedCategory } from "../../App";
+import Emoji from "../../reusable/Emoji/Emoji";
+import SelectDefaultDifficulty from "./OptionsDifficulty/SelectDefaultDifficulty";
+import ShowInstructionsOnLoad from "./OptionsInstructions/ShowInstructionsOnLoad";
+import Select from "../../reusable/Select";
+import { categories } from "../../data/gameOptions";
 
-function OptionsHighScores() {
+function Options() {
   //Using useContext here allows for PropTypes nested components. Otherwise won't work
   const { customOptions, setCustomOptions } = React.useContext(CustomOptionsContext);
+  const { selectedCategory, setSelectedCategory } = React.useContext(SelectedCategory);
 
   const toggleShowHighScore = optionsObj => {
     return setCustomOptions({ ...optionsObj, showHighScore: !optionsObj.showHighScore });
@@ -20,6 +23,7 @@ function OptionsHighScores() {
       showInstructionsOnLoad: !optionsObj.showInstructionsOnLoad,
     });
   };
+
   return (
     <section className="OptionsHighScores">
       <div>
@@ -46,9 +50,18 @@ function OptionsHighScores() {
           customOptions={customOptions}
           toggleShowInstructionsOnLoad={() => toggleShowInstructionsOnLoad(customOptions)}
         />
+        <Emoji ariaLabel="category section">🔖</Emoji>
+        <Select
+          data={Object.keys(categories)}
+          id="categories"
+          handleOnChange={e => setSelectedCategory(e.target.value)}
+          defaultValue={selectedCategory}
+        >
+          Default category
+        </Select>
       </div>
     </section>
   );
 }
 
-export default OptionsHighScores;
+export default Options;

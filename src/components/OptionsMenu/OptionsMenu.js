@@ -1,8 +1,9 @@
 import React from "react";
 import "./OptionsMenu.scss";
 import MobileSlidingMenu from "../MobileMenu/MobileSlidingMenu/MobileSlidingMenu";
-import OptionsHighScores from "./OptionsHighScores/OptionHighScores";
+import Options from "./Options";
 
+//TODO: restructure and rename
 function OptionsMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
@@ -21,7 +22,7 @@ function OptionsMenu() {
         onClick={() => setIsMenuOpen(state => !state)}
       >
         <h2>Options</h2>
-        <OptionsHighScores />
+        <Options />
       </MobileSlidingMenu>
     </>
   );
