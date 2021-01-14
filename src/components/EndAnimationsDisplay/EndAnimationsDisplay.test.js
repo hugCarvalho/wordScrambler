@@ -49,10 +49,10 @@ test("should render only loser icon by losing", ()=> {
   const iconMedal = screen.getByRole("img", {name: /medal/i})
   const iconClaps = screen.getByRole("img", {name: /hands/i})
   const iconTrophy = screen.getByRole("img", {name: /trophy/i})
-  const arr = [iconTrophy, iconMedal, iconClaps]
+  const arrIcons = [iconTrophy, iconMedal, iconClaps]
  
   expect(iconLoser).toHaveClass("activate-loser");
-  arr.forEach(item => {
+  arrIcons.forEach(item => {
     expect(item).toHaveClass("false")
   })
 })
@@ -64,8 +64,8 @@ test("should render only one winning icon by winning and no losing icon", ()=> {
   const iconMedal = screen.getByRole("img", {name: /medal/i})
   const iconClaps = screen.getByRole("img", {name: /hands/i})
   const iconTrophy = screen.getByRole("img", {name: /trophy/i})
-  const arr = [iconTrophy, iconMedal, iconClaps]
+  const arrIcons = [iconTrophy, iconMedal, iconClaps]
 
   expect(iconLoser).not.toContain("activate-loser");
-  expect(arr.filter(item => item.classList.contains("false"))).toHaveLength(2)
+  expect(arrIcons.filter(item => item.classList.contains("false"))).toHaveLength(2)
 })

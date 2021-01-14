@@ -17,4 +17,9 @@ export const optionsCustom = {
   defaultDifficulty: "easy",
 };
 
+export const categories = {
+  objects: ["spoon"],
+  animals: ["dog", "donkey"],
+};
+
 export default gameOptions;

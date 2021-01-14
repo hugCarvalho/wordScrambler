@@ -1,4 +1,5 @@
 import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import Word from "./Word";
 
 const renderWithInput = (gameStatus = "playing", scrambledWord = "test") => {
@@ -27,8 +28,9 @@ test("should render question mark with certain gameStatus", () => {
 });
 
 test("should render a word", () => {
-  render(renderWithInput("playing"));
+  render(renderWithInput("playing", "test"));
   screen.getByLabelText("word to guess");
   screen.getByText("test");
   expect(screen.getByLabelText(/word to guess/i).textContent).not.toBe("❓");
 });
+
