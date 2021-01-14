@@ -1,4 +1,4 @@
-import testData from "./testData";
+import testData, { animals } from "./testData";
 
 const gameOptions = {
   totalGuessesLeft: 3,
@@ -21,7 +21,7 @@ export const optionsCustom = {
 
 export const categories = {
   objects: testData,
-  animals: ["dog", "donkey"],
+  animals: animals,
   selected: "animals",
 };
 

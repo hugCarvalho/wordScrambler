@@ -17,6 +17,7 @@ import HighScores from "./components/HighScores/HighScores";
 import gameOptions, { categories } from "./data/gameOptions";
 import { optionsCustom } from "./data/gameOptions";
 
+//TODO: commit categories to localStorage
 //TODO: accessibility checklist
 //TODO: colocate state
 //TODO: change handling of options obj to reducer
@@ -77,11 +78,6 @@ function App() {
         throw new Error("OOOps, check status strings");
     }
   };
-
-  useEffect(() => {
-    console.log(selectedCategory);
-    setArray(categories[selectedCategory]);
-  }, [selectedCategory]);
 
   //LOCALSTORAGE ⏩ GET
   // useEffect(() => {
@@ -153,6 +149,13 @@ function App() {
   }, [gameStatus, guess, correctWord]);
 
   //GAME LOST GUESSES LEFT ARE 0 💥
+  useEffect(() => {
+    if (gameStatus === "playing") {
+      setGuessesLeft(0);
+    }
+    setArray(categories[selectedCategory]);
+  }, [selectedCategory]);
+
   useEffect(() => {
     if (guessesLeft === 0) {
       setGameStatus("ended");

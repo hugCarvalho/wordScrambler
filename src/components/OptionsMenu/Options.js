@@ -24,9 +24,26 @@ function Options() {
     });
   };
 
+  //removes selected key and prepares random
+  const prepareData = categories => {
+    let data = Object.keys(categories);
+    data.splice(data.indexOf("selected"), 1);
+    return data;
+  };
+
   return (
     <section className="OptionsHighScores">
       <div>
+        <Emoji ariaLabel="category section">🔖</Emoji>
+        <Select
+          data={prepareData(categories)}
+          id="categories"
+          handleOnChange={e => setSelectedCategory(e.target.value)}
+          defaultValue={selectedCategory}
+        >
+          Choose Category:
+        </Select>
+
         <Emoji ariaLabel="high scores section">🥇</Emoji>
         <ShowHighScore
           customOptions={customOptions}
@@ -50,15 +67,6 @@ function Options() {
           customOptions={customOptions}
           toggleShowInstructionsOnLoad={() => toggleShowInstructionsOnLoad(customOptions)}
         />
-        <Emoji ariaLabel="category section">🔖</Emoji>
-        <Select
-          data={Object.keys(categories)}
-          id="categories"
-          handleOnChange={e => setSelectedCategory(e.target.value)}
-          defaultValue={selectedCategory}
-        >
-          Default category
-        </Select>
       </div>
     </section>
   );
