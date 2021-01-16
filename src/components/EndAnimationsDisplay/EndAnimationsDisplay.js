@@ -13,7 +13,7 @@ function EndAnimationsDisplay({ gameWon, showInstructions }) {
 
   React.useEffect(() => {
     if (gameWon) {
-      setRandomNum(Math.ceil(Math.random() * animations.length));
+      setRandomNum(Math.floor(Math.random() * animations.length));
     }
   }, [gameWon]);
 
@@ -22,12 +22,12 @@ function EndAnimationsDisplay({ gameWon, showInstructions }) {
       className={`EndAnimationsDisplay ${!showInstructions && "showToken"}`}
       style={gameWon ? { backgroundColor: "white" } : {}}
     >
-      <div></div>
+      {/* <div></div> */}
 
       {/* WON - icons will enter from different sides*/}
       <Emoji
         ariaLabel="won medal"
-        className={`medal ${gameWon === "yes" && randomNum === 3 && "activate-medal"}`}
+        className={`medal ${gameWon === "yes" && randomNum === 0 && "activate-medal"}`}
       >
         🏅
       </Emoji>

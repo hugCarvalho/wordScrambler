@@ -26,7 +26,7 @@ import { optionsCustom } from "./data/gameOptions";
 //TODO: do condition for no categories
 
 export const CustomOptionsContext = createContext();
-export const SelectedCategory = createContext();
+export const SelectedCategoryContext = createContext();
 
 function App() {
   //DATA + OPTIONS
@@ -116,7 +116,6 @@ function App() {
   useEffect(() => {
     if (gameStatus === "scramblingWord") {
       setCorrectWord(null);
-      console.log(selectedCategory, array);
       setCorrectWord(chooseWord(array, difficulty));
     }
   }, [gameStatus, array, difficulty]);
@@ -152,9 +151,10 @@ function App() {
   useEffect(() => {
     if (gameStatus === "playing") {
       setGuessesLeft(0);
+    } else {
+      setArray(categories[selectedCategory]);
     }
-    setArray(categories[selectedCategory]);
-  }, [selectedCategory]);
+  }, [selectedCategory, gameStatus]);
 
   useEffect(() => {
     if (guessesLeft === 0) {
@@ -261,7 +261,9 @@ function App() {
         </div>
       </main>
       <section className="game-options">
-        <SelectedCategory.Provider value={{ selectedCategory, setSelectedCategory }}>
+        <SelectedCategoryContext.Provider
+          value={{ selectedCategory, setSelectedCategory }}
+        >
           <CustomOptionsContext.Provider
             value={{
               customOptions,
@@ -270,7 +272,7 @@ function App() {
           >
             <OptionsMenu options={customOptions} />
           </CustomOptionsContext.Provider>
-        </SelectedCategory.Provider>
+        </SelectedCategoryContext.Provider>
 
         <Audio
           gameWon={gameWon}

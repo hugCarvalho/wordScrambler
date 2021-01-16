@@ -1,7 +1,7 @@
 import React from "react";
 import SelectHighScoreEntriesToDisplay from "./OptionsHighScores/SelectHighScoreEntriesToDisplay/SelectHighScoreEntriesToDisplay";
 import ShowHighScore from "./OptionsHighScores/ShowHighScore/ShowHighScore";
-import { CustomOptionsContext, SelectedCategory } from "../../App";
+import { CustomOptionsContext, SelectedCategoryContext } from "../../App";
 import Emoji from "../../reusable/Emoji/Emoji";
 import SelectDefaultDifficulty from "./OptionsDifficulty/SelectDefaultDifficulty";
 import ShowInstructionsOnLoad from "./OptionsInstructions/ShowInstructionsOnLoad";
@@ -11,7 +11,9 @@ import { categories } from "../../data/gameOptions";
 function Options() {
   //Using useContext here allows for PropTypes nested components. Otherwise won't work
   const { customOptions, setCustomOptions } = React.useContext(CustomOptionsContext);
-  const { selectedCategory, setSelectedCategory } = React.useContext(SelectedCategory);
+  const { selectedCategory, setSelectedCategory } = React.useContext(
+    SelectedCategoryContext
+  );
 
   const toggleShowHighScore = optionsObj => {
     return setCustomOptions({ ...optionsObj, showHighScore: !optionsObj.showHighScore });

@@ -9,13 +9,6 @@ function Select({
   children,
   ...other
 }) {
-  const [updatedSelect, setUpdatedSelect] = React.useState("default");
-
-  // const handleOnChange = e => {
-  //   e.preventDefault();
-  //   setUpdatedSelect(e.target.value);
-  // };
-
   const renderOptions = data.map((option, i) => (
     <option value={option} key={i}>
       {option}
