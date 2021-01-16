@@ -30,7 +30,10 @@ export const SelectedCategoryContext = createContext();
 
 function App() {
   //DATA + OPTIONS
-  const [selectedCategory, setSelectedCategory] = useState(categories.selected);
+  const [selectedCategory, setSelectedCategory] = useState(
+    () =>
+      JSON.parse(window.localStorage.getItem("selectedCategory")) || categories.selected
+  );
   const [array, setArray] = useState(categories[selectedCategory]);
   const [options] = useState(gameOptions);
   const [scoresObj, setScoresObj] = useState(
@@ -149,12 +152,12 @@ function App() {
 
   //GAME LOST GUESSES LEFT ARE 0 💥
   useEffect(() => {
+    console.log(selectedCategory);
     if (gameStatus === "playing") {
       setGuessesLeft(0);
-    } else {
-      setArray(categories[selectedCategory]);
     }
-  }, [selectedCategory, gameStatus]);
+    setArray(categories[selectedCategory]);
+  }, [selectedCategory]);
 
   useEffect(() => {
     if (guessesLeft === 0) {
@@ -201,6 +204,10 @@ function App() {
   }, [gameWon, score, difficulty, allowHighScoreEntry, scoresObj]);
 
   //LOCALSTORGAGE ⏩ SET
+  useEffect(() => {
+    window.localStorage.setItem("selectedCategory", JSON.stringify(selectedCategory));
+  }, [selectedCategory]);
+
   useEffect(() => {
     window.localStorage.setItem("highScoreTables", JSON.stringify(scoresObj));
   }, [scoresObj]);
