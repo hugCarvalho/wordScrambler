@@ -1,64 +1,74 @@
+import PropTypes from "prop-types";
 import React from "react";
 import "./DisplayHint.scss";
 import style from "styled-components";
 
+//🔀 ✅ ❎ 🔁
 const ButtonDisplayHint = style.button`
-  background-color: rgb(241, 225, 1);
+  background-color: ${props =>
+    props.disabled || !props.playing ? "gray" : "rgb(223, 223, 210)"};
+  cursor: ${props => (props.disabled || !props.playing ? "not-allowed" : "")};
   color: rgb(47, 48, 47);
-  height: 28px;
+  height: 27px;
+  width: 60px;
   position: absolute;
-  top: -29px;
+  top: -28px;
   right: -1px;
-  padding: 3px 6px;
+  padding: 0px 6px;
   border: 1px solid gray;
   border-bottom: none;
   border-radius: 3px 3px 0 0;
-  transform: ${props => (props.showHint ? "translateY(0%)" : "translateY(100%)")};
-  transition: transform 0.7s ease;
+  transition: all 0.5s ease;
   opacity: 1;
   letter-spacing: 1px;
 
   &:hover {
-    opacity: 0.8;
+    background-color: ${props =>
+      props.disabled || !props.playing ? "" : "rgb(242, 242, 228)"}
   }
 `;
 
-//TODO: useContext - Word - showHint
-//TODO: add comments useeffects
+function DisplayHint({ gameStatus, activateHint }) {
+  //const [showHintBtn, setShowHintBtn] = React.useState(true);
+  const [isHintAvailable, setIsHintAvailable] = React.useState(true);
 
-function DisplayHint({ countdown, gameStatus, correctWord, scrambledWord }) {
-  const [showHintBtn, setShowHintBtn] = React.useState(false);
-  const [isHintAvailable, setIsHintAvailable] = React.useState(false);
+  const onClickHandler = () => {
+    if (gameStatus === "playing") {
+      setIsHintAvailable(false);
+      activateHint(true);
+    } else return;
+  };
 
   React.useEffect(() => {
-    if (countdown < 16) {
-      setShowHintBtn(true);
+    if (gameStatus === "setup") {
+      //setShowHintBtn(true);
+      setIsHintAvailable(true);
     }
-  }, [countdown]);
-
-  React.useEffect(() => {
     if (gameStatus === "ended") {
-      setShowHintBtn(true);
       setIsHintAvailable(false);
     }
   }, [gameStatus]);
 
   React.useEffect(() => {
-    if (isHintAvailable) {
-      setIsHintAvailable(false);
-    }
+    console.log("Available:", isHintAvailable);
   }, [isHintAvailable]);
 
   return (
     <ButtonDisplayHint
-      className="DisplayHint"
+      playing={gameStatus === "playing"}
       disabled={!isHintAvailable}
-      showHint={showHintBtn}
-      // onClick={() => showHint(correctWord, scrambledWord)}
+      //showHint={showHintBtn}
+      title="changes color of letter to green if in the right order or red, if in wrong order "
+      onClick={onClickHandler}
     >
-      Hint 2
+      {" ✅ ❎"}
     </ButtonDisplayHint>
   );
 }
+
+DisplayHint.propTypes = {
+  activateHint: PropTypes.func.isRequired,
+  gameStatus: PropTypes.string.isRequired,
+};
 
 export default DisplayHint;

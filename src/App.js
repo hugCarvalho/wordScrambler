@@ -28,6 +28,7 @@ import DisplayHint from "./DisplayHint/DisplayHint";
 
 export const CustomOptionsContext = createContext();
 export const SelectedCategoryContext = createContext();
+// const isMatchLettersActivatedContext = createContext();
 
 function App() {
   //DATA + OPTIONS
@@ -52,11 +53,17 @@ function App() {
   const [countdown, setCountdown] = useState(gameOptions.countdown);
   const [correctWord, setCorrectWord] = useState(null);
   const [scrambledWord, setScrambledWord] = useState("");
+  const [isMatchLettersActivated, setIsMatchLettersActivated] = useState(false);
   const [guess, setGuess] = useState(null);
+
   //GAME ENDED
   const [gameWon, setGameWon] = useState(null); //null, "yes", "no" -> don't change to true/false, falsy value is being used
   const [score, setScore] = useState(gameOptions.score);
   const [allowHighScoreEntry, setAllowHighScoreEntry] = useState(false); //prevents automatic highscore entry when changing level
+
+  useEffect(() => {
+    console.log("isMatchLettersActivated", isMatchLettersActivated);
+  }, [isMatchLettersActivated]);
 
   const onSubmitHandler = (e, userText) => {
     e.preventDefault();
@@ -134,6 +141,7 @@ function App() {
     if (gameStatus === "ended") {
       setScrambledWord(correctWord);
       setGuess("");
+      setIsMatchLettersActivated(false);
     }
 
     console.log("correct", correctWord, "scrambled", scrambledWord);
@@ -241,10 +249,10 @@ function App() {
 
       <main className="container__app">
         <DisplayHint
-          countdown={countdown}
           gameStatus={gameStatus}
           correctWord={correctWord}
           scrambledWord={scrambledWord}
+          activateHint={setIsMatchLettersActivated}
         />
         <div className="wrapper__app">
           <div className="indicators">
@@ -257,6 +265,7 @@ function App() {
             gameStatus={gameStatus}
             correctWord={correctWord}
             scrambledWord={scrambledWord}
+            isMatchLettersActivated={isMatchLettersActivated}
           />
 
           <UserInput

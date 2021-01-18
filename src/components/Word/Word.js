@@ -3,31 +3,32 @@ import "./Word.scss";
 import PropTypes from "prop-types";
 import style from "styled-components";
 
-//TODO: useContext - DisplayHint - isHintAvailable
+const Letter = style.span`
+  color: ${props => (props.isMatch ? "lightgreen" : "orangered")}
+`;
 
-const Letter = style.span``;
+const matchLetters = (word, scrambledWord) => {
+  let result = [];
+  for (let i = 0; i < word.length; i++) {
+    if (word[i] === scrambledWord[i]) result.push(scrambledWord[i]);
+    if (word[i] !== scrambledWord[i]) result.push(scrambledWord[i].toUpperCase());
+  }
 
-function Word({ gameStatus, scrambledWord, correctWord }) {
+  return result.map((letter, i) => {
+    return letter === scrambledWord[i] ? (
+      <Letter isMatch key={i}>
+        {letter}
+      </Letter>
+    ) : (
+      <Letter key={i}>{scrambledWord[i]}</Letter>
+    );
+  });
+};
+
+function Word({ gameStatus, scrambledWord, correctWord, isMatchLettersActivated }) {
   //Active on gameStatus "ended" only
   const [changeWordColor, setChangeWordColor] = React.useState(false);
-  const [isMatchLettersActivated, setIsMatchLettersActivated] = React.useState(false);
   const link = `https://en.wikipedia.org/wiki/${scrambledWord}`;
-
-  const showHint = (word, scrambledWord) => {
-    let result = [];
-    for (let i = 0; i < word.length; i++) {
-      if (word[i] === scrambledWord[i]) result.push(scrambledWord[i]);
-      if (word[i] !== scrambledWord[i]) result.push(scrambledWord[i].toUpperCase());
-    }
-    //span each letter with prop/class
-    return result.map((letter, i) => {
-      return letter === scrambledWord[i] ? (
-        <span match>{letter}</span>
-      ) : (
-        <span noMatch>{letter}</span>
-      );
-    });
-  };
 
   return (
     <div className="Word">
@@ -51,8 +52,8 @@ function Word({ gameStatus, scrambledWord, correctWord }) {
         ) : (
           <>
             {isMatchLettersActivated
-              ? scrambledWord
-              : showHint(correctWord, scrambledWord)}
+              ? matchLetters(correctWord, scrambledWord)
+              : scrambledWord}
           </>
         )}
       </span>
@@ -63,6 +64,7 @@ function Word({ gameStatus, scrambledWord, correctWord }) {
 Word.propTypes = {
   gameStatus: PropTypes.string.isRequired,
   scrambledWord: PropTypes.string.isRequired,
+  isMatchLettersActivated: PropTypes.bool.isRequired,
 };
 
 //ℹ️❔
