@@ -16,6 +16,7 @@ import Audio from "./components/Audio/Audio";
 import HighScores from "./components/HighScores/HighScores";
 import gameOptions, { categories } from "./data/gameOptions";
 import { optionsCustom } from "./data/gameOptions";
+import DisplayHint from "./DisplayHint/DisplayHint";
 
 //TODO: commit categories to localStorage
 //TODO: accessibility checklist
@@ -92,7 +93,7 @@ function App() {
   //   }
   // }, []);
 
-  //Timer ⏲️
+  //Timer ⏲️ + Setup
   useEffect(() => {
     if (gameStatus === "setup") {
       //console.log("SETUP => setting up game");
@@ -134,6 +135,8 @@ function App() {
       setScrambledWord(correctWord);
       setGuess("");
     }
+
+    console.log("correct", correctWord, "scrambled", scrambledWord);
   }, [correctWord, gameStatus]);
 
   //GUESSES ⁉️
@@ -221,9 +224,9 @@ function App() {
   //   console.log("CUSTOmOPTIONS", customOptions);
   // }, [customOptions]);
 
-  useEffect(() => {
-    //console.log("gameWon", gameWon);
-  }, [gameWon]);
+  // useEffect(() => {
+  //   console.log("gameWon", gameWon);
+  // }, [gameWon]);
 
   return (
     <div className="App">
@@ -237,6 +240,12 @@ function App() {
       <DisplayCategory category={selectedCategory} />
 
       <main className="container__app">
+        <DisplayHint
+          countdown={countdown}
+          gameStatus={gameStatus}
+          correctWord={correctWord}
+          scrambledWord={scrambledWord}
+        />
         <div className="wrapper__app">
           <div className="indicators">
             <GuessesLeft guessesLeft={guessesLeft} gameOptions={gameOptions} />
@@ -267,6 +276,7 @@ function App() {
           />
         </div>
       </main>
+
       <section className="game-options">
         <SelectedCategoryContext.Provider
           value={{ selectedCategory, setSelectedCategory }}
@@ -292,6 +302,7 @@ function App() {
           }
         />
       </section>
+
       <section>
         <HighScores
           updatedAllScores={scoresObj}

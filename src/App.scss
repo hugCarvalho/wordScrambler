@@ -16,12 +16,13 @@
   }
 
   main {
-    //background-color: #282c34;
+    //background-color: #297eb6;
     margin: 20px 3px;
     border: 1px solid gray;
     min-width: 314px;
     width: 314px;
     position: relative;
+    //z-index: 10;
   }
 
   .indicators {
@@ -36,5 +37,11 @@
 
   .game-options {
     display: flex;
+  }
+
+  .wrapper__app {
+    background-color: #282c34;
+    position: relative;
+    //z-index: 10;
   }
 }

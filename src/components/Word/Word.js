@@ -1,11 +1,33 @@
 import React from "react";
 import "./Word.scss";
 import PropTypes from "prop-types";
+import style from "styled-components";
 
-function Word({ gameStatus, scrambledWord }) {
+//TODO: useContext - DisplayHint - isHintAvailable
+
+const Letter = style.span``;
+
+function Word({ gameStatus, scrambledWord, correctWord }) {
   //Active on gameStatus "ended" only
   const [changeWordColor, setChangeWordColor] = React.useState(false);
+  const [isMatchLettersActivated, setIsMatchLettersActivated] = React.useState(false);
   const link = `https://en.wikipedia.org/wiki/${scrambledWord}`;
+
+  const showHint = (word, scrambledWord) => {
+    let result = [];
+    for (let i = 0; i < word.length; i++) {
+      if (word[i] === scrambledWord[i]) result.push(scrambledWord[i]);
+      if (word[i] !== scrambledWord[i]) result.push(scrambledWord[i].toUpperCase());
+    }
+    //span each letter with prop/class
+    return result.map((letter, i) => {
+      return letter === scrambledWord[i] ? (
+        <span match>{letter}</span>
+      ) : (
+        <span noMatch>{letter}</span>
+      );
+    });
+  };
 
   return (
     <div className="Word">
@@ -27,7 +49,11 @@ function Word({ gameStatus, scrambledWord }) {
             <span className="info fas fa-info-circle" />
           </a>
         ) : (
-          <>{scrambledWord}</>
+          <>
+            {isMatchLettersActivated
+              ? scrambledWord
+              : showHint(correctWord, scrambledWord)}
+          </>
         )}
       </span>
     </div>
