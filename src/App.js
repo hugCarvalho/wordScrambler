@@ -16,7 +16,8 @@ import Audio from "./components/Audio/Audio";
 import HighScores from "./components/HighScores/HighScores";
 import gameOptions, { categories } from "./data/gameOptions";
 import { optionsCustom } from "./data/gameOptions";
-import DisplayHint from "./DisplayHint/DisplayHint";
+import DisplayHint2 from "./DisplayHint/DisplayHint2";
+import DisplayHint1 from "./DisplayHint/DisplayHint1";
 
 //TODO: commit categories to localStorage
 //TODO: accessibility checklist
@@ -62,7 +63,7 @@ function App() {
   const [allowHighScoreEntry, setAllowHighScoreEntry] = useState(false); //prevents automatic highscore entry when changing level
 
   useEffect(() => {
-    console.log("isMatchLettersActivated", isMatchLettersActivated);
+    //console.log("isMatchLettersActivated", isMatchLettersActivated);
   }, [isMatchLettersActivated]);
 
   const onSubmitHandler = (e, userText) => {
@@ -144,7 +145,7 @@ function App() {
       setIsMatchLettersActivated(false);
     }
 
-    console.log("correct", correctWord, "scrambled", scrambledWord);
+    //console.log("correct", correctWord, "scrambled", scrambledWord);
   }, [correctWord, gameStatus]);
 
   //GUESSES ⁉️
@@ -163,7 +164,7 @@ function App() {
 
   //GAME LOST GUESSES LEFT ARE 0 💥
   useEffect(() => {
-    console.log(selectedCategory);
+    // console.log(selectedCategory);
     if (gameStatus === "playing") {
       setGuessesLeft(0);
     }
@@ -248,7 +249,14 @@ function App() {
       <DisplayCategory category={selectedCategory} />
 
       <main className="container__app">
-        <DisplayHint
+        <DisplayHint1
+          gameStatus={gameStatus}
+          correctWord={correctWord}
+          scrambledWord={scrambledWord}
+          rescrambleWord={setScrambledWord}
+          //activateHint={setScrambledWord}
+        />
+        <DisplayHint2
           gameStatus={gameStatus}
           correctWord={correctWord}
           scrambledWord={scrambledWord}

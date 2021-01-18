@@ -1,34 +1,11 @@
 import PropTypes from "prop-types";
 import React from "react";
+import ButtonHint from "../reusable/BtnHint";
 import "./DisplayHint.scss";
-import style from "styled-components";
 
 //🔀 ✅ ❎ 🔁
-const ButtonDisplayHint = style.button`
-  background-color: ${props =>
-    props.disabled || !props.playing ? "gray" : "rgb(223, 223, 210)"};
-  cursor: ${props => (props.disabled || !props.playing ? "not-allowed" : "")};
-  color: rgb(47, 48, 47);
-  height: 27px;
-  width: 60px;
-  position: absolute;
-  top: -28px;
-  right: -1px;
-  padding: 0px 6px;
-  border: 1px solid gray;
-  border-bottom: none;
-  border-radius: 3px 3px 0 0;
-  transition: all 0.5s ease;
-  opacity: 1;
-  letter-spacing: 1px;
 
-  &:hover {
-    background-color: ${props =>
-      props.disabled || !props.playing ? "" : "rgb(242, 242, 228)"}
-  }
-`;
-
-function DisplayHint({ gameStatus, activateHint }) {
+function DisplayHint2({ gameStatus, activateHint }) {
   //const [showHintBtn, setShowHintBtn] = React.useState(true);
   const [isHintAvailable, setIsHintAvailable] = React.useState(true);
 
@@ -50,11 +27,11 @@ function DisplayHint({ gameStatus, activateHint }) {
   }, [gameStatus]);
 
   React.useEffect(() => {
-    console.log("Available:", isHintAvailable);
+    // console.log("Available:", isHintAvailable);
   }, [isHintAvailable]);
 
   return (
-    <ButtonDisplayHint
+    <ButtonHint
       playing={gameStatus === "playing"}
       disabled={!isHintAvailable}
       //showHint={showHintBtn}
@@ -62,13 +39,13 @@ function DisplayHint({ gameStatus, activateHint }) {
       onClick={onClickHandler}
     >
       {" ✅ ❎"}
-    </ButtonDisplayHint>
+    </ButtonHint>
   );
 }
 
-DisplayHint.propTypes = {
+DisplayHint2.propTypes = {
   activateHint: PropTypes.func.isRequired,
   gameStatus: PropTypes.string.isRequired,
 };
 
-export default DisplayHint;
+export default DisplayHint2;
